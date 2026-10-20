@@ -3,10 +3,10 @@ import Image from "next/image";
 export function LogoMark({ className = "h-8 w-auto" }: { className?: string }) {
   return (
     <Image
-      src="/logo-tsiqa.png"
+      src="/logo-tsiqa.svg"
       alt="Simbol TSIQA"
-      width={606}
-      height={472}
+      width={44}
+      height={34}
       className={`object-contain ${className}`}
       priority
     />
@@ -21,9 +21,9 @@ export function Logo({
   className?: string;
 }) {
   return (
-    <span className={`inline-flex items-center gap-2 ${className}`}>
+    <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <Image
-        src="/logo-tsiqa.png"
+        src="/logo-tsiqa.svg"
         alt="Logo TSIQA"
         width={44}
         height={34}
@@ -31,11 +31,11 @@ export function Logo({
         priority
       />
       <Image
-        src="/tulisan-tsiqa.png"
+        src="/tulisan-tsiqa.svg"
         alt="TSIQA"
         width={98}
         height={26}
-        className={`h-5 w-auto object-contain ${
+        className={`h-5.5 w-auto object-contain ${
           inverse ? "brightness-0 invert" : ""
         }`}
         priority
