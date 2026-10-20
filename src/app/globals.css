@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* Sistem Desain TSIQA: Quiet Minimalism + Soft Modern + Academic Tech */
+@theme {
+  --color-emerald: #0f766e;
+  --color-emerald-hover: #0d645d;
+  --color-emerald-pale: #ddf4ec;
+  --color-forest: #263b35;
+  --color-forest-light: #314b44;
+  --color-ink: #182622;
+  --color-muted: #5b6b65;
+  --color-ivory: #f8faf9;
+  --color-surface-soft: #f1f5f3;
+  --color-line: #e2e8e5;
+  --color-lunas: #0f766e;
+  --color-lunas-bg: #ddf4ec;
+  --color-cicilan: #92400e;
+  --color-cicilan-bg: #fef3c7;
+  --color-belum: #b91c1c;
+  --color-belum-bg: #fee2e2;
+
+  /* BARU: aksen emas lembut — hanya untuk sorotan & garansi */
+  --color-gold: #b7791f;
+  --color-gold-ink: #7a4f0b;
+  --color-gold-soft: #f1dba0;
+  --color-gold-pale: #fbf3dd;
+
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
+html {
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fokus keyboard yang jelas */
+:focus-visible {
+  outline: 2px solid var(--color-emerald);
+  outline-offset: 3px;
+}
+
+/* Animasi masuk hero (sekali saja, hormati preferensi gerak) */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Pergantian isi (tab, angka kwitansi) */
+@keyframes swap {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-swap {
+  animation: swap 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Elemen dekoratif yang melayang pelan */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+/* Kartu: terangkat + bayangan + garis tepi menyala saat disorot (khusus perangkat dengan kursor) */
+.lift,
+.lift-dark {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 44px -24px rgba(24, 38, 34, 0.38);
+    border-color: color-mix(in srgb, var(--color-emerald) 45%, transparent);
+  }
+  .lift-dark:hover {
+    transform: translateY(-4px);
+    background-color: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 22px 44px -24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Kolom judul yang menempel saat konten di sebelahnya di-scroll.
+   Hanya aktif di layar lebar yang cukup tinggi, supaya kolom yang panjang
+   (mis. garansi + syarat) tidak terpotong di laptop berlayar pendek. */
+.stick {
+  align-self: start;
+}
+
+@media (min-width: 1024px) and (min-height: 760px) {
+  .stick {
+    position: sticky;
+    top: 6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise,
+  .animate-swap,
+  .animate-floaty {
+    animation: none;
+  }
+  .lift:hover,
+  .lift-dark:hover {
+    transform: none;
+  }
+}
+
+/* Scrollbar halus & bersih */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5d1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9fb0aa;
+}
