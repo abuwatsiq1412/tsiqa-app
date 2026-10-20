@@ -1,42 +1,45 @@
-/**
- * LOGO SEMENTARA (placeholder).
- * Saat logo final siap, cukup ganti isi <LogoMark /> di bawah ini
- * (atau ganti dengan <Image src="/logo.svg" ... />). Semua tempat lain otomatis ikut.
- */
-export function LogoMark({ className = "size-8" }: { className?: string }) {
+import Image from "next/image";
+
+export function LogoMark({ className = "h-8 w-auto" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 32 32" className={className} aria-hidden="true">
-      <rect width="32" height="32" rx="9" fill="#0f766e" />
-      <g
-        fill="none"
-        stroke="#ffffff"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      >
-        <rect x="9.5" y="9.5" width="13" height="13" />
-        <rect
-          x="9.5"
-          y="9.5"
-          width="13"
-          height="13"
-          transform="rotate(45 16 16)"
-        />
-      </g>
-    </svg>
+    <Image
+      src="/logo-tsiqa.png"
+      alt="Simbol TSIQA"
+      width={606}
+      height={472}
+      className={`object-contain ${className}`}
+      priority
+    />
   );
 }
 
-export function Logo({ inverse = false }: { inverse?: boolean }) {
+export function Logo({
+  inverse = false,
+  className = "",
+}: {
+  inverse?: boolean;
+  className?: string;
+}) {
   return (
-    <span className="inline-flex items-center gap-2.5">
-      <LogoMark />
-      <span
-        className={`text-[19px] font-bold tracking-[-0.03em] ${
-          inverse ? "text-white" : "text-ink"
+    <span className={`inline-flex items-center gap-2 ${className}`}>
+      <Image
+        src="/logo-tsiqa.png"
+        alt="Logo TSIQA"
+        width={44}
+        height={34}
+        className="h-8.5 w-auto object-contain"
+        priority
+      />
+      <Image
+        src="/tulisan-tsiqa.png"
+        alt="TSIQA"
+        width={98}
+        height={26}
+        className={`h-5 w-auto object-contain ${
+          inverse ? "brightness-0 invert" : ""
         }`}
-      >
-        TSIQA
-      </span>
+        priority
+      />
     </span>
   );
 }
