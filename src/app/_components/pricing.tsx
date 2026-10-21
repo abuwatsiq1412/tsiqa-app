@@ -4,12 +4,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "./icons";
 import { Badge, ButtonLink } from "./ui";
 import {
-  BIAYA_SETUP,
   KUOTA_MAX,
   KUOTA_MIN,
   KUOTA_STEP,
   MODUL,
   PAKET,
+  TARIF_SETUP_PER_SANTRI,
   hitungCore,
   hitungHarga,
   rupiah,
@@ -58,7 +58,6 @@ export function Pricing() {
   const [kuota, setKuota] = useState<number>(awal.kuota);
   const [modul, setModul] = useState<ModulId[]>(awal.modul);
   const [tahunan, setTahunan] = useState(true);
-  const [setup, setSetup] = useState(true);
 
   // Bar total untuk HP: tampil saat bagian harga terlihat tapi kwitansi belum.
   const bagianRef = useRef<HTMLDivElement>(null);
@@ -86,8 +85,8 @@ export function Pricing() {
   }, []);
 
   const hasil = useMemo(
-    () => hitungHarga({ kuota, modul, tahunan, setup }),
-    [kuota, modul, tahunan, setup]
+    () => hitungHarga({ kuota, modul, tahunan }),
+    [kuota, modul, tahunan]
   );
 
   const pilihPaket = (id: PaketId) => {
@@ -123,12 +122,6 @@ export function Pricing() {
       : `Paket ${PAKET.find((p) => p.id === pilihan)!.nama}`;
 
   const n = hasil.jumlahModul;
-  const infoDiskon =
-    n >= 5
-      ? `Diskon 15% aktif, hemat ${rupiah(hasil.diskon)} per bulan.`
-      : n >= 3
-      ? `Diskon 10% aktif. Tambah ${5 - n} modul lagi untuk diskon 15%.`
-      : `Pilih ${3 - n} modul lagi untuk mendapat diskon 10%.`;
 
   const pesanWa =
     `Assalamu’alaikum, saya tertarik dengan TSIQA.\n\n` +
@@ -140,7 +133,11 @@ export function Pricing() {
         : "tanpa modul tambahan"
     }\n` +
     `• Perkiraan ${rupiah(hasil.perBulan)} per bulan\n` +
-    `• Setup: ${setup ? "dibantu tim" : "input mandiri"}\n\n` +
+    `• Pembayaran: ${
+      tahunan
+        ? `tahunan ${rupiah(hasil.perTahun)} (gratis 2 bulan)`
+        : "bulanan"
+    }\n\n` +
     `Mohon informasinya.`;
 
   const keKwitansi = () => {
@@ -195,15 +192,15 @@ export function Pricing() {
             key="paket"
             role="group"
             aria-label="Pilih paket"
-            className="animate-swap grid gap-3 sm:grid-cols-3"
+            className="animate-swap grid gap-3 sm:grid-cols-2"
           >
             {PAKET.map((p) => {
-              const harga = hitungHarga({
+              const hargaPaket = hitungHarga({
                 kuota: p.kuota,
                 modul: p.modul,
                 tahunan: false,
-                setup: false,
-              }).perBulan;
+              });
+              const harga = hargaPaket.perBulan;
               const on = pilihan === p.id;
               return (
                 <button
@@ -247,6 +244,9 @@ export function Pricing() {
                   </p>
                   <p className="text-xs text-muted">
                     hingga {p.kuota} santri aktif
+                  </p>
+                  <p className="mt-1 text-xs font-medium text-emerald">
+                    {rupiah(hargaPaket.perTahun)} / tahun, gratis 2 bulan
                   </p>
                   <ul className="mt-3 space-y-1.5 border-t border-line pt-3">
                     {p.poin.map((x) => (
@@ -330,18 +330,6 @@ export function Pricing() {
                 </div>
               </div>
 
-              <p
-                role="status"
-                className={`mb-4 flex items-center gap-2 rounded-xl px-3.5 py-2.5 text-[13px] font-medium ${
-                  n >= 3
-                    ? "bg-emerald-pale text-emerald"
-                    : "bg-gold-pale text-gold-ink"
-                }`}
-              >
-                <Icon name="sparkles" className="size-4 shrink-0" />
-                {infoDiskon}
-              </p>
-
               <div className="grid gap-3 sm:grid-cols-2">
                 {MODUL.map((m) => {
                   const on = modul.includes(m.id);
@@ -397,45 +385,13 @@ export function Pricing() {
           </div>
         )}
 
-        {/* ------------------------ Cara memulai ------------------------ */}
-        <fieldset className="rounded-2xl border border-line bg-white p-5">
-          <legend className="px-1 text-sm font-semibold text-ink">
-            Cara memulai
-          </legend>
-          <div className="mt-1 grid gap-2.5 sm:grid-cols-2">
-            {[
-              {
-                v: true,
-                judul: "Dibantu tim",
-                harga: rupiah(BIAYA_SETUP),
-                ket: "Sekali bayar. Setup, impor data, dan pelatihan admin.",
-              },
-              {
-                v: false,
-                judul: "Input mandiri via Excel",
-                harga: "Gratis",
-                ket: "Admin pondok mengunggah template sendiri.",
-              },
-            ].map((o) => (
-              <label key={o.judul} className="relative block cursor-pointer">
-                <input
-                  type="radio"
-                  name="setup"
-                  checked={setup === o.v}
-                  onChange={() => setSetup(o.v)}
-                  className="peer sr-only"
-                />
-                <div className="lift h-full rounded-xl border border-line px-4 py-3 peer-checked:border-emerald peer-checked:bg-emerald-pale/30 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-emerald">
-                  <div className="flex items-center justify-between gap-3 text-sm">
-                    <span className="font-semibold text-ink">{o.judul}</span>
-                    <span className="font-semibold text-emerald">{o.harga}</span>
-                  </div>
-                  <p className="mt-0.5 text-[13px] text-muted">{o.ket}</p>
-                </div>
-              </label>
-            ))}
-          </div>
-        </fieldset>
+        {/* ------------------------ Catatan setup ------------------------ */}
+        <p className="rounded-xl bg-surface-soft px-4 py-3 text-[13px] leading-relaxed text-muted">
+          <span className="font-semibold text-ink">Catatan:</span> setup dan
+          input data santri awal tidak termasuk dalam simulasi di atas.
+          Mandiri lewat template Excel gratis (Rp0), atau dibantu tim TSIQA
+          mulai dari {rupiah(TARIF_SETUP_PER_SANTRI)} per santri.
+        </p>
       </div>
 
       {/* ------------------------ Kanan: kwitansi ----------------------- */}
@@ -492,7 +448,7 @@ export function Pricing() {
                   tahunan ? "bg-emerald text-white shadow-sm" : "text-muted"
                 }`}
               >
-                Tahunan · bayar 11 bulan
+                Tahunan · bayar 10 bulan (Gratis 2 bulan!)
               </button>
             </div>
 
@@ -529,13 +485,6 @@ export function Pricing() {
                   </details>
                 </>
               )}
-              {hasil.persenDiskon > 0 && (
-                <Baris
-                  label={`Diskon modul ${hasil.persenDiskon}%`}
-                  nilai={`−${rupiah(hasil.diskon)}`}
-                  hijau
-                />
-              )}
               <div className="border-t border-dashed border-line pt-3">
                 <Baris
                   label="Biaya per bulan"
@@ -546,18 +495,14 @@ export function Pricing() {
               {tahunan && (
                 <>
                   <Baris
-                    label="Langganan 12 bulan (bayar 11)"
+                    label="Langganan 12 bulan (bayar 10)"
                     nilai={rupiah(hasil.perTahun)}
                   />
                   <p className="text-[13px] font-medium text-emerald">
-                    Gratis 1 bulan, hemat {rupiah(hasil.hematTahunan)}.
+                    Gratis 2 bulan, hemat {rupiah(hasil.hematTahunan)}.
                   </p>
                 </>
               )}
-              <Baris
-                label="Setup awal (sekali)"
-                nilai={setup ? rupiah(BIAYA_SETUP) : "Gratis"}
-              />
             </div>
 
             <div className="mt-5 rounded-xl bg-forest p-4 text-white">
@@ -571,8 +516,9 @@ export function Pricing() {
                 {rupiah(hasil.bayarAwal)}
               </p>
               <p className="mt-1 text-xs text-white/70">
-                {tahunan ? "Langganan 11 bulan" : "Langganan bulan pertama"}
-                {setup ? ` + setup ${rupiah(BIAYA_SETUP)}` : ""}
+                {tahunan
+                  ? "Langganan 10 bulan (gratis 2 bulan)"
+                  : "Langganan bulan pertama"}
               </p>
             </div>
 
