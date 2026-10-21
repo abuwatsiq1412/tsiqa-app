@@ -119,7 +119,7 @@ export const MODUL: Modul[] = [
     kategori: "Penerimaan",
     nama: "PPDB / PSB Online",
     deskripsi: "Pendaftaran santri baru online, verifikasi berkas, pengumuman seleksi otomatis.",
-    harga: 15_000,
+    harga: 10_000,
     icon: "calendar",
   },
   {
