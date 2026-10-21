@@ -133,7 +133,7 @@ const SYARAT = [
 const FAQ = [
   {
     q: "Mengapa TSIQA dibanding aplikasi lain begitu terjangkau?",
-    a: "TSIQA disusun modular. Pondok cukup memulai dari Core (Rp59.000 per bulan untuk 100 santri aktif) dan menyalakan modul hanya saat dibutuhkan, sehingga tidak membayar fitur yang belum terpakai. Mengambil 3–4 modul mendapat diskon 10%, dan 5 modul atau lebih mendapat diskon 15%. Bayar tahunan cukup 10 bulan (gratis 2 bulan).",
+    a: "TSIQA disusun modular. Pondok cukup memulai dari Core (Rp59.000 per bulan untuk 150 santri aktif) dan menyalakan modul hanya saat dibutuhkan, sehingga tidak membayar fitur yang belum terpakai. Mengambil 3–4 modul mendapat diskon 10%, dan 5 modul atau lebih mendapat diskon 15%. Bayar tahunan cukup 10 bulan (gratis 2 bulan).",
   },
   {
     q: "Aplikasinya masih akses awal. Apakah aman dipakai?",
@@ -141,7 +141,7 @@ const FAQ = [
   },
   {
     q: "Apakah biaya setup wajib?",
-    a: "Tidak wajib dan tidak termasuk dalam harga langganan. Jika admin pondok mengisi sendiri memakai template Excel, biaya setup Rp0. Jika ingin dibantu, tim kami menyiapkan database, mengimpor data santri dari Excel atau buku lama sampai tuntas, dan melatih admin TU lewat Zoom atau WhatsApp, mulai dari Rp1.000 per santri.",
+    a: "Tidak wajib dan tidak termasuk dalam harga langganan. Jika admin pondok mengisi sendiri memakai template Excel, biaya setup Rp0. Jika ingin dibantu, tim kami menyiapkan database, mengimpor data santri dari Excel atau buku lama sampai tuntas, dan melatih admin TU lewat Zoom atau WhatsApp, dengan biaya Rp1.000 per santri (minimum charge Rp150.000).",
   },
   {
     q: "Apakah alumni ikut memakan kuota santri aktif?",
@@ -434,7 +434,7 @@ export default function LandingPage() {
                   Harga yang jelas. Bayar sesuai kebutuhan pondok.
                 </h2>
                 <p className="mt-3 text-[15px] leading-relaxed text-muted sm:text-base">
-                  Core {rupiah(CORE_HARGA_DASAR)} per bulan untuk 100 santri
+                  Core {rupiah(CORE_HARGA_DASAR)} per bulan untuk 150 santri
                   aktif, lalu tambah modul yang dibutuhkan saja. Ambil 3–4 modul
                   diskon 10%, 5 modul atau lebih diskon 15%. Bayar tahunan
                   cukup 10 bulan, gratis 2 bulan.

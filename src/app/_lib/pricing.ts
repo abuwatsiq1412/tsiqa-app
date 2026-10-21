@@ -14,12 +14,13 @@ export function waLink(text: string) {
 /* ------------------------------------------------------------------ */
 /*  Aturan harga resmi TSIQA (Model Bersih & Transparan)               */
 /* ------------------------------------------------------------------ */
-export const CORE_KUOTA_DASAR = 100;
+export const CORE_KUOTA_DASAR = 150;
 export const CORE_HARGA_DASAR = 59_000;
-export const CORE_BLOK = 50;
-export const CORE_HARGA_PER_BLOK = 10_000;
+export const CORE_BLOK = 100;
+export const CORE_HARGA_PER_BLOK = 15_000;
 export const BULAN_BAYAR_TAHUNAN = 10; // Bayar 10 bulan, gratis 2 bulan
-export const TARIF_SETUP_PER_SANTRI = 1_000; // Opsional, di luar paket dan di luar simulasi (hanya untuk catatan)
+export const TARIF_SETUP_PER_SANTRI = 1_000; // Opsional: Rp 1.000 / santri
+export const MIN_SETUP_BIAYA = 150_000; // Minimum charge bantuan migrasi & training tim
 
 // Diskon add-on, dihitung dari subtotal modul (bukan Core).
 export const DISKON_MODUL_SEDANG_MIN = 3; // 3-4 modul
@@ -27,7 +28,7 @@ export const DISKON_MODUL_SEDANG_PERSEN = 10;
 export const DISKON_MODUL_BESAR_MIN = 5; // 5 modul atau lebih
 export const DISKON_MODUL_BESAR_PERSEN = 15;
 
-export const KUOTA_MIN = 100;
+export const KUOTA_MIN = 150;
 export const KUOTA_MAX = 1000;
 export const KUOTA_STEP = 50;
 
@@ -110,7 +111,7 @@ export const MODUL: Modul[] = [
     nama: "Perizinan & Keamanan Asrama",
     deskripsi:
       "Izin keluar dan pulang, keterlambatan kembali, buku tamu, riwayat pelanggaran santri.",
-    harga: 10_000,
+    harga: 15_000,
     icon: "shield",
   },
   {
@@ -156,7 +157,7 @@ export const PAKET: Paket[] = [
     id: "perintis",
     nama: "Perintis",
     untuk: "Mulai merapikan data pondok.",
-    kuota: 100,
+    kuota: 150,
     modul: [],
     poin: [
       "Buku induk santri, kamar, dan kelas",
@@ -169,7 +170,7 @@ export const PAKET: Paket[] = [
     id: "administrasi",
     nama: "Administrasi",
     untuk: "Tagihan tertib, wali santri terinformasi.",
-    kuota: 100,
+    kuota: 150,
     modul: ["spp", "wa", "portal-wali"],
     poin: [
       "Semua fitur Perintis",
@@ -281,7 +282,7 @@ export function rupiah(angka: number): string {
 }
 
 export const HARGA_PAKET_UMUM = hitungHarga({
-  kuota: 100,
+  kuota: 150,
   modul: PAKET.find((p) => p.id === "administrasi")!.modul,
   tahunan: false,
 }).perBulan;

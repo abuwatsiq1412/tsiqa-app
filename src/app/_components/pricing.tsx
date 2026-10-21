@@ -11,6 +11,7 @@ import {
   KUOTA_MAX,
   KUOTA_MIN,
   KUOTA_STEP,
+  MIN_SETUP_BIAYA,
   MODUL,
   PAKET,
   TARIF_SETUP_PER_SANTRI,
@@ -412,10 +413,10 @@ export function Pricing() {
 
         {/* ------------------------ Catatan setup ------------------------ */}
         <p className="rounded-xl bg-surface-soft px-4 py-3 text-[13px] leading-relaxed text-muted">
-          <span className="font-semibold text-ink">Catatan:</span> setup dan
-          input data santri awal tidak termasuk dalam simulasi di atas.
-          Mandiri lewat template Excel gratis (Rp0), atau dibantu tim TSIQA
-          mulai dari {rupiah(TARIF_SETUP_PER_SANTRI)} per santri.
+          <span className="font-semibold text-ink">Catatan setup data santri:</span>{" "}
+          input mandiri via template Excel gratis (Rp0). Jika dibantu tim TSIQA
+          (terima beres & bimbingan admin), dikenakan {rupiah(TARIF_SETUP_PER_SANTRI)}/santri
+          (minimum charge {rupiah(MIN_SETUP_BIAYA)}).
         </p>
       </div>
 
