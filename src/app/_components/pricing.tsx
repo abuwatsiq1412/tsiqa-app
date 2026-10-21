@@ -4,6 +4,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "./icons";
 import { Badge, ButtonLink } from "./ui";
 import {
+  DISKON_MODUL_BESAR_MIN,
+  DISKON_MODUL_BESAR_PERSEN,
+  DISKON_MODUL_SEDANG_MIN,
+  DISKON_MODUL_SEDANG_PERSEN,
   KUOTA_MAX,
   KUOTA_MIN,
   KUOTA_STEP,
@@ -248,6 +252,11 @@ export function Pricing() {
                   <p className="mt-1 text-xs font-medium text-emerald">
                     {rupiah(hargaPaket.perTahun)} / tahun, gratis 2 bulan
                   </p>
+                  {hargaPaket.persenDiskon > 0 && (
+                    <p className="mt-0.5 text-xs text-muted">
+                      Sudah termasuk diskon modul {hargaPaket.persenDiskon}%
+                    </p>
+                  )}
                   <ul className="mt-3 space-y-1.5 border-t border-line pt-3">
                     {p.poin.map((x) => (
                       <li
@@ -329,6 +338,22 @@ export function Pricing() {
                   </button>
                 </div>
               </div>
+
+              <p
+                role="status"
+                className={`mb-4 flex items-center gap-2 rounded-xl px-3.5 py-2.5 text-[13px] font-medium ${
+                  hasil.persenDiskon > 0
+                    ? "bg-emerald-pale text-emerald"
+                    : "bg-gold-pale text-gold-ink"
+                }`}
+              >
+                <Icon name="sparkles" className="size-4 shrink-0" />
+                {n >= DISKON_MODUL_BESAR_MIN
+                  ? `Diskon ${DISKON_MODUL_BESAR_PERSEN}% aktif untuk modul tambahan Anda.`
+                  : n >= DISKON_MODUL_SEDANG_MIN
+                  ? `Diskon ${DISKON_MODUL_SEDANG_PERSEN}% aktif. Tambah sampai ${DISKON_MODUL_BESAR_MIN} modul untuk diskon ${DISKON_MODUL_BESAR_PERSEN}%.`
+                  : `Ambil ${DISKON_MODUL_SEDANG_MIN}–${DISKON_MODUL_BESAR_MIN - 1} modul diskon ${DISKON_MODUL_SEDANG_PERSEN}%, ${DISKON_MODUL_BESAR_MIN} modul atau lebih diskon ${DISKON_MODUL_BESAR_PERSEN}%.`}
+              </p>
 
               <div className="grid gap-3 sm:grid-cols-2">
                 {MODUL.map((m) => {
@@ -484,6 +509,13 @@ export function Pricing() {
                     </ul>
                   </details>
                 </>
+              )}
+              {hasil.persenDiskon > 0 && (
+                <Baris
+                  label={`Diskon modul ${hasil.persenDiskon}%`}
+                  nilai={`−${rupiah(hasil.diskon)}`}
+                  hijau
+                />
               )}
               <div className="border-t border-dashed border-line pt-3">
                 <Baris

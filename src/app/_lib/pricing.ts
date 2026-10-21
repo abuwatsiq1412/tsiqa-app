@@ -21,6 +21,12 @@ export const CORE_HARGA_PER_BLOK = 10_000;
 export const BULAN_BAYAR_TAHUNAN = 10; // Bayar 10 bulan, gratis 2 bulan
 export const TARIF_SETUP_PER_SANTRI = 1_000; // Opsional, di luar paket dan di luar simulasi (hanya untuk catatan)
 
+// Diskon add-on, dihitung dari subtotal modul (bukan Core).
+export const DISKON_MODUL_SEDANG_MIN = 3; // 3-4 modul
+export const DISKON_MODUL_SEDANG_PERSEN = 10;
+export const DISKON_MODUL_BESAR_MIN = 5; // 5 modul atau lebih
+export const DISKON_MODUL_BESAR_PERSEN = 15;
+
 export const KUOTA_MIN = 100;
 export const KUOTA_MAX = 1000;
 export const KUOTA_STEP = 50;
@@ -213,7 +219,7 @@ export const PAKET: Paket[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Perhitungan Bersih Tanpa Diskon Bundling                           */
+/*  Perhitungan: Core + modul, dengan diskon add-on                    */
 /* ------------------------------------------------------------------ */
 export function hitungCore(kuota: number): number {
   const blokTambahan = Math.max(
@@ -223,11 +229,19 @@ export function hitungCore(kuota: number): number {
   return CORE_HARGA_DASAR + blokTambahan * CORE_HARGA_PER_BLOK;
 }
 
+export function persenDiskonModul(jumlahModul: number): number {
+  if (jumlahModul >= DISKON_MODUL_BESAR_MIN) return DISKON_MODUL_BESAR_PERSEN;
+  if (jumlahModul >= DISKON_MODUL_SEDANG_MIN) return DISKON_MODUL_SEDANG_PERSEN;
+  return 0;
+}
+
 export interface HasilHarga {
   core: number;
   terpilih: Modul[];
   jumlahModul: number;
   subtotalModul: number;
+  persenDiskon: number;
+  diskon: number;
   perBulan: number;
   perTahun: number;
   hematTahunan: number;
@@ -242,7 +256,9 @@ export function hitungHarga(input: {
   const core = hitungCore(input.kuota);
   const terpilih = MODUL.filter((m) => input.modul.includes(m.id));
   const subtotalModul = terpilih.reduce((acc, m) => acc + m.harga, 0);
-  const perBulan = core + subtotalModul;
+  const persenDiskon = persenDiskonModul(terpilih.length);
+  const diskon = Math.round((subtotalModul * persenDiskon) / 100);
+  const perBulan = core + subtotalModul - diskon;
   const perTahun = perBulan * BULAN_BAYAR_TAHUNAN;
   const bayarAwal = input.tahunan ? perTahun : perBulan;
 
@@ -251,6 +267,8 @@ export function hitungHarga(input: {
     terpilih,
     jumlahModul: terpilih.length,
     subtotalModul,
+    persenDiskon,
+    diskon,
     perBulan,
     perTahun,
     hematTahunan: perBulan * 2, // Hemat 2 bulan

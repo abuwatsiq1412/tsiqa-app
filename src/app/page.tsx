@@ -133,7 +133,7 @@ const SYARAT = [
 const FAQ = [
   {
     q: "Mengapa TSIQA dibanding aplikasi lain begitu terjangkau?",
-    a: "TSIQA disusun modular. Pondok cukup memulai dari Core (Rp59.000 per bulan untuk 100 santri aktif) dan menyalakan modul hanya saat dibutuhkan, sehingga tidak membayar fitur yang belum terpakai. Harga modul transparan, dan bayar tahunan cukup 10 bulan (gratis 2 bulan).",
+    a: "TSIQA disusun modular. Pondok cukup memulai dari Core (Rp59.000 per bulan untuk 100 santri aktif) dan menyalakan modul hanya saat dibutuhkan, sehingga tidak membayar fitur yang belum terpakai. Mengambil 3–4 modul mendapat diskon 10%, dan 5 modul atau lebih mendapat diskon 15%. Bayar tahunan cukup 10 bulan (gratis 2 bulan).",
   },
   {
     q: "Aplikasinya masih akses awal. Apakah aman dipakai?",
@@ -435,7 +435,8 @@ export default function LandingPage() {
                 </h2>
                 <p className="mt-3 text-[15px] leading-relaxed text-muted sm:text-base">
                   Core {rupiah(CORE_HARGA_DASAR)} per bulan untuk 100 santri
-                  aktif, lalu tambah modul yang dibutuhkan saja. Bayar tahunan
+                  aktif, lalu tambah modul yang dibutuhkan saja. Ambil 3–4 modul
+                  diskon 10%, 5 modul atau lebih diskon 15%. Bayar tahunan
                   cukup 10 bulan, gratis 2 bulan.
                 </p>
               </div>
