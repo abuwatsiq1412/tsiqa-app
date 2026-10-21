@@ -5,7 +5,7 @@ import { Badge, WindowFrame } from "./ui";
 export function HeroMock() {
   return (
     <div className="relative">
-      <WindowFrame title="Hari Ini · Pondok Contoh">
+      <WindowFrame title="Hari Ini · Data contoh">
         <div className="space-y-4 p-5">
           <div className="flex items-start justify-between gap-3">
             <div>

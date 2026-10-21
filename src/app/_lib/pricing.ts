@@ -191,7 +191,7 @@ export const PAKET: Paket[] = [
       "Akademik & E-Rapor (jadwal & nilai)",
       "Portal Guru & Staf Pegawai",
     ],
-    sorot: "Favorit",
+    sorot: "Paling banyak dipilih",
   },
   {
     id: "lengkap",

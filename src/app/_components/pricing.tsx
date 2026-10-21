@@ -4,6 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "./icons";
 import { Badge, ButtonLink } from "./ui";
 import {
+  CORE_BLOK,
+  CORE_HARGA_PER_BLOK,
+  CORE_KUOTA_DASAR,
   DISKON_MODUL_BESAR_MIN,
   DISKON_MODUL_BESAR_PERSEN,
   DISKON_MODUL_SEDANG_MIN,
@@ -213,9 +216,13 @@ export function Pricing() {
                   type="button"
                   aria-pressed={on}
                   onClick={() => pilihPaket(p.id)}
-                  className={`lift relative flex flex-col rounded-2xl border bg-white p-4 text-left active:scale-[0.99] ${
+                  className={`lift relative flex flex-col rounded-2xl border p-4 text-left active:scale-[0.99] ${
+                    p.sorot ? "bg-emerald-pale/25" : "bg-white"
+                  } ${
                     on
                       ? "border-emerald shadow-[0_0_0_3px_rgba(15,118,110,0.14)]"
+                      : p.sorot
+                      ? "border-emerald/40"
                       : "border-line"
                   }`}
                 >
@@ -411,13 +418,21 @@ export function Pricing() {
           </div>
         )}
 
-        {/* ------------------------ Catatan setup ------------------------ */}
-        <p className="rounded-xl bg-surface-soft px-4 py-3 text-[13px] leading-relaxed text-muted">
-          <span className="font-semibold text-ink">Catatan setup data santri:</span>{" "}
-          input mandiri via template Excel gratis (Rp0). Jika dibantu tim TSIQA
-          (terima beres & bimbingan admin), dikenakan {rupiah(TARIF_SETUP_PER_SANTRI)}/santri
-          (minimum charge {rupiah(MIN_SETUP_BIAYA)}).
-        </p>
+        {/* ---------------------- Catatan kuota & setup ------------------- */}
+        <div className="space-y-2 rounded-xl bg-surface-soft px-4 py-3 text-[13px] leading-relaxed text-muted">
+          <p>
+            <span className="font-semibold text-ink">Kuota santri aktif:</span>{" "}
+            Core mencakup hingga {CORE_KUOTA_DASAR} santri aktif. Tambahan{" "}
+            {rupiah(CORE_HARGA_PER_BLOK)}/bulan untuk setiap kelipatan{" "}
+            {CORE_BLOK} santri. Alumni tidak dihitung.
+          </p>
+          <p>
+            <span className="font-semibold text-ink">Catatan setup data santri:</span>{" "}
+            input mandiri via template Excel gratis (Rp0). Jika dibantu tim TSIQA
+            (terima beres & bimbingan admin), dikenakan {rupiah(TARIF_SETUP_PER_SANTRI)}/santri
+            (minimum charge {rupiah(MIN_SETUP_BIAYA)}).
+          </p>
+        </div>
       </div>
 
       {/* ------------------------ Kanan: kwitansi ----------------------- */}

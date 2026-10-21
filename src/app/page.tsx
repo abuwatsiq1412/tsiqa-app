@@ -12,7 +12,6 @@ import { ButtonLink, Eyebrow } from "./_components/ui";
 import {
   CORE_HARGA_DASAR,
   EMAIL,
-  HARGA_PAKET_UMUM,
   WA_DISPLAY,
   rupiah,
   waLink,
@@ -253,18 +252,16 @@ export default function LandingPage() {
                 className="animate-rise mt-4 max-w-[33rem] text-base leading-relaxed text-muted sm:text-[17px]"
                 style={{ animationDelay: "160ms" }}
               >
-                TSIQA mencatat santri, kamar, dan pembayaran dalam satu sistem,
-                lalu mengirim pengingat ke wali santri lewat WhatsApp. Core
-                mulai {rupiah(CORE_HARGA_DASAR)} per bulan; paket yang paling
-                umum dibutuhkan (dengan SPP, WhatsApp, dan portal wali) sekitar{" "}
+                Catat santri, kamar, dan pembayaran dalam satu sistem, lalu
+                kirim pengingat ke wali santri lewat WhatsApp. Mulai{" "}
                 <strong className="font-semibold text-ink">
-                  {rupiah(HARGA_PAKET_UMUM)}
+                  {rupiah(CORE_HARGA_DASAR)}
                 </strong>{" "}
                 per bulan.
               </p>
 
               <div
-                className="animate-rise mt-6 flex flex-col gap-3 sm:flex-row"
+                className="animate-rise mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-5"
                 style={{ animationDelay: "240ms" }}
               >
                 <ButtonLink href={WA_PILOT}>
@@ -274,29 +271,26 @@ export default function LandingPage() {
                     className="size-4 transition-transform group-hover:translate-x-0.5"
                   />
                 </ButtonLink>
-                <ButtonLink href={WA_UMUM} variant="outline">
-                  <Icon name="message" className="size-4 text-emerald" />
-                  Tanya lewat WhatsApp
-                </ButtonLink>
+                <a
+                  href="#harga"
+                  className="text-sm font-semibold text-muted underline decoration-line decoration-2 underline-offset-4 transition-colors hover:text-emerald"
+                >
+                  Lihat harga ↓
+                </a>
               </div>
 
               <p
-                className="animate-rise mt-5 flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-sm text-muted"
+                className="animate-rise mt-5 text-sm text-muted"
                 style={{ animationDelay: "320ms" }}
               >
-                <span className="rounded-full bg-gold-pale px-2.5 py-0.5 text-xs font-bold text-gold-ink">
-                  Akses Awal
-                </span>
-                <span>
-                  Terus berkembang, dan dilindungi{" "}
-                  <a
-                    href="#garansi"
-                    className="font-semibold text-ink underline decoration-gold decoration-2 underline-offset-4 transition-colors hover:text-emerald"
-                  >
-                    Garansi Tsiqah
-                  </a>
-                  : uang kembali 30 hari.
-                </span>
+                Dilindungi{" "}
+                <a
+                  href="#garansi"
+                  className="font-semibold text-ink underline decoration-gold decoration-2 underline-offset-4 transition-colors hover:text-emerald"
+                >
+                  Garansi Tsiqah
+                </a>
+                : uang kembali 30 hari.
               </p>
             </div>
 
