@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { PenjagaTemaRoute } from "@/components-tema";
+import { BarProgresNavigasi } from "@/components-progres";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,6 +26,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body>
+        <Suspense fallback={null}>
+          <BarProgresNavigasi />
+        </Suspense>
         <PenjagaTemaRoute />
         {children}
       </body>

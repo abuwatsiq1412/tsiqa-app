@@ -301,7 +301,7 @@ export function KerangkaApp({
                           key={m.href}
                           href={m.href}
                           title={ringkas ? m.label : undefined}
-                          className={`group relative flex items-center rounded-lg text-sm transition ${
+                          className={`group relative flex items-center rounded-lg text-sm transition duration-150 active:scale-[0.98] ${
                             ringkas ? "mx-auto h-10 w-10 justify-center" : "gap-2.5 px-3 py-2"
                           } ${aktif ? t.itemAktif : t.item}`}
                         >
@@ -322,7 +322,7 @@ export function KerangkaApp({
           <div className={`border-t px-3 pt-3 ${t.garis}`}>
             <Link
               href={tautanBawah.href}
-              className={`flex items-center justify-between rounded-lg px-3 py-2 text-xs font-medium transition ${t.item}`}
+              className={`flex items-center justify-between rounded-lg px-3 py-2 text-xs font-medium transition duration-150 active:scale-[0.98] ${t.item}`}
             >
               <span>{tautanBawah.label}</span>
               <Ikon nama="panah" className="h-3.5 w-3.5" />
