@@ -51,21 +51,21 @@ export function MobileNav({
               </li>
             ))}
             <li className="border-t border-line/70 pt-2">
-              <span className="flex items-center justify-between py-2.5 text-sm font-medium text-muted/70">
-                <span>Masuk ke Akun</span>
-                <span className="rounded-full bg-surface-soft px-2 py-0.5 text-[10px] text-muted">Segera Hadir</span>
-              </span>
+              <a
+                href="/masuk"
+                onClick={() => setOpen(false)}
+                className="block py-3 text-base font-medium text-ink no-underline hover:text-emerald"
+              >
+                Masuk
+              </a>
             </li>
             <li className="pt-1">
               <a
-                href="https://wa.me/628197600441?text=Assalamu%E2%80%99alaikum%2C%20kami%20tertarik%20menjadi%20pondok%20pilot%20TSIQA.%20Mohon%20informasinya."
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/daftar"
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-full bg-ink py-2.5 text-center text-sm font-semibold text-white no-underline transition hover:bg-emerald"
+                className="flex items-center justify-center rounded-full bg-ink py-2.5 text-center text-sm font-semibold text-white no-underline transition hover:bg-emerald"
               >
-                <span>Daftar Pilot</span>
-                <span className="rounded-full bg-emerald-pale/25 px-1.5 py-0.5 text-[10px] font-medium text-emerald-pale">Akses Awal</span>
+                Daftar Pondok
               </a>
             </li>
           </ul>

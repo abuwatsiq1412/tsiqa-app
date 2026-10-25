@@ -42,14 +42,14 @@ function Baris({
 }) {
   return (
     <div
-      className={`flex items-baseline gap-2 text-sm ${
+      className={`flex items-baseline gap-2 text-xs sm:text-sm ${
         tebal ? "font-semibold text-ink" : "text-muted"
       } ${hijau ? "!text-emerald" : ""}`}
     >
-      <span className="min-w-0 max-w-[62%] shrink-0 truncate">{label}</span>
+      <span className="min-w-0 max-w-[65%] shrink-0 truncate">{label}</span>
       <span
         aria-hidden="true"
-        className="min-w-4 flex-1 -translate-y-1 border-b border-dotted border-line"
+        className="min-w-3 flex-1 -translate-y-1 border-b border-dotted border-line"
       />
       <span className={`shrink-0 ${tebal ? "text-ink" : "text-ink/80"}`}>
         {nilai}
@@ -108,7 +108,6 @@ export function Pricing() {
   const gantiMode = (m: Mode) => {
     if (m === mode) return;
     setMode(m);
-    // Kembali ke paket: terapkan lagi paket terakhir yang dipilih.
     if (m === "paket") pilihPaket(paketTerakhir);
   };
 
@@ -143,7 +142,7 @@ export function Pricing() {
     `• Perkiraan ${rupiah(hasil.perBulan)} per bulan\n` +
     `• Pembayaran: ${
       tahunan
-        ? `tahunan ${rupiah(hasil.perTahun)} (gratis 2 bulan)`
+        ? `tahunan ${rupiah(hasil.perTahun)} (gratis 1 bulan)`
         : "bulanan"
     }\n\n` +
     `Mohon informasinya.`;
@@ -159,13 +158,16 @@ export function Pricing() {
   const tampilBar = bagianTerlihat && !kwitansiTerlihat;
 
   return (
-    <div ref={bagianRef} className="mt-8 grid items-start gap-6 lg:grid-cols-12">
+    <div
+      ref={bagianRef}
+      className="mt-5 grid items-start gap-5 sm:mt-8 sm:gap-6 lg:grid-cols-12"
+    >
       {/* ------------------------- Kiri: pilihan ------------------------ */}
-      <div className="space-y-5 lg:col-span-7">
+      <div className="space-y-4 sm:space-y-5 lg:col-span-7">
         <div
           role="group"
           aria-label="Cara memilih"
-          className="inline-grid grid-cols-2 rounded-full border border-line bg-white p-1 text-sm font-semibold"
+          className="grid w-full grid-cols-2 rounded-full border border-line bg-white p-1 text-xs font-semibold sm:inline-grid sm:w-auto sm:text-sm"
         >
           {(
             [
@@ -178,16 +180,16 @@ export function Pricing() {
               type="button"
               aria-pressed={mode === id}
               onClick={() => gantiMode(id)}
-              className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-2 transition-all duration-200 ${
+              className={`inline-flex items-center justify-center gap-1.5 rounded-full px-3.5 py-2 transition-all duration-200 sm:gap-2 sm:px-5 ${
                 mode === id
                   ? "bg-ink text-white shadow-sm"
                   : "text-muted hover:text-ink"
               }`}
             >
               {ikon === "sliders" ? (
-                <Icon name="sliders" className="size-4" />
+                <Icon name="sliders" className="size-3.5 sm:size-4" />
               ) : (
-                <Icon name="check" className="size-4" />
+                <Icon name="check" className="size-3.5 sm:size-4" />
               )}
               {label}
             </button>
@@ -200,7 +202,7 @@ export function Pricing() {
             key="paket"
             role="group"
             aria-label="Pilih paket"
-            className="animate-swap grid gap-3 sm:grid-cols-2"
+            className="animate-swap grid gap-2.5 sm:grid-cols-2 sm:gap-3"
           >
             {PAKET.map((p) => {
               const hargaPaket = hitungHarga({
@@ -216,7 +218,7 @@ export function Pricing() {
                   type="button"
                   aria-pressed={on}
                   onClick={() => pilihPaket(p.id)}
-                  className={`lift relative flex flex-col rounded-2xl border p-4 text-left active:scale-[0.99] ${
+                  className={`lift relative flex flex-col rounded-2xl border p-3.5 text-left active:scale-[0.99] sm:p-4 ${
                     p.sorot ? "bg-emerald-pale/25" : "bg-white"
                   } ${
                     on
@@ -226,54 +228,55 @@ export function Pricing() {
                       : "border-line"
                   }`}
                 >
-                  <div className="flex min-h-6 items-center justify-between gap-2">
-                    <span className="text-[15px] font-semibold text-ink">
-                      {p.nama}
-                    </span>
+                  <div className="flex min-h-5 items-center justify-between gap-2 sm:min-h-6">
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="text-sm font-semibold text-ink sm:text-[15px]">
+                        {p.nama}
+                      </span>
+                      {p.sorot && <Badge tone="gold">{p.sorot}</Badge>}
+                    </div>
                     <span
                       aria-hidden="true"
-                      className={`grid size-5 shrink-0 place-items-center rounded-full border transition ${
+                      className={`grid size-4.5 shrink-0 place-items-center rounded-full border transition sm:size-5 ${
                         on
                           ? "border-emerald bg-emerald text-white"
                           : "border-line bg-white text-transparent"
                       }`}
                     >
-                      <Icon name="check" className="size-3" />
+                      <Icon name="check" className="size-2.5 sm:size-3" />
                     </span>
                   </div>
-                  <div className="mt-1 h-[22px]">
-                    {p.sorot && <Badge tone="gold">{p.sorot}</Badge>}
-                  </div>
-                  <p className="mt-2 text-[13px] leading-snug text-muted">
+
+                  <p className="mt-1.5 text-xs leading-snug text-muted sm:mt-2 sm:text-[13px]">
                     {p.untuk}
                   </p>
-                  <p className="mt-3 text-[22px] font-semibold tracking-tight text-ink">
+                  <p className="mt-2.5 text-lg font-semibold tracking-tight text-ink sm:mt-3 sm:text-[22px]">
                     {rupiah(harga)}
-                    <span className="text-sm font-medium text-muted">
+                    <span className="text-xs font-medium text-muted sm:text-sm">
                       {" "}
                       /bulan
                     </span>
                   </p>
-                  <p className="text-xs text-muted">
+                  <p className="text-[11px] text-muted sm:text-xs">
                     hingga {p.kuota} santri aktif
                   </p>
-                  <p className="mt-1 text-xs font-medium text-emerald">
-                    {rupiah(hargaPaket.perTahun)} / tahun, gratis 2 bulan
+                  <p className="mt-0.5 text-[11px] font-medium text-emerald sm:mt-1 sm:text-xs">
+                    {rupiah(hargaPaket.perTahun)} / tahun (gratis 1 bulan)
                   </p>
                   {hargaPaket.persenDiskon > 0 && (
-                    <p className="mt-0.5 text-xs text-muted">
-                      Sudah termasuk diskon modul {hargaPaket.persenDiskon}%
+                    <p className="mt-0.5 text-[11px] text-muted sm:text-xs">
+                      Termasuk diskon modul {hargaPaket.persenDiskon}%
                     </p>
                   )}
-                  <ul className="mt-3 space-y-1.5 border-t border-line pt-3">
+                  <ul className="mt-2.5 space-y-1 border-t border-line pt-2.5 sm:mt-3 sm:space-y-1.5 sm:pt-3">
                     {p.poin.map((x) => (
                       <li
                         key={x}
-                        className="flex items-start gap-2 text-[13px] leading-snug text-ink/90"
+                        className="flex items-start gap-1.5 text-xs leading-snug text-ink/90 sm:gap-2 sm:text-[13px]"
                       >
                         <Icon
                           name="check"
-                          className="mt-0.5 size-3.5 shrink-0 text-emerald"
+                          className="mt-0.5 size-3 shrink-0 text-emerald sm:size-3.5"
                         />
                         {x}
                       </li>
@@ -289,14 +292,17 @@ export function Pricing() {
         {mode === "custom" && (
           <div
             key="custom"
-            className="animate-swap space-y-5 rounded-2xl border border-line bg-white p-5"
+            className="animate-swap space-y-4 rounded-2xl border border-line bg-white p-3.5 sm:space-y-5 sm:p-5"
           >
             <div>
-              <div className="mb-2 flex items-center justify-between gap-3">
-                <label htmlFor="kuota" className="text-sm font-semibold text-ink">
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <label
+                  htmlFor="kuota"
+                  className="text-xs font-semibold text-ink sm:text-sm"
+                >
                   Santri aktif
                 </label>
-                <span className="rounded-full bg-emerald-pale px-3 py-1 text-sm font-semibold text-emerald">
+                <span className="rounded-full bg-emerald-pale px-2.5 py-0.5 text-xs font-semibold text-emerald sm:px-3 sm:py-1 sm:text-sm">
                   hingga {kuota.toLocaleString("id-ID")} santri
                 </span>
               </div>
@@ -313,17 +319,17 @@ export function Pricing() {
                 )} per bulan`}
                 className="h-2 w-full cursor-pointer accent-emerald"
               />
-              <p className="mt-2 text-[13px] text-muted">
+              <p className="mt-1.5 text-xs text-muted sm:mt-2 sm:text-[13px]">
                 Core {rupiah(hitungCore(kuota))}/bulan. Alumni tidak dihitung.
               </p>
             </div>
 
             <div>
-              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm font-semibold text-ink">
+              <div className="mb-2.5 flex flex-wrap items-center justify-between gap-2 sm:mb-3">
+                <p className="text-xs font-semibold text-ink sm:text-sm">
                   Modul tambahan ({n} dipilih)
                 </p>
-                <div className="flex gap-4 text-[13px] font-semibold">
+                <div className="flex gap-3 text-xs font-semibold sm:gap-4 sm:text-[13px]">
                   <button
                     type="button"
                     onClick={() => {
@@ -349,21 +355,23 @@ export function Pricing() {
 
               <p
                 role="status"
-                className={`mb-4 flex items-center gap-2 rounded-xl px-3.5 py-2.5 text-[13px] font-medium ${
+                className={`mb-3 flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium sm:mb-4 sm:px-3.5 sm:py-2.5 sm:text-[13px] ${
                   hasil.persenDiskon > 0
                     ? "bg-emerald-pale text-emerald"
                     : "bg-gold-pale text-gold-ink"
                 }`}
               >
-                <Icon name="sparkles" className="size-4 shrink-0" />
+                <Icon name="sparkles" className="size-3.5 shrink-0 sm:size-4" />
                 {n >= DISKON_MODUL_BESAR_MIN
                   ? `Diskon ${DISKON_MODUL_BESAR_PERSEN}% aktif untuk modul tambahan Anda.`
                   : n >= DISKON_MODUL_SEDANG_MIN
                   ? `Diskon ${DISKON_MODUL_SEDANG_PERSEN}% aktif. Tambah sampai ${DISKON_MODUL_BESAR_MIN} modul untuk diskon ${DISKON_MODUL_BESAR_PERSEN}%.`
-                  : `Ambil ${DISKON_MODUL_SEDANG_MIN}–${DISKON_MODUL_BESAR_MIN - 1} modul diskon ${DISKON_MODUL_SEDANG_PERSEN}%, ${DISKON_MODUL_BESAR_MIN} modul atau lebih diskon ${DISKON_MODUL_BESAR_PERSEN}%.`}
+                  : `Ambil ${DISKON_MODUL_SEDANG_MIN}–${
+                      DISKON_MODUL_BESAR_MIN - 1
+                    } modul diskon ${DISKON_MODUL_SEDANG_PERSEN}%, ${DISKON_MODUL_BESAR_MIN}+ modul diskon ${DISKON_MODUL_BESAR_PERSEN}%.`}
               </p>
 
-              <div className="grid gap-3 sm:grid-cols-2">
+              <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
                 {MODUL.map((m) => {
                   const on = modul.includes(m.id);
                   return (
@@ -374,37 +382,37 @@ export function Pricing() {
                         onChange={() => toggleModul(m.id)}
                         className="peer sr-only"
                       />
-                      <div className="lift h-full rounded-xl border border-line bg-white p-4 peer-checked:border-emerald peer-checked:bg-emerald-pale/30 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-emerald">
-                        <div className="flex items-start justify-between gap-3">
+                      <div className="lift h-full rounded-xl border border-line bg-white p-3 peer-checked:border-emerald peer-checked:bg-emerald-pale/30 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-emerald sm:p-4">
+                        <div className="flex items-start justify-between gap-2.5">
                           <div className="min-w-0">
-                            <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted">
+                            <p className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted sm:gap-1.5 sm:text-xs">
                               <Icon
                                 name={m.icon}
-                                className="size-3.5 text-emerald"
+                                className="size-3 text-emerald sm:size-3.5"
                               />
                               {m.kategori}
                             </p>
-                            <p className="mt-1 text-[15px] font-semibold text-ink">
+                            <p className="mt-0.5 text-sm font-semibold text-ink sm:mt-1 sm:text-[15px]">
                               {m.nama}
                             </p>
                           </div>
                           <span
                             aria-hidden="true"
-                            className={`grid size-5 shrink-0 place-items-center rounded-md border transition ${
+                            className={`grid size-4.5 shrink-0 place-items-center rounded-md border transition sm:size-5 ${
                               on
                                 ? "border-emerald bg-emerald text-white"
                                 : "border-line bg-white text-transparent"
                             }`}
                           >
-                            <Icon name="check" className="size-3.5" />
+                            <Icon name="check" className="size-3 sm:size-3.5" />
                           </span>
                         </div>
-                        <p className="mt-2 text-[13px] leading-relaxed text-muted">
+                        <p className="mt-1.5 text-xs leading-relaxed text-muted sm:mt-2 sm:text-[13px]">
                           {m.deskripsi}
                         </p>
-                        <p className="mt-3 text-sm font-semibold text-ink">
+                        <p className="mt-2 text-xs font-semibold text-ink sm:mt-3 sm:text-sm">
                           +{rupiah(m.harga)}
-                          <span className="text-xs font-medium text-muted">
+                          <span className="text-[11px] font-medium text-muted sm:text-xs">
                             {" "}
                             /bulan
                           </span>
@@ -419,7 +427,7 @@ export function Pricing() {
         )}
 
         {/* ---------------------- Catatan kuota & setup ------------------- */}
-        <div className="space-y-2 rounded-xl bg-surface-soft px-4 py-3 text-[13px] leading-relaxed text-muted">
+        <div className="space-y-1.5 rounded-xl bg-surface-soft px-3.5 py-2.5 text-xs leading-relaxed text-muted sm:space-y-2 sm:px-4 sm:py-3 sm:text-[13px]">
           <p>
             <span className="font-semibold text-ink">Kuota santri aktif:</span>{" "}
             Core mencakup hingga {CORE_KUOTA_DASAR} santri aktif. Tambahan{" "}
@@ -427,10 +435,13 @@ export function Pricing() {
             {CORE_BLOK} santri. Alumni tidak dihitung.
           </p>
           <p>
-            <span className="font-semibold text-ink">Catatan setup data santri:</span>{" "}
+            <span className="font-semibold text-ink">
+              Catatan setup data santri:
+            </span>{" "}
             input mandiri via template Excel gratis (Rp0). Jika dibantu tim TSIQA
-            (terima beres & bimbingan admin), dikenakan {rupiah(TARIF_SETUP_PER_SANTRI)}/santri
-            (minimum charge {rupiah(MIN_SETUP_BIAYA)}).
+            (terima beres & bimbingan admin), dikenakan{" "}
+            {rupiah(TARIF_SETUP_PER_SANTRI)}/santri (minimum charge{" "}
+            {rupiah(MIN_SETUP_BIAYA)}).
           </p>
         </div>
       </div>
@@ -444,19 +455,19 @@ export function Pricing() {
       >
         <div className="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_30px_70px_-40px_rgba(24,38,34,0.45)]">
           <div className="h-1.5 bg-emerald" />
-          <div className="p-5">
-            <div className="flex items-start justify-between gap-4">
+          <div className="p-4 sm:p-5">
+            <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted sm:text-xs">
                   Simulasi biaya
                 </p>
-                <h3 className="mt-1 truncate text-lg font-semibold text-ink">
+                <h3 className="mt-0.5 truncate text-base font-semibold text-ink sm:mt-1 sm:text-lg">
                   {namaPilihan}
                 </h3>
               </div>
               <div
                 aria-hidden="true"
-                className="grid size-16 shrink-0 -rotate-12 place-items-center rounded-full border-2 border-gold text-center text-[10px] font-bold uppercase leading-tight tracking-wide text-gold-ink"
+                className="grid size-13 shrink-0 -rotate-12 place-items-center rounded-full border-2 border-gold text-center text-[9px] font-bold uppercase leading-tight tracking-wide text-gold-ink sm:size-16 sm:text-[10px]"
               >
                 <span>
                   Garansi
@@ -469,13 +480,13 @@ export function Pricing() {
             <div
               role="group"
               aria-label="Siklus pembayaran"
-              className="mt-4 grid grid-cols-2 rounded-full bg-surface-soft p-1 text-[13px] font-semibold"
+              className="mt-3.5 grid grid-cols-2 rounded-full bg-surface-soft p-1 text-xs font-semibold sm:mt-4 sm:text-[13px]"
             >
               <button
                 type="button"
                 aria-pressed={!tahunan}
                 onClick={() => setTahunan(false)}
-                className={`rounded-full px-3 py-2 transition-all duration-200 ${
+                className={`rounded-full px-2.5 py-1.5 transition-all duration-200 sm:px-3 sm:py-2 ${
                   !tahunan ? "bg-white text-ink shadow-sm" : "text-muted"
                 }`}
               >
@@ -485,15 +496,18 @@ export function Pricing() {
                 type="button"
                 aria-pressed={tahunan}
                 onClick={() => setTahunan(true)}
-                className={`rounded-full px-3 py-2 transition-all duration-200 ${
+                className={`rounded-full px-2.5 py-1.5 transition-all duration-200 sm:px-3 sm:py-2 ${
                   tahunan ? "bg-emerald text-white shadow-sm" : "text-muted"
                 }`}
               >
-                Tahunan · bayar 10 bulan (Gratis 2 bulan!)
+                <span className="sm:hidden">Tahunan (Hemat 1 bln)</span>
+                <span className="hidden sm:inline">
+                  Tahunan · bayar 11 bulan
+                </span>
               </button>
             </div>
 
-            <div className="mt-5 space-y-2.5">
+            <div className="mt-4 space-y-2 sm:mt-5 sm:space-y-2.5">
               <Baris
                 label={`Core (≤ ${kuota} santri)`}
                 nilai={rupiah(hasil.core)}
@@ -504,7 +518,7 @@ export function Pricing() {
                     label={`Modul tambahan (${n})`}
                     nilai={rupiah(hasil.subtotalModul)}
                   />
-                  <details className="group text-[13px]">
+                  <details className="group text-xs sm:text-[13px]">
                     <summary className="flex w-fit cursor-pointer list-none items-center gap-1 font-semibold text-emerald [&::-webkit-details-marker]:hidden">
                       <Icon
                         name="plus"
@@ -533,7 +547,7 @@ export function Pricing() {
                   hijau
                 />
               )}
-              <div className="border-t border-dashed border-line pt-3">
+              <div className="border-t border-dashed border-line pt-2.5 sm:pt-3">
                 <Baris
                   label="Biaya per bulan"
                   nilai={rupiah(hasil.perBulan)}
@@ -543,39 +557,39 @@ export function Pricing() {
               {tahunan && (
                 <>
                   <Baris
-                    label="Langganan 12 bulan (bayar 10)"
+                    label="Langganan 12 bulan (bayar 11)"
                     nilai={rupiah(hasil.perTahun)}
                   />
-                  <p className="text-[13px] font-medium text-emerald">
-                    Gratis 2 bulan, hemat {rupiah(hasil.hematTahunan)}.
+                  <p className="text-xs font-medium text-emerald sm:text-[13px]">
+                    Gratis 1 bulan, hemat {rupiah(hasil.hematTahunan)}.
                   </p>
                 </>
               )}
             </div>
 
-            <div className="mt-5 rounded-xl bg-forest p-4 text-white">
-              <p className="text-[13px] text-emerald-pale">
+            <div className="mt-4 rounded-xl bg-forest p-3.5 text-white sm:mt-5 sm:p-4">
+              <p className="text-xs text-emerald-pale sm:text-[13px]">
                 Total dibayar di awal
               </p>
               <p
                 key={hasil.bayarAwal}
-                className="animate-swap mt-1 text-3xl font-semibold tracking-tight"
+                className="animate-swap mt-0.5 text-2xl font-semibold tracking-tight sm:mt-1 sm:text-3xl"
               >
                 {rupiah(hasil.bayarAwal)}
               </p>
-              <p className="mt-1 text-xs text-white/70">
+              <p className="mt-0.5 text-[11px] text-white/70 sm:mt-1 sm:text-xs">
                 {tahunan
-                  ? "Langganan 10 bulan (gratis 2 bulan)"
+                  ? "Langganan 11 bulan (gratis 1 bulan)"
                   : "Langganan bulan pertama"}
               </p>
             </div>
 
-            <div className="mt-4 grid gap-2.5">
-              <ButtonLink href={waLink(pesanWa)} variant="primary" className="w-full">
-                Daftar Pilot dengan Paket Ini
+            <div className="mt-3.5 grid gap-2 sm:mt-4 sm:gap-2.5">
+              <ButtonLink href="/daftar" variant="primary" className="w-full">
+                Daftar dengan Paket Ini
                 <Icon
                   name="arrow-right"
-                  className="size-4 transition-transform group-hover:translate-x-0.5"
+                  className="size-3.5 transition-transform group-hover:translate-x-0.5 sm:size-4"
                 />
               </ButtonLink>
               <ButtonLink
@@ -583,12 +597,12 @@ export function Pricing() {
                 variant="outline"
                 className="w-full"
               >
-                <Icon name="message" className="size-4 text-emerald" />
+                <Icon name="message" className="size-3.5 text-emerald sm:size-4" />
                 Konsultasi Paket via WhatsApp
               </ButtonLink>
             </div>
 
-            <p className="mt-3 text-center text-xs leading-relaxed text-muted">
+            <p className="mt-2.5 text-center text-[11px] leading-relaxed text-muted sm:mt-3 sm:text-xs">
               Garansi uang kembali 30 hari untuk biaya langganan. Biaya setup
               tidak termasuk. Modul bisa ditambah atau dimatikan kapan saja.
             </p>
@@ -599,14 +613,14 @@ export function Pricing() {
       {/* ----------- Bar total yang menempel di bawah (khusus HP) -------- */}
       <div
         aria-hidden={!tampilBar}
-        className={`fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 px-4 py-3 backdrop-blur transition-transform duration-300 lg:hidden ${
+        className={`fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 px-4 py-2.5 backdrop-blur transition-transform duration-300 lg:hidden ${
           tampilBar ? "translate-y-0" : "translate-y-full"
         }`}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
           <div className="min-w-0">
-            <p className="text-xs text-muted">Total di awal</p>
-            <p className="truncate text-lg font-semibold text-ink">
+            <p className="text-[11px] text-muted">Total di awal</p>
+            <p className="truncate text-base font-semibold text-ink">
               {rupiah(hasil.bayarAwal)}
             </p>
           </div>
@@ -614,10 +628,10 @@ export function Pricing() {
             type="button"
             tabIndex={tampilBar ? 0 : -1}
             onClick={keKwitansi}
-            className="inline-flex h-10 shrink-0 items-center gap-2 rounded-full bg-emerald px-5 text-sm font-semibold text-white transition active:scale-[0.97]"
+            className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full bg-emerald px-4 text-xs font-semibold text-white transition active:scale-[0.97]"
           >
             Lihat rincian
-            <Icon name="arrow-right" className="size-4" />
+            <Icon name="arrow-right" className="size-3.5" />
           </button>
         </div>
       </div>

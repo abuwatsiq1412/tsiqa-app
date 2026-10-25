@@ -18,7 +18,7 @@ export const CORE_KUOTA_DASAR = 150;
 export const CORE_HARGA_DASAR = 59_000;
 export const CORE_BLOK = 100;
 export const CORE_HARGA_PER_BLOK = 15_000;
-export const BULAN_BAYAR_TAHUNAN = 10; // Bayar 10 bulan, gratis 2 bulan
+export const BULAN_BAYAR_TAHUNAN = 11; // Bayar 11 bulan, gratis 1 bulan
 export const TARIF_SETUP_PER_SANTRI = 1_000; // Opsional: Rp 1.000 / santri
 export const MIN_SETUP_BIAYA = 150_000; // Minimum charge bantuan migrasi & training tim
 
@@ -76,7 +76,8 @@ export const MODUL: Modul[] = [
     id: "portal-wali",
     kategori: "Portal",
     nama: "Portal Wali Santri",
-    deskripsi: "Wali melihat tagihan, saldo saku, rapor, dan izin ananda langsung dari HP via PWA ringan.",
+    deskripsi:
+      "Wali melihat tagihan, saldo saku, rapor, dan izin ananda langsung dari HP via PWA ringan.",
     harga: 20_000,
     icon: "users",
   },
@@ -93,7 +94,8 @@ export const MODUL: Modul[] = [
     id: "portal-guru",
     kategori: "Portal",
     nama: "Portal Guru & Staf Pegawai",
-    deskripsi: "Ustadz dan karyawan mengisi absensi harian, nilai, dan akses profil tugas dari HP.",
+    deskripsi:
+      "Ustadz dan karyawan mengisi absensi harian, nilai, dan akses profil tugas dari HP.",
     harga: 15_000,
     icon: "award",
   },
@@ -101,7 +103,8 @@ export const MODUL: Modul[] = [
     id: "tahfidz",
     kategori: "Keagamaan",
     nama: "Tahfidz & Muroja'ah",
-    deskripsi: "Setoran harian, target juz, ziyadah dan muroja'ah terstruktur serta laporan hafalan.",
+    deskripsi:
+      "Setoran harian, target juz, ziyadah dan muroja'ah terstruktur serta laporan hafalan.",
     harga: 15_000,
     icon: "sparkles",
   },
@@ -118,7 +121,8 @@ export const MODUL: Modul[] = [
     id: "ppdb",
     kategori: "Penerimaan",
     nama: "PPDB / PSB Online",
-    deskripsi: "Pendaftaran santri baru online, verifikasi berkas, pengumuman seleksi otomatis.",
+    deskripsi:
+      "Pendaftaran santri baru online, verifikasi berkas, pengumuman seleksi otomatis.",
     harga: 10_000,
     icon: "calendar",
   },
@@ -126,7 +130,8 @@ export const MODUL: Modul[] = [
     id: "kas-dapur",
     kategori: "Operasional",
     nama: "Kas Operasional & Dapur",
-    deskripsi: "Arus kas yayasan, belanja logistik dapur, laporan buku kas harian.",
+    deskripsi:
+      "Arus kas yayasan, belanja logistik dapur, laporan buku kas harian.",
     harga: 10_000,
     icon: "home",
   },
@@ -134,7 +139,8 @@ export const MODUL: Modul[] = [
     id: "poskestren",
     kategori: "Kesehatan",
     nama: "Poskestren",
-    deskripsi: "Rekam kesehatan santri, riwayat obat dan alergi, laporan kondisi ke orang tua.",
+    deskripsi:
+      "Rekam kesehatan santri, riwayat obat dan alergi, laporan kondisi ke orang tua.",
     harga: 10_000,
     icon: "medical",
   },
@@ -272,7 +278,7 @@ export function hitungHarga(input: {
     diskon,
     perBulan,
     perTahun,
-    hematTahunan: perBulan * 2, // Hemat 2 bulan
+    hematTahunan: perBulan, // Hemat 1 bulan
     bayarAwal,
   };
 }

@@ -27,7 +27,7 @@ export function ButtonLink({
   variant?: Variant;
   className?: string;
 }) {
-  const cls = `group inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-[15px] font-semibold no-underline transition-all duration-200 active:scale-[0.98] sm:h-12 ${VARIANT[variant]} ${className}`;
+  const cls = `group inline-flex h-10 items-center justify-center gap-2 rounded-full px-4.5 text-[13.5px] font-semibold no-underline transition-all duration-200 active:scale-[0.98] sm:h-11 sm:px-6 sm:text-[15px] ${VARIANT[variant]} ${className}`;
   if (href.startsWith("http")) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
@@ -62,7 +62,7 @@ export function Badge({
 }) {
   return (
     <span
-      className={`inline-flex items-center whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-semibold ${TONE[tone]}`}
+      className={`inline-flex items-center whitespace-nowrap rounded-full px-2 py-0.5 text-[11px] font-semibold sm:px-2.5 sm:text-xs ${TONE[tone]}`}
     >
       {children}
     </span>
@@ -83,16 +83,16 @@ export function WindowFrame({
     <div
       className={`overflow-hidden rounded-2xl border border-line bg-white shadow-[0_30px_80px_-35px_rgba(24,38,34,0.4)] ${className}`}
     >
-      <div className="flex items-center justify-between gap-3 border-b border-line bg-surface-soft px-4 py-2.5">
+      <div className="flex items-center justify-between gap-2 border-b border-line bg-surface-soft px-3 py-2 sm:gap-3 sm:px-4 sm:py-2.5">
         <div className="flex items-center gap-1.5" aria-hidden="true">
-          <span className="size-2.5 rounded-full bg-line" />
-          <span className="size-2.5 rounded-full bg-line" />
-          <span className="size-2.5 rounded-full bg-line" />
+          <span className="size-2 rounded-full bg-line sm:size-2.5" />
+          <span className="size-2 rounded-full bg-line sm:size-2.5" />
+          <span className="size-2 rounded-full bg-line sm:size-2.5" />
         </div>
-        <p className="min-w-0 flex-1 truncate text-xs font-medium text-muted">
+        <p className="min-w-0 flex-1 truncate text-[11px] font-medium text-muted sm:text-xs">
           {title}
         </p>
-        <span className="shrink-0 rounded-full bg-gold-pale px-2.5 py-0.5 text-[11px] font-semibold text-gold-ink">
+        <span className="shrink-0 rounded-full bg-gold-pale px-2 py-0.5 text-[10px] font-semibold text-gold-ink sm:px-2.5 sm:text-[11px]">
           Tampilan ilustrasi
         </span>
       </div>
@@ -111,7 +111,7 @@ export function Eyebrow({
 }) {
   return (
     <p
-      className={`text-[13px] font-semibold uppercase tracking-[0.14em] ${
+      className={`text-[11px] font-semibold uppercase tracking-[0.14em] sm:text-[13px] ${
         onDark ? "text-emerald-pale" : "text-emerald"
       }`}
     >

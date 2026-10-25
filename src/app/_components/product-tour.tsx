@@ -74,23 +74,23 @@ const TABS: Tab[] = [
 /* ------------------------- Isi jendela per tab ---------------------- */
 function MockHariIni() {
   return (
-    <div className="space-y-3 p-5">
-      <div className="grid grid-cols-3 gap-3">
+    <div className="space-y-2.5 p-3 sm:space-y-3 sm:p-5">
+      <div className="grid grid-cols-3 gap-2 sm:gap-3">
         {[
           ["Penerimaan", "Rp29,4 jt"],
           ["Santri aktif", "94"],
           ["Belum lunas", "12"],
         ].map(([k, v]) => (
-          <div key={k} className="rounded-xl border border-line bg-ivory p-3">
-            <p className="text-xs text-muted">{k}</p>
-            <p className="mt-1 text-lg font-semibold text-ink">{v}</p>
+          <div key={k} className="rounded-xl border border-line bg-ivory p-2.5 sm:p-3">
+            <p className="text-[11px] text-muted sm:text-xs">{k}</p>
+            <p className="mt-0.5 text-sm font-semibold text-ink sm:mt-1 sm:text-lg">{v}</p>
           </div>
         ))}
       </div>
-      <p className="pt-1 text-xs font-semibold uppercase tracking-wider text-muted">
+      <p className="pt-0.5 text-[11px] font-semibold uppercase tracking-wider text-muted sm:pt-1 sm:text-xs">
         Perlu ditindaklanjuti
       </p>
-      <ul className="divide-y divide-line rounded-xl border border-line text-sm">
+      <ul className="divide-y divide-line rounded-xl border border-line text-xs sm:text-sm">
         {[
           ["Syahriah Oktober belum lunas", "12 santri", "belum"],
           ["Izin pulang menunggu persetujuan", "3 pengajuan", "cicilan"],
@@ -98,7 +98,7 @@ function MockHariIni() {
         ].map(([a, b, tone]) => (
           <li
             key={a}
-            className="flex items-center justify-between gap-3 px-3.5 py-3"
+            className="flex items-center justify-between gap-2 px-3 py-2 sm:gap-3 sm:px-3.5 sm:py-3"
           >
             <span className="font-medium text-ink">{a}</span>
             <Badge tone={tone as "belum" | "cicilan" | "netral"}>{b}</Badge>
@@ -118,17 +118,17 @@ function MockSantri() {
     ["Rafi Hidayat", "—", "—", "Alumni"],
   ];
   return (
-    <div className="p-5">
-      <div className="mb-3 flex flex-wrap items-center gap-2">
+    <div className="p-3 sm:p-5">
+      <div className="mb-2.5 flex flex-wrap items-center gap-1.5 sm:mb-3 sm:gap-2">
         <Badge tone="lunas">Aktif 94</Badge>
         <Badge tone="netral">Alumni 24</Badge>
-        <span className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs font-semibold text-ink">
-          <Icon name="upload" className="size-3.5 text-emerald" />
+        <span className="ml-auto inline-flex items-center gap-1 rounded-full border border-line px-2.5 py-0.5 text-[11px] font-semibold text-ink sm:gap-1.5 sm:px-3 sm:py-1 sm:text-xs">
+          <Icon name="upload" className="size-3 text-emerald sm:size-3.5" />
           Impor Excel
         </span>
       </div>
-      <div className="overflow-hidden rounded-xl border border-line text-sm">
-        <div className="grid grid-cols-[1.4fr_1fr_0.9fr_0.8fr] gap-2 bg-surface-soft px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-muted">
+      <div className="overflow-hidden rounded-xl border border-line text-xs sm:text-sm">
+        <div className="grid grid-cols-[1.4fr_1fr_0.9fr_0.8fr] gap-1.5 bg-surface-soft px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted sm:gap-2 sm:px-3.5 sm:py-2 sm:text-xs">
           <span>Nama</span>
           <span>Kamar</span>
           <span>Kelas</span>
@@ -137,7 +137,7 @@ function MockSantri() {
         {rows.map(([n, k, c, s]) => (
           <div
             key={n}
-            className="grid grid-cols-[1.4fr_1fr_0.9fr_0.8fr] items-center gap-2 border-t border-line px-3.5 py-2.5"
+            className="grid grid-cols-[1.4fr_1fr_0.9fr_0.8fr] items-center gap-1.5 border-t border-line px-2.5 py-2 sm:gap-2 sm:px-3.5 sm:py-2.5"
           >
             <span className="truncate font-medium text-ink">{n}</span>
             <span className="truncate text-muted">{k}</span>
@@ -159,32 +159,34 @@ function MockSyahriah() {
     ["Hasan Basri", "Rp300.000", "Belum bayar", "belum"],
   ];
   return (
-    <div className="space-y-3 p-5">
-      <ul className="divide-y divide-line rounded-xl border border-line text-sm">
+    <div className="space-y-2.5 p-3 sm:space-y-3 sm:p-5">
+      <ul className="divide-y divide-line rounded-xl border border-line text-xs sm:text-sm">
         {rows.map(([n, j, s, t]) => (
           <li
             key={n}
-            className="flex items-center justify-between gap-3 px-3.5 py-3"
+            className="flex items-center justify-between gap-2 px-3 py-2 sm:gap-3 sm:px-3.5 sm:py-3"
           >
             <div className="min-w-0">
               <p className="truncate font-semibold text-ink">{n}</p>
-              <p className="text-[13px] text-muted">Syahriah Oktober · {j}</p>
+              <p className="text-[11px] text-muted sm:text-[13px]">
+                Syahriah Oktober · {j}
+              </p>
             </div>
             <Badge tone={t}>{s}</Badge>
           </li>
         ))}
       </ul>
-      <div className="flex items-start gap-3 rounded-xl border border-gold-soft bg-gold-pale p-3.5">
-        <Icon name="heart" className="mt-0.5 size-4 shrink-0 text-gold" />
-        <p className="text-[13px] leading-relaxed text-gold-ink">
+      <div className="flex items-start gap-2.5 rounded-xl border border-gold-soft bg-gold-pale p-2.5 sm:gap-3 sm:p-3.5">
+        <Icon name="heart" className="mt-0.5 size-3.5 shrink-0 text-gold sm:size-4" />
+        <p className="text-xs leading-relaxed text-gold-ink sm:text-[13px]">
           <strong>Keringanan yatim 50%</strong> diterapkan: tagihan Rp300.000
           menjadi Rp150.000 per bulan, rekap utama tetap utuh.
         </p>
       </div>
-      <div className="flex items-center justify-between rounded-xl bg-surface-soft px-3.5 py-3 text-sm">
+      <div className="flex items-center justify-between rounded-xl bg-surface-soft px-3 py-2 text-xs sm:px-3.5 sm:py-3 sm:text-sm">
         <span className="font-medium text-ink">Kwitansi #KW-108</span>
         <span className="inline-flex items-center gap-1.5 font-semibold text-emerald">
-          <Icon name="download" className="size-4" />
+          <Icon name="download" className="size-3.5 sm:size-4" />
           Cetak
         </span>
       </div>
@@ -194,22 +196,24 @@ function MockSyahriah() {
 
 function MockWhatsapp() {
   return (
-    <div className="space-y-3 bg-surface-soft p-5">
-      <div className="ml-auto max-w-[88%] rounded-2xl rounded-tr-sm bg-emerald-pale p-3.5 text-[13.5px] leading-relaxed text-ink shadow-sm">
+    <div className="space-y-2.5 bg-surface-soft p-3 sm:space-y-3 sm:p-5">
+      <div className="ml-auto max-w-[92%] rounded-2xl rounded-tr-sm bg-emerald-pale p-3 text-xs leading-relaxed text-ink shadow-sm sm:max-w-[88%] sm:p-3.5 sm:text-[13.5px]">
         <p>Assalamu’alaikum Bapak/Ibu,</p>
-        <p className="mt-2">
+        <p className="mt-1.5 sm:mt-2">
           Kami sampaikan rincian syahriah ananda{" "}
           <strong>Ahmad Fauzan</strong> bulan Oktober sebesar{" "}
           <strong>Rp300.000</strong>. Mohon berkenan menyelesaikannya paling
           lambat tanggal 10.
         </p>
-        <p className="mt-2">Jazakumullah khairan.</p>
+        <p className="mt-1.5 sm:mt-2">Jazakumullah khairan.</p>
         <p className="text-muted">— Admin Pondok Contoh</p>
-        <p className="mt-1.5 text-right text-[11px] text-muted">08.00 ✓✓</p>
+        <p className="mt-1 text-right text-[10px] text-muted sm:mt-1.5 sm:text-[11px]">
+          08.00 ✓✓
+        </p>
       </div>
-      <div className="flex items-center justify-between rounded-xl border border-line bg-white px-3.5 py-3 text-sm">
-        <span className="inline-flex items-center gap-2 font-medium text-ink">
-          <Icon name="clock" className="size-4 text-emerald" />
+      <div className="flex items-center justify-between rounded-xl border border-line bg-white px-3 py-2 text-xs sm:px-3.5 sm:py-3 sm:text-sm">
+        <span className="inline-flex items-center gap-1.5 font-medium text-ink sm:gap-2">
+          <Icon name="clock" className="size-3.5 text-emerald sm:size-4" />
           Terjadwal setiap tanggal 1
         </span>
         <Badge tone="lunas">86 wali terkirim</Badge>
@@ -248,7 +252,7 @@ export function ProductTour() {
         role="tablist"
         aria-label="Fitur utama TSIQA"
         onKeyDown={onKeyDown}
-        className="-mx-5 -my-2 flex gap-2 overflow-x-auto px-5 py-2 sm:mx-0 sm:my-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:py-0"
+        className="-mx-4 -my-1.5 flex gap-1.5 overflow-x-auto px-4 py-1.5 sm:mx-0 sm:my-0 sm:flex-wrap sm:gap-2 sm:overflow-visible sm:px-0 sm:py-0"
       >
         {TABS.map((t) => {
           const on = t.id === aktif;
@@ -265,13 +269,13 @@ export function ProductTour() {
               tabIndex={on ? 0 : -1}
               type="button"
               onClick={() => setAktif(t.id)}
-              className={`inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.98] ${
+              className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold transition-all duration-200 active:scale-[0.98] sm:gap-2 sm:px-4 sm:py-2.5 sm:text-sm ${
                 on
                   ? "bg-ink text-white shadow-md"
                   : "border border-line bg-white text-muted hover:-translate-y-0.5 hover:border-emerald/40 hover:text-ink hover:shadow-sm"
               }`}
             >
-              <Icon name={t.icon} className="size-4" />
+              <Icon name={t.icon} className="size-3.5 sm:size-4" />
               {t.label}
             </button>
           );
@@ -283,18 +287,23 @@ export function ProductTour() {
         role="tabpanel"
         id={`panel-${tab.id}`}
         aria-labelledby={`tab-${tab.id}`}
-        className="animate-swap mt-6 grid items-center gap-6 lg:grid-cols-12 lg:gap-10"
+        className="animate-swap mt-4 grid items-center gap-4 sm:mt-6 sm:gap-6 lg:grid-cols-12 lg:gap-10"
       >
         <div className="lg:col-span-5">
-          <h3 className="text-xl font-semibold leading-snug tracking-tight text-ink sm:text-2xl">
+          <h3 className="text-base font-semibold leading-snug tracking-tight text-ink sm:text-xl lg:text-2xl">
             {tab.judul}
           </h3>
-          <p className="mt-3 text-[15px] leading-relaxed text-muted">{tab.isi}</p>
-          <ul className="mt-5 space-y-2.5">
+          <p className="mt-2 text-[13px] leading-relaxed text-muted sm:mt-3 sm:text-[15px]">
+            {tab.isi}
+          </p>
+          <ul className="mt-3.5 space-y-2 sm:mt-5 sm:space-y-2.5">
             {tab.poin.map((p) => (
-              <li key={p} className="flex items-start gap-3 text-[15px] text-ink">
-                <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-emerald-pale text-emerald">
-                  <Icon name="check" className="size-3.5" />
+              <li
+                key={p}
+                className="flex items-start gap-2.5 text-[13px] text-ink sm:gap-3 sm:text-[15px]"
+              >
+                <span className="mt-0.5 grid size-4.5 shrink-0 place-items-center rounded-full bg-emerald-pale text-emerald sm:size-5">
+                  <Icon name="check" className="size-3 sm:size-3.5" />
                 </span>
                 {p}
               </li>

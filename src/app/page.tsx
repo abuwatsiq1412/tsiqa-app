@@ -38,11 +38,11 @@ const WA_PILOT = waLink(
   "Assalamu’alaikum, kami tertarik menjadi pondok pilot TSIQA. Mohon informasinya."
 );
 
-/* Ukuran judul bagian & jarak antar bagian — satu tempat agar konsisten. */
+/* Ukuran judul bagian & jarak antar bagian — responsif untuk HP & Desktop */
 const H2 =
-  "mt-2.5 text-2xl font-bold leading-tight tracking-[-0.03em] sm:text-[30px]";
-const SEKSI = "py-14 md:py-20";
-const WADAH = "mx-auto max-w-6xl px-5 sm:px-8";
+  "mt-1.5 text-[19px] font-bold leading-snug tracking-[-0.025em] sm:mt-2.5 sm:text-2xl lg:text-[30px] lg:leading-tight";
+const SEKSI = "py-10 sm:py-14 md:py-20";
+const WADAH = "mx-auto max-w-6xl px-4 sm:px-8";
 const STICKY = "stick";
 
 const MASALAH: {
@@ -132,7 +132,7 @@ const SYARAT = [
 const FAQ = [
   {
     q: "Mengapa TSIQA dibanding aplikasi lain begitu terjangkau?",
-    a: "TSIQA disusun modular. Pondok cukup memulai dari Core (Rp59.000 per bulan untuk 150 santri aktif) dan menyalakan modul hanya saat dibutuhkan, sehingga tidak membayar fitur yang belum terpakai. Mengambil 3–4 modul mendapat diskon 10%, dan 5 modul atau lebih mendapat diskon 15%. Bayar tahunan cukup 10 bulan (gratis 2 bulan).",
+    a: "TSIQA disusun modular. Pondok cukup memulai dari Core (Rp59.000 per bulan untuk 150 santri aktif) dan menyalakan modul hanya saat dibutuhkan, sehingga tidak membayar fitur yang belum terpakai. Mengambil 3–4 modul mendapat diskon 10%, dan 5 modul atau lebih mendapat diskon 15%. Bayar tahunan cukup 11 bulan (gratis 1 bulan).",
   },
   {
     q: "Aplikasinya masih akses awal. Apakah aman dipakai?",
@@ -172,7 +172,7 @@ export default function LandingPage() {
 
       {/* ============================ NAVBAR ============================ */}
       <header className="sticky top-0 z-50 border-b border-line bg-white/85 backdrop-blur-md">
-        <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
+        <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:h-16 sm:px-8">
           <div className="flex items-center gap-10">
             <Link href="/" aria-label="TSIQA, beranda" className="no-underline">
               <Logo />
@@ -193,27 +193,23 @@ export default function LandingPage() {
             </nav>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span
-              className="hidden cursor-not-allowed items-center gap-1.5 rounded-full border border-line bg-surface-soft px-3.5 py-1.5 text-xs font-medium text-muted/70 select-none sm:inline-flex"
-              title="Portal aplikasi sedang dalam tahap pengembangan"
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <Link
+              href="/masuk"
+              className="hidden rounded-full px-4 py-2 text-sm font-medium text-ink no-underline transition hover:bg-surface-soft sm:inline-flex"
             >
-              <span>Masuk</span>
-              <span className="rounded-full bg-line/80 px-1.5 py-0.5 text-[10px] text-muted">Segera Hadir</span>
-            </span>
-            <a
-              href={WA_PILOT}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex h-10 items-center gap-2 rounded-full bg-ink px-4 text-xs font-semibold text-white no-underline transition-all duration-200 hover:-translate-y-0.5 hover:bg-emerald hover:shadow-[0_12px_24px_-10px_rgba(15,118,110,0.6)] active:scale-[0.97] sm:text-sm sm:px-5"
+              Masuk
+            </Link>
+            <Link
+              href="/daftar"
+              className="group inline-flex h-8.5 items-center gap-1.5 rounded-full bg-ink px-3.5 text-xs font-semibold text-white no-underline transition-all duration-200 hover:-translate-y-0.5 hover:bg-emerald hover:shadow-[0_12px_24px_-10px_rgba(15,118,110,0.6)] active:scale-[0.97] sm:h-10 sm:px-5 sm:text-sm"
             >
-              <span>Daftar Pilot</span>
-              <span className="rounded-full bg-emerald-pale/25 px-1.5 py-0.5 text-[10px] font-medium text-emerald-pale">Akses Awal</span>
+              <span>Daftar Pondok</span>
               <Icon
                 name="arrow-right"
-                className="size-3.5 transition-transform group-hover:translate-x-0.5"
+                className="size-3 transition-transform group-hover:translate-x-0.5 sm:size-3.5"
               />
-            </a>
+            </Link>
             <MobileNav links={NAV} />
           </div>
         </div>
@@ -230,15 +226,15 @@ export default function LandingPage() {
           </div>
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-emerald-pale/60 to-transparent"
+            className="absolute inset-x-0 top-0 h-28 bg-linear-to-b from-emerald-pale/60 to-transparent sm:h-32"
           />
 
           <div
-            className={`relative ${WADAH} grid items-center gap-10 pb-12 pt-6 md:pb-16 md:pt-9 lg:grid-cols-12 lg:gap-10`}
+            className={`relative ${WADAH} grid items-center gap-6 pb-8 pt-5 sm:gap-10 sm:pb-12 sm:pt-7 md:pb-16 md:pt-9 lg:grid-cols-12`}
           >
             <div className="lg:col-span-6">
               <h1
-                className="animate-rise text-[30px] font-bold leading-[1.12] tracking-[-0.035em] text-ink sm:text-4xl lg:text-[44px]"
+                className="animate-rise text-[22px] font-bold leading-[1.2] tracking-[-0.03em] text-ink sm:text-4xl sm:leading-[1.12] lg:text-[44px]"
                 style={{ animationDelay: "80ms" }}
               >
                 Administrasi pondok yang{" "}
@@ -249,7 +245,7 @@ export default function LandingPage() {
               </h1>
 
               <p
-                className="animate-rise mt-4 max-w-[33rem] text-base leading-relaxed text-muted sm:text-[17px]"
+                className="animate-rise mt-3 max-w-[33rem] text-[13.5px] leading-relaxed text-muted sm:mt-4 sm:text-[17px]"
                 style={{ animationDelay: "160ms" }}
               >
                 Catat santri, kamar, dan pembayaran dalam satu sistem, lalu
@@ -257,30 +253,28 @@ export default function LandingPage() {
                 <strong className="font-semibold text-ink">
                   {rupiah(CORE_HARGA_DASAR)}
                 </strong>{" "}
-                per bulan.
+                per bulan untuk 150 santri aktif.
               </p>
 
               <div
-                className="animate-rise mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-5"
+                className="animate-rise mt-4 flex flex-wrap items-center gap-2.5 sm:mt-6 sm:gap-4"
                 style={{ animationDelay: "240ms" }}
               >
-                <ButtonLink href={WA_PILOT}>
-                  Daftar Pilot (Akses Awal)
+                <ButtonLink href="/daftar">
+                  Daftar Pondok
                   <Icon
                     name="arrow-right"
-                    className="size-4 transition-transform group-hover:translate-x-0.5"
+                    className="size-3.5 transition-transform group-hover:translate-x-0.5 sm:size-4"
                   />
                 </ButtonLink>
-                <a
-                  href="#harga"
-                  className="text-sm font-semibold text-muted underline decoration-line decoration-2 underline-offset-4 transition-colors hover:text-emerald"
-                >
-                  Lihat harga ↓
-                </a>
+                <ButtonLink href={WA_PILOT} variant="outline">
+                  <Icon name="message" className="size-3.5 text-emerald sm:size-4" />
+                  Tanya lewat WhatsApp
+                </ButtonLink>
               </div>
 
               <p
-                className="animate-rise mt-5 text-sm text-muted"
+                className="animate-rise mt-3.5 text-xs text-muted sm:mt-5 sm:text-sm"
                 style={{ animationDelay: "320ms" }}
               >
                 Dilindungi{" "}
@@ -312,7 +306,7 @@ export default function LandingPage() {
                 <h2 className={H2}>
                   Tiga pekerjaan yang paling menyita waktu pengurus.
                 </h2>
-                <p className="mt-3 text-[15px] leading-relaxed text-muted sm:text-base">
+                <p className="mt-2 text-[13.5px] leading-relaxed text-muted sm:mt-3 sm:text-base">
                   Waktu ustadz dan pengurus sebaiknya kembali untuk mendidik
                   santri. TSIQA merapikan tiga pekerjaan administrasi yang
                   paling sering berulang setiap bulan.
@@ -320,30 +314,32 @@ export default function LandingPage() {
               </div>
             </Reveal>
 
-            <div className="mt-7 grid gap-4 md:grid-cols-3">
+            <div className="mt-5 grid gap-3 sm:mt-7 sm:gap-4 md:grid-cols-3">
               {MASALAH.map((m, i) => (
                 <Reveal key={m.judul} delay={i * 80} className="h-full">
-                  <article className="lift flex h-full flex-col rounded-2xl border border-line bg-ivory p-5">
-                    <span className="grid size-9 place-items-center rounded-xl bg-emerald-pale text-emerald">
-                      <Icon name={m.icon} className="size-[18px]" />
-                    </span>
-                    <h3 className="mt-4 text-base font-semibold sm:text-[17px]">
-                      {m.judul}
-                    </h3>
-                    <div className="mt-4 flex flex-1 flex-col gap-3">
-                      <div className="rounded-xl border border-line bg-white p-3.5">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+                  <article className="lift flex h-full flex-col rounded-2xl border border-line bg-ivory p-3.5 sm:p-5">
+                    <div className="flex items-center gap-2.5 sm:block">
+                      <span className="grid size-8 shrink-0 place-items-center rounded-xl bg-emerald-pale text-emerald sm:size-9">
+                        <Icon name={m.icon} className="size-4 sm:size-[18px]" />
+                      </span>
+                      <h3 className="text-[15px] font-semibold sm:mt-4 sm:text-[17px]">
+                        {m.judul}
+                      </h3>
+                    </div>
+                    <div className="mt-3 flex flex-1 flex-col gap-2 sm:mt-4 sm:gap-3">
+                      <div className="rounded-xl border border-line bg-white p-2.5 sm:p-3.5">
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted sm:text-xs">
                           Cara lama
                         </p>
-                        <p className="mt-1.5 text-[14.5px] leading-relaxed text-muted">
+                        <p className="mt-1 text-xs leading-relaxed text-muted sm:mt-1.5 sm:text-[14.5px]">
                           {m.lama}
                         </p>
                       </div>
-                      <div className="flex-1 rounded-xl border border-emerald/25 bg-emerald-pale/40 p-3.5">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-emerald">
+                      <div className="flex-1 rounded-xl border border-emerald/25 bg-emerald-pale/40 p-2.5 sm:p-3.5">
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-emerald sm:text-xs">
                           Dengan TSIQA
                         </p>
-                        <p className="mt-1.5 text-[14.5px] leading-relaxed text-ink">
+                        <p className="mt-1 text-xs leading-relaxed text-ink sm:mt-1.5 sm:text-[14.5px]">
                           {m.baru}
                         </p>
                       </div>
@@ -367,7 +363,7 @@ export default function LandingPage() {
                 </h2>
               </div>
             </Reveal>
-            <div className="mt-7">
+            <div className="mt-5 sm:mt-7">
               <ProductTour />
             </div>
           </div>
@@ -391,24 +387,24 @@ export default function LandingPage() {
                 <h2 className={H2}>
                   Hal-hal kecil yang membuat pengurus pondok merasa dimengerti.
                 </h2>
-                <p className="mt-3 text-[15px] leading-relaxed text-white/75 sm:text-base">
+                <p className="mt-2 text-[13.5px] leading-relaxed text-white/75 sm:mt-3 sm:text-base">
                   Enam hal yang kami rancang khusus untuk cara kerja pondok,
                   bukan sekadar fitur pelengkap.
                 </p>
               </div>
             </Reveal>
 
-            <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-5 grid grid-cols-2 gap-2.5 sm:mt-7 sm:gap-3 lg:grid-cols-3">
               {PEMBEDA.map((p, i) => (
                 <Reveal key={p.judul} delay={(i % 3) * 80} className="h-full">
-                  <article className="lift-dark h-full rounded-2xl border border-white/10 bg-white/[0.05] p-5">
-                    <span className="grid size-9 place-items-center rounded-xl bg-white/10 text-emerald-pale">
-                      <Icon name={p.icon} className="size-[18px]" />
+                  <article className="lift-dark h-full rounded-2xl border border-white/10 bg-white/[0.05] p-3.5 sm:p-5">
+                    <span className="grid size-8 place-items-center rounded-xl bg-white/10 text-emerald-pale sm:size-9">
+                      <Icon name={p.icon} className="size-4 sm:size-[18px]" />
                     </span>
-                    <h3 className="mt-4 text-base font-semibold sm:text-[17px]">
+                    <h3 className="mt-2.5 text-[13.5px] font-semibold leading-snug sm:mt-4 sm:text-[17px]">
                       {p.judul}
                     </h3>
-                    <p className="mt-1.5 text-[14.5px] leading-relaxed text-white/75">
+                    <p className="mt-1 text-xs leading-relaxed text-white/75 sm:mt-1.5 sm:text-[14.5px]">
                       {p.isi}
                     </p>
                   </article>
@@ -427,11 +423,11 @@ export default function LandingPage() {
                 <h2 className={H2}>
                   Harga yang jelas. Bayar sesuai kebutuhan pondok.
                 </h2>
-                <p className="mt-3 text-[15px] leading-relaxed text-muted sm:text-base">
+                <p className="mt-2 text-[13.5px] leading-relaxed text-muted sm:mt-3 sm:text-base">
                   Core {rupiah(CORE_HARGA_DASAR)} per bulan untuk 150 santri
                   aktif, lalu tambah modul yang dibutuhkan saja. Ambil 3–4 modul
                   diskon 10%, 5 modul atau lebih diskon 15%. Bayar tahunan
-                  cukup 10 bulan, gratis 2 bulan.
+                  cukup 11 bulan, gratis 1 bulan.
                 </p>
               </div>
             </Reveal>
@@ -441,17 +437,17 @@ export default function LandingPage() {
 
         {/* ============================ GARANSI =========================== */}
         <section id="garansi" className={`border-t border-line bg-white ${SEKSI}`}>
-          <div className={`${WADAH} grid gap-8 lg:grid-cols-12 lg:gap-12`}>
+          <div className={`${WADAH} grid gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12`}>
             <div className="lg:col-span-6">
               <div className="relative">
-                <h2 className={`${H2} !mt-0 pr-24`}>
+                <h2 className={`${H2} !mt-0 pr-16 sm:pr-24`}>
                   Kami ingin Anda
                   <br />
                   mencoba dengan tenang.
                 </h2>
                 <div
                   aria-hidden="true"
-                  className="absolute right-1 top-0 grid size-[68px] -rotate-6 place-items-center rounded-full border-[3px] border-gold text-center text-[10px] font-bold uppercase leading-tight tracking-wider text-gold-ink"
+                  className="absolute right-0 top-0 grid size-13 -rotate-6 place-items-center rounded-full border-2 border-gold text-center text-[8.5px] font-bold uppercase leading-tight tracking-wider text-gold-ink sm:right-1 sm:size-[68px] sm:border-[3px] sm:text-[10px]"
                 >
                   <span>
                     Garansi
@@ -460,25 +456,25 @@ export default function LandingPage() {
                   </span>
                 </div>
               </div>
-              <p className="mt-3 text-[15px] leading-relaxed text-muted sm:text-base">
+              <p className="mt-2 text-[13.5px] leading-relaxed text-muted sm:mt-3 sm:text-base">
                 <em className="not-italic font-semibold text-ink">Tsiqah</em>{" "}
                 berarti dapat dipercaya. Tiga janji berikut berlaku untuk setiap
                 pondok, dengan syarat yang kami tulis terang-terangan.
               </p>
 
-              <div className="mt-5 rounded-2xl border border-line bg-surface-soft p-5">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-muted">
+              <div className="mt-4 rounded-2xl border border-line bg-surface-soft p-3.5 sm:mt-5 sm:p-5">
+                <h3 className="text-[11px] font-semibold uppercase tracking-wider text-muted sm:text-xs">
                   Syarat singkat
                 </h3>
-                <ul className="mt-3 space-y-2.5">
+                <ul className="mt-2.5 space-y-2 sm:mt-3 sm:space-y-2.5">
                   {SYARAT.map((s) => (
                     <li
                       key={s}
-                      className="flex items-start gap-2.5 text-[14px] leading-relaxed text-ink"
+                      className="flex items-start gap-2 text-xs leading-relaxed text-ink sm:gap-2.5 sm:text-[14px]"
                     >
                       <Icon
                         name="check"
-                        className="mt-1 size-4 shrink-0 text-emerald"
+                        className="mt-0.5 size-3.5 shrink-0 text-emerald sm:mt-1 sm:size-4"
                       />
                       {s}
                     </li>
@@ -487,22 +483,21 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Kartu janji merenggang mengikuti tinggi kolom kiri, jadi bawahnya selalu sejajar. */}
-            <div className="flex flex-col gap-3 lg:col-span-6">
+            <div className="flex flex-col gap-2.5 sm:gap-3 lg:col-span-6">
               {JANJI.map((j, i) => (
                 <Reveal key={j.judul} delay={i * 80} className="flex flex-1">
-                  <article className="lift flex w-full items-center gap-4 rounded-2xl border border-line bg-ivory px-5 py-4">
-                    <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-gold-pale text-gold-ink">
-                      <Icon name={j.icon} className="size-5" />
+                  <article className="lift flex w-full items-start gap-3 rounded-2xl border border-line bg-ivory px-3.5 py-3 sm:items-center sm:gap-4 sm:px-5 sm:py-4">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-gold-pale text-gold-ink sm:size-11">
+                      <Icon name={j.icon} className="size-4 sm:size-5" />
                     </span>
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-wider text-gold">
+                      <p className="text-[10px] font-semibold uppercase tracking-wider text-gold sm:text-xs">
                         Janji {i + 1}
                       </p>
-                      <h3 className="mt-0.5 text-base font-semibold sm:text-[17px]">
+                      <h3 className="mt-0.5 text-sm font-semibold sm:text-[17px]">
                         {j.judul}
                       </h3>
-                      <p className="mt-1.5 text-[14.5px] leading-relaxed text-muted">
+                      <p className="mt-1 text-xs leading-relaxed text-muted sm:mt-1.5 sm:text-[14.5px]">
                         {j.isi}
                       </p>
                     </div>
@@ -514,16 +509,16 @@ export default function LandingPage() {
         </section>
 
         {/* ============================= PILOT ============================ */}
-        <section id="pilot" className="border-t border-line bg-ivory py-12 md:py-16">
+        <section id="pilot" className="border-t border-line bg-ivory py-8 sm:py-12 md:py-16">
           <div className={WADAH}>
             <Reveal>
-              <div className="grid items-center gap-6 rounded-3xl border border-line bg-white p-7 sm:p-9 lg:grid-cols-12 lg:gap-10">
+              <div className="grid items-center gap-4 rounded-2xl border border-line bg-white p-4 sm:gap-6 sm:rounded-3xl sm:p-8 lg:grid-cols-12 lg:gap-10">
                 <div className="lg:col-span-7">
                   <Eyebrow>Program Pondok Pilot</Eyebrow>
-                  <h2 className="mt-2.5 text-xl font-bold leading-tight tracking-[-0.03em] sm:text-2xl">
+                  <h2 className="mt-1.5 text-lg font-bold leading-snug tracking-[-0.025em] sm:mt-2.5 sm:text-2xl">
                     Tumbuh bersama pondok pertama kami.
                   </h2>
-                  <p className="mt-3 text-[15px] leading-relaxed text-muted">
+                  <p className="mt-2 text-xs leading-relaxed text-muted sm:mt-3 sm:text-[15px]">
                     TSIQA masih dalam akses awal, dan kami ingin membangunnya
                     bersama pesantren yang benar-benar memakainya. Pondok pilot
                     mendapat pendampingan langsung dari pengembang lewat
@@ -531,12 +526,12 @@ export default function LandingPage() {
                     kerjakan berikutnya. Garansi Tsiqah berlaku penuh.
                   </p>
                 </div>
-                <div className="flex flex-col gap-3 lg:col-span-5 lg:items-end">
+                <div className="flex flex-col gap-2 sm:gap-3 lg:col-span-5 lg:items-end">
                   <ButtonLink href={WA_PILOT} className="w-full sm:w-auto">
-                    <Icon name="message" className="size-4" />
+                    <Icon name="message" className="size-3.5 sm:size-4" />
                     Jadi pondok pilot
                   </ButtonLink>
-                  <p className="text-sm text-muted">
+                  <p className="text-xs text-muted sm:text-sm">
                     Slot terbatas untuk 10 pondok pertama program pilot
                   </p>
                 </div>
@@ -547,30 +542,32 @@ export default function LandingPage() {
 
         {/* ============================== FAQ ============================= */}
         <section id="faq" className={`border-t border-line bg-white ${SEKSI}`}>
-          <div className={`${WADAH} grid gap-8 lg:grid-cols-12 lg:gap-14`}>
+          <div className={`${WADAH} grid gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-14`}>
             <div className={`lg:col-span-4 ${STICKY}`}>
               <Eyebrow>FAQ</Eyebrow>
               <h2 className={H2}>
                 Pertanyaan yang sering diajukan pengurus pondok.
               </h2>
-              <p className="mt-3 text-[15px] leading-relaxed text-muted sm:text-base">
+              <p className="mt-2 text-[13.5px] leading-relaxed text-muted sm:mt-3 sm:text-base">
                 Belum menemukan jawabannya? Tanyakan langsung, kami balas lewat
                 WhatsApp.
               </p>
-              <div className="mt-5">
+              <div className="mt-3.5 sm:mt-5">
                 <ButtonLink href={WA_UMUM} variant="outline">
-                  <Icon name="message" className="size-4 text-emerald" />
+                  <Icon name="message" className="size-3.5 text-emerald sm:size-4" />
                   Tanya lewat WhatsApp
                 </ButtonLink>
               </div>
 
-              <div className="mt-5 rounded-2xl border border-line bg-ivory p-4">
-                <p className="text-xs font-semibold uppercase tracking-wider text-muted">
+              <div className="mt-4 rounded-2xl border border-line bg-ivory p-3.5 sm:mt-5 sm:p-4">
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-muted sm:text-xs">
                   Hubungi langsung
                 </p>
-                <ul className="mt-3 space-y-3 text-sm">
+                <ul className="mt-2.5 space-y-2.5 text-xs sm:mt-3 sm:space-y-3 sm:text-sm">
                   <li>
-                    <span className="block text-xs text-muted">WhatsApp</span>
+                    <span className="block text-[11px] text-muted sm:text-xs">
+                      WhatsApp
+                    </span>
                     <a
                       href={WA_UMUM}
                       target="_blank"
@@ -581,7 +578,9 @@ export default function LandingPage() {
                     </a>
                   </li>
                   <li>
-                    <span className="block text-xs text-muted">Email</span>
+                    <span className="block text-[11px] text-muted sm:text-xs">
+                      Email
+                    </span>
                     <a
                       href={`mailto:${EMAIL}`}
                       className="break-all font-semibold text-ink no-underline transition-colors hover:text-emerald"
@@ -601,13 +600,13 @@ export default function LandingPage() {
                   open={i === 0}
                   className="group rounded-xl border border-line bg-ivory transition-colors duration-200 hover:border-emerald/40 open:bg-white open:shadow-sm"
                 >
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-left text-[14.5px] font-semibold text-ink [&::-webkit-details-marker]:hidden">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-2.5 px-3.5 py-2.5 text-left text-[13.5px] font-semibold text-ink sm:gap-3 sm:px-4 sm:py-3 sm:text-[14.5px] [&::-webkit-details-marker]:hidden">
                     {f.q}
-                    <span className="grid size-6 shrink-0 place-items-center rounded-full bg-white text-muted transition-all duration-200 group-open:rotate-45 group-open:bg-emerald group-open:text-white">
-                      <Icon name="plus" className="size-3.5" />
+                    <span className="grid size-5.5 shrink-0 place-items-center rounded-full bg-white text-muted transition-all duration-200 group-open:rotate-45 group-open:bg-emerald group-open:text-white sm:size-6">
+                      <Icon name="plus" className="size-3 sm:size-3.5" />
                     </span>
                   </summary>
-                  <p className="px-4 pb-4 text-[14px] leading-relaxed text-muted">
+                  <p className="px-3.5 pb-3 text-xs leading-relaxed text-muted sm:px-4 sm:pb-4 sm:text-[14px]">
                     {f.a}
                   </p>
                 </details>
@@ -617,7 +616,7 @@ export default function LandingPage() {
         </section>
 
         {/* ========================== PENUTUP CTA ========================= */}
-        <section className="relative overflow-hidden bg-forest py-14 text-white md:py-16">
+        <section className="relative overflow-hidden bg-forest py-10 text-white sm:py-14 md:py-16">
           <div
             aria-hidden="true"
             className="absolute inset-0 [mask-image:radial-gradient(ellipse_60%_100%_at_85%_100%,#000_10%,transparent_70%)]"
@@ -626,23 +625,23 @@ export default function LandingPage() {
           </div>
           <div className={`relative ${WADAH} text-center`}>
             <Reveal>
-              <h2 className="mx-auto max-w-2xl text-2xl font-bold leading-tight tracking-[-0.03em] sm:text-3xl">
+              <h2 className="mx-auto max-w-2xl text-xl font-bold leading-snug tracking-[-0.025em] sm:text-3xl sm:leading-tight">
                 TSIQA, sistem yang layak dipercaya.
               </h2>
-              <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-white/75 sm:text-base">
+              <p className="mx-auto mt-2 max-w-xl text-[13.5px] leading-relaxed text-white/75 sm:mt-3 sm:text-base">
                 Mulai dari Core {rupiah(CORE_HARGA_DASAR)} per bulan, dengan
                 garansi uang kembali 30 hari.
               </p>
-              <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-                <ButtonLink href={WA_PILOT} variant="onDark">
-                  Daftar Program Pilot
+              <div className="mt-5 flex flex-col justify-center gap-2.5 sm:mt-6 sm:flex-row sm:gap-3">
+                <ButtonLink href="/daftar" variant="onDark">
+                  Daftar Pondok
                   <Icon
                     name="arrow-right"
-                    className="size-4 transition-transform group-hover:translate-x-0.5"
+                    className="size-3.5 transition-transform group-hover:translate-x-0.5 sm:size-4"
                   />
                 </ButtonLink>
                 <ButtonLink href={WA_UMUM} variant="outlineOnDark">
-                  <Icon name="message" className="size-4" />
+                  <Icon name="message" className="size-3.5 sm:size-4" />
                   Tanya lewat WhatsApp
                 </ButtonLink>
               </div>
@@ -652,66 +651,68 @@ export default function LandingPage() {
       </main>
 
       {/* ============================= FOOTER ============================ */}
-      <footer className="border-t border-line bg-ivory py-10">
-        <div className={`${WADAH} grid gap-8 md:grid-cols-12`}>
+      <footer className="border-t border-line bg-ivory py-8 sm:py-10">
+        <div className={`${WADAH} grid gap-6 sm:gap-8 md:grid-cols-12`}>
           <div className="md:col-span-5">
             <Logo />
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
+            <p className="mt-2.5 max-w-xs text-xs leading-relaxed text-muted sm:mt-3 sm:text-sm">
               Sistem manajemen pondok pesantren. Berasal dari kata{" "}
               <em className="not-italic font-semibold text-ink">tsiqah</em>:
               dapat dipercaya.
             </p>
           </div>
-          <div className="md:col-span-3">
-            <p className="text-sm font-semibold text-ink">Halaman</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted">
-              <li>
-                <a
-                  href={WA_PILOT}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="no-underline hover:text-ink"
-                >
-                  Daftar Pilot (Akses Awal)
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-muted/60 select-none">Masuk ke Sistem</span>
-                <span className="rounded-full bg-surface-soft px-1.5 py-0.5 text-[10px] text-muted">Segera Hadir</span>
-              </li>
-              <li>
-                <Link href="/privasi" className="no-underline hover:text-ink">
-                  Kebijakan Privasi
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div className="md:col-span-4">
-            <p className="text-sm font-semibold text-ink">Kontak</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted">
-              <li>
-                <a
-                  href={WA_UMUM}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="no-underline hover:text-ink"
-                >
-                  WhatsApp {WA_DISPLAY}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${EMAIL}`}
-                  className="no-underline hover:text-ink"
-                >
-                  {EMAIL}
-                </a>
-              </li>
-            </ul>
+          <div className="grid grid-cols-2 gap-6 md:col-span-7 md:grid-cols-7">
+            <div className="md:col-span-3">
+              <p className="text-xs font-semibold text-ink sm:text-sm">
+                Halaman
+              </p>
+              <ul className="mt-2 space-y-1.5 text-xs text-muted sm:mt-3 sm:space-y-2 sm:text-sm">
+                <li>
+                  <Link href="/daftar" className="no-underline hover:text-ink">
+                    Daftar Pondok
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/masuk" className="no-underline hover:text-ink">
+                    Masuk ke Sistem
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/privasi" className="no-underline hover:text-ink">
+                    Kebijakan Privasi
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="md:col-span-4">
+              <p className="text-xs font-semibold text-ink sm:text-sm">
+                Kontak
+              </p>
+              <ul className="mt-2 space-y-1.5 text-xs text-muted sm:mt-3 sm:space-y-2 sm:text-sm">
+                <li>
+                  <a
+                    href={WA_UMUM}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="no-underline hover:text-ink"
+                  >
+                    WhatsApp {WA_DISPLAY}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`mailto:${EMAIL}`}
+                    className="break-all no-underline hover:text-ink"
+                  >
+                    {EMAIL}
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <div
-          className={`${WADAH} mt-8 border-t border-line pt-5 text-xs text-muted`}
+          className={`${WADAH} mt-6 border-t border-line pt-4 text-[11px] text-muted sm:mt-8 sm:pt-5 sm:text-xs`}
         >
           © 2026 TSIQA · Akses Awal (Beta). Tampilan aplikasi pada halaman ini
           adalah ilustrasi.
