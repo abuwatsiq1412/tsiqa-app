@@ -23,6 +23,7 @@ export default async function Beranda({ searchParams }: { searchParams: Promise<
   const nada = d.totalSisa === 0 ? "hijau" : terlambat.length ? "merah" : "emas";
   const chip = d.totalSisa === 0 ? "Semua tagihan lunas" : terlambat.length ? `${terlambat.length} tagihan terlambat` : `${belum.length} tagihan berjalan`;
   const wa = d.pondok?.telepon ? nomorWA(d.pondok.telepon) : null;
+  const raporDibuka = (adaRapor ?? []).length > 0;
 
   const kabar: KabarItem[] = [
     ...d.konfirmasi.filter((k) => k.status !== "menunggu").slice(0, 3).map((k) => ({
@@ -51,11 +52,11 @@ export default async function Beranda({ searchParams }: { searchParams: Promise<
 
       <section>
         <div className="mb-2.5 flex items-center justify-between">
-          <h2 className="text-base font-extrabold">Perlu dibayar</h2>
+          <h2 className="text-base font-extrabold text-ink">Perlu dibayar</h2>
           {belum.length > 3 && <Link href={tautan("/wali/tagihan", aktif.id)} className="text-[13px] font-bold text-emerald">Semua</Link>}
         </div>
         {belum.length === 0 ? (
-          <div className="flex items-center gap-3 rounded-2xl border border-line bg-white p-4">
+          <div className="flex items-center gap-3 rounded-2xl border border-line bg-surface p-4">
             <span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-pale text-emerald"><IkonW n="centang" /></span>
             <span className="text-sm text-muted">Tidak ada tagihan yang menunggu. Alhamdulillah.</span>
           </div>
@@ -64,9 +65,9 @@ export default async function Beranda({ searchParams }: { searchParams: Promise<
             {belum.slice(0, 3).map((t) => {
               const s = statusTagihan(t, d.menunggu.has(t.id)); const g = GAYA[s];
               return (
-                <Link key={t.id} href={tautan("/wali/tagihan", aktif.id, `buka=${t.id}`)} className="tekan flex items-center gap-3 rounded-2xl border border-line bg-white p-4">
-                  <span className="min-w-0 flex-1"><span className="block truncate text-[15px] font-bold">{t.judul}</span><span className="mt-0.5 block text-xs text-muted">Jatuh tempo {tanggalLengkap(t.jatuh_tempo)}</span></span>
-                  <span className="text-right"><span className="block text-[15px] font-extrabold">{rp(t.sisa)}</span><span className={`mt-1 inline-block rounded-full px-2.5 py-1 text-[11px] font-bold ${g.chip}`}>{g.label}</span></span>
+                <Link key={t.id} href={tautan("/wali/tagihan", aktif.id, `buka=${t.id}`)} className="tekan flex items-center gap-3 rounded-2xl border border-line bg-surface p-4 text-ink">
+                  <span className="min-w-0 flex-1"><span className="block truncate text-[15px] font-bold text-ink">{t.judul}</span><span className="mt-0.5 block text-xs text-muted">Jatuh tempo {tanggalLengkap(t.jatuh_tempo)}</span></span>
+                  <span className="text-right"><span className="block text-[15px] font-extrabold text-ink">{rp(t.sisa)}</span><span className={`mt-1 inline-block rounded-full px-2.5 py-1 text-xs font-bold ${g.chip}`}>{g.label}</span></span>
                 </Link>
               );
             })}
@@ -74,25 +75,27 @@ export default async function Beranda({ searchParams }: { searchParams: Promise<
         )}
       </section>
 
-      {(adaRapor ?? []).length > 0 && (
-        <Link href={tautan("/wali/rapor", aktif.id)} className="tekan flex items-center gap-3 rounded-2xl border border-line bg-white p-4">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-pale text-emerald"><IkonW n="kwitansi" /></span>
-          <span className="flex-1"><span className="block text-[15px] font-bold">Rapor dan kehadiran</span><span className="block text-xs text-muted">Nilai terbaru sudah dibuka pondok</span></span>
-          <IkonW n="kanan" className="h-4 w-4 text-muted" />
-        </Link>
-      )}
-
-      <Link href={tautan("/wali/rapor", aktif.id)} className="tekan flex items-center gap-3 rounded-2xl border border-line bg-white p-4">
+      <Link href={tautan("/wali/rapor", aktif.id)} className="tekan flex items-center gap-3 rounded-2xl border border-line bg-surface p-4 text-ink">
         <span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-pale text-emerald"><IkonW n="kwitansi" /></span>
-        <span className="flex-1"><span className="block text-[15px] font-bold">Rapor & kehadiran</span><span className="block text-xs text-muted">Nilai dan absensi ananda</span></span>
+        <span className="flex-1">
+          <span className="block text-[15px] font-bold text-ink">Rapor & kehadiran</span>
+          <span className="block text-xs text-muted">
+            {raporDibuka ? "Nilai terbaru sudah dibuka pondok" : "Nilai dan absensi ananda"}
+          </span>
+        </span>
+        {raporDibuka && (
+          <span className="rounded-full bg-emerald-pale px-2.5 py-0.5 text-xs font-bold text-emerald">
+            Baru
+          </span>
+        )}
         <IkonW n="kanan" className="h-4 w-4 text-muted" />
       </Link>
 
       {/* Kartu Tahfidz & Muroja'ah Ananda (Tampil otomatis jika ada data setoran/juz) */}
       {(d.tahfidzJuz.length > 0 || d.tahfidzSetoran.length > 0) && (
-        <section className="rounded-2xl border border-line bg-white p-4">
+        <section className="rounded-2xl border border-line bg-surface p-4 text-ink">
           <div className="flex items-center justify-between">
-            <h2 className="text-base font-extrabold">Tahfidz & Muroja&apos;ah</h2>
+            <h2 className="text-base font-extrabold text-ink">Tahfidz & Muroja&apos;ah</h2>
             <span className="rounded-full bg-emerald-pale px-2.5 py-0.5 text-xs font-extrabold text-emerald">
               {d.tahfidzJuz.length} Juz Lulus
             </span>
@@ -103,7 +106,7 @@ export default async function Beranda({ searchParams }: { searchParams: Promise<
               {d.tahfidzJuz.map((j) => (
                 <span
                   key={j.juz}
-                  className="rounded-lg border border-emerald/25 bg-emerald-pale/60 px-2 py-0.5 text-[11px] font-bold text-emerald"
+                  className="rounded-lg border border-emerald/25 bg-emerald-pale/60 px-2.5 py-0.5 text-xs font-bold text-emerald"
                 >
                   Juz {j.juz}
                 </span>
@@ -115,7 +118,7 @@ export default async function Beranda({ searchParams }: { searchParams: Promise<
             <div className="mt-3 divide-y divide-line/60 border-t border-line pt-2 text-xs">
               {d.tahfidzSetoran.map((s, idx) => (
                 <div key={idx} className="py-2">
-                  <div className="flex items-center justify-between text-[11px] text-muted">
+                  <div className="flex items-center justify-between text-xs text-muted">
                     <span>{tanggalLengkap(s.tanggal)}</span>
                     <span className="font-bold uppercase text-emerald">{s.status}</span>
                   </div>
@@ -138,17 +141,17 @@ export default async function Beranda({ searchParams }: { searchParams: Promise<
 
       {/* Kartu Status Perizinan Ananda (Tampil otomatis jika ada catatan izin keluar/pulang) */}
       {d.perizinan.length > 0 && (
-        <section className="rounded-2xl border border-line bg-white p-4">
-          <h2 className="text-base font-extrabold">Perizinan & Asrama</h2>
+        <section className="rounded-2xl border border-line bg-surface p-4 text-ink">
+          <h2 className="text-base font-extrabold text-ink">Perizinan & Asrama</h2>
           <div className="mt-2 divide-y divide-line/60 text-xs">
             {d.perizinan.map((iz) => (
               <div key={iz.id} className="py-2">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-2">
                   <span className="font-bold capitalize text-ink">
                     Izin {iz.jenis}: {iz.alasan}
                   </span>
                   <span
-                    className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                    className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold ${
                       iz.status === "keluar"
                         ? "bg-cicilan-bg text-cicilan"
                         : iz.status === "kembali_terlambat"
@@ -163,7 +166,7 @@ export default async function Beranda({ searchParams }: { searchParams: Promise<
                       : "Sudah Kembali"}
                   </span>
                 </div>
-                <div className="mt-0.5 text-[11px] text-muted">
+                <div className="mt-0.5 text-xs text-muted">
                   Batas kembali: {tanggalLengkap(iz.batas_kembali.slice(0, 10))}
                 </div>
               </div>
@@ -172,15 +175,14 @@ export default async function Beranda({ searchParams }: { searchParams: Promise<
         </section>
       )}
 
-      <section className="rounded-2xl border border-line bg-white p-4">
-        <h2 className="text-base font-extrabold">{aktif.nama}</h2>
+      <section className="rounded-2xl border border-line bg-surface p-4 text-ink">
+        <h2 className="text-base font-extrabold text-ink">{aktif.nama}</h2>
         <dl className="mt-2.5 grid grid-cols-3 gap-3 text-sm">
-          <div><dt className="text-xs text-muted">NIS</dt><dd className="font-semibold">{aktif.nis}</dd></div>
-          <div><dt className="text-xs text-muted">Kamar</dt><dd className="font-semibold">{d.kamar ?? "-"}</dd></div>
-          <div><dt className="text-xs text-muted">Kelas</dt><dd className="font-semibold">{d.kelas ?? "-"}</dd></div>
+          <div><dt className="text-xs text-muted">NIS</dt><dd className="font-semibold text-ink">{aktif.nis}</dd></div>
+          <div><dt className="text-xs text-muted">Kamar</dt><dd className="font-semibold text-ink">{d.kamar ?? "-"}</dd></div>
+          <div><dt className="text-xs text-muted">Kelas</dt><dd className="font-semibold text-ink">{d.kelas ?? "-"}</dd></div>
         </dl>
       </section>
     </div>
   );
 }
-

@@ -28,21 +28,21 @@ export function DaftarTagihan({ items, anakId, rekening, wa, pondok, hari, aksi,
       <div role="tablist" className="flex gap-2">
         {([["semua", "Semua"], ["belum", "Belum lunas"], ["lunas", "Lunas"]] as const).map(([k, l]) => (
           <button key={k} role="tab" aria-selected={saring === k} onClick={() => setSaring(k)}
-            className={`tekan h-10 cursor-pointer rounded-full px-4 text-[13px] font-bold ${saring === k ? "bg-forest text-white" : "border border-line bg-white text-muted"}`}>{l}</button>
+            className={`tekan h-10 cursor-pointer rounded-full px-4 text-[13px] font-bold ${saring === k ? "bg-forest text-white" : "border border-line bg-surface text-muted"}`}>{l}</button>
         ))}
       </div>
 
       <div className="mt-4 flex flex-col gap-2.5">
         {tampil.length === 0 && <p className="rounded-2xl border border-dashed border-line py-10 text-center text-sm text-muted">Belum ada tagihan di sini.</p>}
         {tampil.map((x) => (
-          <button key={x.id} onClick={() => setPilih(x.id)} className="tekan flex w-full cursor-pointer items-center gap-3 rounded-2xl border border-line bg-white p-4 text-left">
+          <button key={x.id} onClick={() => setPilih(x.id)} className="tekan flex w-full cursor-pointer items-center gap-3 rounded-2xl border border-line bg-surface p-4 text-left text-ink">
             <span className="min-w-0 flex-1">
-              <span className="block truncate text-[15px] font-bold">{x.judul}</span>
+              <span className="block truncate text-[15px] font-bold text-ink">{x.judul}</span>
               <span className="mt-0.5 block text-xs text-muted">Jatuh tempo {x.jatuhTempo}</span>
             </span>
             <span className="text-right">
-              <span className="block text-[15px] font-extrabold">{rp(x.status === "lunas" ? x.nominal : x.sisa)}</span>
-              <span className={`mt-1 inline-block rounded-full px-2.5 py-1 text-[11px] font-bold ${x.chip}`}>{x.label}</span>
+              <span className="block text-[15px] font-extrabold text-ink">{rp(x.status === "lunas" ? x.nominal : x.sisa)}</span>
+              <span className={`mt-1 inline-block rounded-full px-2.5 py-1 text-xs font-bold ${x.chip}`}>{x.label}</span>
             </span>
           </button>
         ))}
@@ -51,14 +51,14 @@ export function DaftarTagihan({ items, anakId, rekening, wa, pondok, hari, aksi,
       {t && (
         <LembarBawah judul={t.judul} tutup={tutup}>
           <div className="mt-1 text-xs text-muted">{t.kode}</div>
-          <div className="mt-3 rounded-2xl bg-surface-soft/70 p-4 text-sm">
+          <div className="mt-3 rounded-2xl bg-surface-soft/70 p-4 text-sm text-ink">
             <Baris k="Nominal" v={rp(t.nominal)} />
             <Baris k="Sudah dibayar" v={rp(t.terbayar)} />
             <Baris k="Sisa" v={rp(t.sisa)} tebal />
             <Baris k="Jatuh tempo" v={t.jatuhTempo} />
             <div className="mt-2 flex items-center justify-between">
               <span className="text-muted">Status</span>
-              <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${t.chip}`}>{t.label}</span>
+              <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${t.chip}`}>{t.label}</span>
             </div>
           </div>
 
@@ -76,7 +76,7 @@ export function DaftarTagihan({ items, anakId, rekening, wa, pondok, hari, aksi,
               </div>
             ) : (
               <div className="mt-4 flex flex-col gap-2.5">
-                <button onClick={() => setForm(true)} className="tekan flex h-[50px] cursor-pointer items-center justify-center gap-2 rounded-2xl bg-emerald text-[15px] font-bold text-white">
+                <button onClick={() => setForm(true)} className="tekan flex h-[50px] cursor-pointer items-center justify-center gap-2 rounded-2xl bg-emerald text-[15px] font-bold text-on-brand">
                   <IkonW n="unggah" className="h-5 w-5" />Sudah transfer
                 </button>
                 <CaraBayar nominal={rp(t.sisa)} untuk={`${t.judul} · ${pondok}`} rekening={rekening} wa={wa}
@@ -91,5 +91,5 @@ export function DaftarTagihan({ items, anakId, rekening, wa, pondok, hari, aksi,
 }
 
 function Baris({ k, v, tebal }: { k: string; v: string; tebal?: boolean }) {
-  return <div className="flex items-center justify-between py-1"><span className="text-muted">{k}</span><span className={tebal ? "font-extrabold" : "font-semibold"}>{v}</span></div>;
+  return <div className="flex items-center justify-between py-1"><span className="text-muted">{k}</span><span className={tebal ? "font-extrabold text-ink" : "font-semibold text-ink"}>{v}</span></div>;
 }

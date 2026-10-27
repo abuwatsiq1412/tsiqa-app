@@ -12,6 +12,7 @@ import {
   tombolSekunder,
 } from "@/components-ui";
 import { konteks } from "@/lib/konteks";
+import { hariIni } from "@/lib/waktu";
 import { simpanSetoranMassal } from "./actions";
 
 interface BarisSetoran {
@@ -34,8 +35,9 @@ export default async function TahfidzSetoranPage({
   const { ok, galat, halaqah: filterHalaqah, tanggal: filterTanggal } = await searchParams;
   const { sb, pondokId } = await konteks();
 
-  const hariIni = new Date().toISOString().slice(0, 10);
-  const tglAktif = filterTanggal || hariIni;
+  // Gunakan helper hariIni() berzona waktu WIB agar halaqah Subuh tidak mundur ke tanggal kemarin
+  const tglHariIni = hariIni();
+  const tglAktif = filterTanggal || tglHariIni;
 
   const [
     { data: daftarHalaqah },
@@ -81,7 +83,7 @@ export default async function TahfidzSetoranPage({
       <HeaderHalaman
         kategori="Tahfidz & Muroja'ah Al-Qur'an"
         judul="Setoran & Absen Harian"
-        deskripsi="Isi tambah hafalan atau ulang hafalan (muroja'ah) dalam satu tabel. Kosongkan kolom hafalan bila santri tidak menambah atau mengulang hari ini."
+        deskripsi="Isi tambah hafalan atau ulang hafalan (muroja'ah) dengan cepat. Kosongkan kolom hafalan bila santri tidak menambah atau mengulang hari ini."
         aksi={
           <div className="flex flex-wrap gap-2">
             <Link href="/tahfidz/juz" className={tombolSekunder}>
@@ -145,65 +147,70 @@ export default async function TahfidzSetoranPage({
           <input type="hidden" name="halaqah_id" value={halaqahAktif} />
 
           <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-xs">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead className="border-b border-line bg-surface-soft/70 text-xs font-semibold text-muted">
-                  <tr>
-                    <th className="px-4 py-3">Santri</th>
-                    <th className="px-3 py-3 w-36">Kehadiran</th>
-                    <th className="px-3 py-3">Tambah Hafalan (Ziyadah)</th>
-                    <th className="px-4 py-3">Ulang Hafalan (Muroja&apos;ah)</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-line">
-                  {santriTampil.map((s) => {
-                    const row = petaSetoran.get(s.id);
-                    return (
-                      <tr key={s.id} className="transition hover:bg-surface-soft/40">
-                        <td className="px-4 py-2.5">
-                          <input type="hidden" name="santri_id" value={s.id} />
-                          <div className="font-semibold text-ink">{s.nama}</div>
-                          <div className="text-[11px] text-muted">{s.nis}</div>
-                        </td>
-
-                        <td className="px-3 py-2.5">
-                          <select
-                            name={`status_${s.id}`}
-                            defaultValue={row?.status ?? "hadir"}
-                            className="h-9 w-full rounded-lg border border-line bg-surface px-2.5 text-xs font-semibold text-ink outline-none focus:border-emerald"
-                          >
-                            <option value="hadir">Hadir</option>
-                            <option value="izin">Izin</option>
-                            <option value="sakit">Sakit</option>
-                            <option value="alpa">Alpa</option>
-                          </select>
-                        </td>
-
-                        <td className="px-3 py-2.5">
-                          <input
-                            name={`tambah_${s.id}`}
-                            defaultValue={row?.tambah_hafalan ?? ""}
-                            placeholder="Kosongkan jika tidak tambah (mis. An-Naba 1-20 / Hal 42)"
-                            className="h-9 w-full rounded-lg border border-line bg-surface px-3 text-xs text-ink placeholder:text-muted/50 outline-none focus:border-emerald"
-                          />
-                        </td>
-
-                        <td className="px-4 py-2.5">
-                          <input
-                            name={`ulang_${s.id}`}
-                            defaultValue={row?.ulang_hafalan ?? ""}
-                            placeholder="Kosongkan jika tidak ulang (mis. Juz 30 / Al-Mulk)"
-                            className="h-9 w-full rounded-lg border border-line bg-surface px-3 text-xs text-ink placeholder:text-muted/50 outline-none focus:border-emerald"
-                          />
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+            <div className="hidden border-b border-line bg-surface-soft/70 px-4 py-3 text-xs font-semibold text-muted md:grid md:grid-cols-[1.2fr_144px_1fr_1fr] md:gap-3">
+              <div>Santri</div>
+              <div>Kehadiran</div>
+              <div>Tambah Hafalan (Ziyadah)</div>
+              <div>Ulang Hafalan (Muroja&apos;ah)</div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line bg-surface-soft/50 px-5 py-3.5">
+            <div className="divide-y divide-line">
+              {santriTampil.map((s) => {
+                const row = petaSetoran.get(s.id);
+                return (
+                  <div
+                    key={s.id}
+                    className="space-y-2.5 p-4 transition hover:bg-surface-soft/40 md:grid md:grid-cols-[1.2fr_144px_1fr_1fr] md:items-center md:gap-3 md:space-y-0 md:px-4 md:py-2.5"
+                  >
+                    <input type="hidden" name="santri_id" value={s.id} />
+
+                    <div className="flex items-center justify-between gap-2 md:block">
+                      <div>
+                        <div className="font-semibold text-ink">{s.nama}</div>
+                        <div className="text-xs text-muted">NIS {s.nis}</div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <span className="mb-1 block text-xs font-medium text-muted md:hidden">Kehadiran</span>
+                      <select
+                        name={`status_${s.id}`}
+                        defaultValue={row?.status ?? "hadir"}
+                        aria-label={`Kehadiran ${s.nama}`}
+                        className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-xs font-semibold text-ink outline-none focus:border-emerald md:h-9 md:px-2.5"
+                      >
+                        <option value="hadir">Hadir</option>
+                        <option value="izin">Izin</option>
+                        <option value="sakit">Sakit</option>
+                        <option value="alpa">Alpa</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <span className="mb-1 block text-xs font-medium text-muted md:hidden">Tambah Hafalan (Ziyadah)</span>
+                      <input
+                        name={`tambah_${s.id}`}
+                        defaultValue={row?.tambah_hafalan ?? ""}
+                        placeholder="Mis. An-Naba 1-20 / Hal 42"
+                        className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-xs text-ink placeholder:text-muted/55 outline-none focus:border-emerald md:h-9"
+                      />
+                    </div>
+
+                    <div>
+                      <span className="mb-1 block text-xs font-medium text-muted md:hidden">Ulang Hafalan (Muroja&apos;ah)</span>
+                      <input
+                        name={`ulang_${s.id}`}
+                        defaultValue={row?.ulang_hafalan ?? ""}
+                        placeholder="Mis. Juz 30 / Al-Mulk"
+                        className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-xs text-ink placeholder:text-muted/55 outline-none focus:border-emerald md:h-9"
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="sticky bottom-0 z-10 flex flex-wrap items-center justify-between gap-3 border-t border-line bg-surface/95 px-5 py-3.5 backdrop-blur">
               <span className="text-xs text-muted">
                 Menampilkan <strong className="text-ink">{santriTampil.length}</strong> santri pada tanggal{" "}
                 <strong className="text-ink">{tglAktif}</strong>.

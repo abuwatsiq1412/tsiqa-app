@@ -38,6 +38,7 @@ const LABEL_JENIS: Record<string, string> = {
 function formatWaktu(iso: string) {
   try {
     return new Date(iso).toLocaleString("id-ID", {
+      timeZone: "Asia/Jakarta",
       day: "2-digit",
       month: "short",
       year: "numeric",
@@ -47,6 +48,12 @@ function formatWaktu(iso: string) {
   } catch {
     return iso;
   }
+}
+
+/** Menghasilkan string YYYY-MM-DDTHH:mm sesuai zona waktu WIB (UTC+7) untuk input datetime-local */
+function isoLokalWib(date: Date): string {
+  const wibMs = date.getTime() + 7 * 3600 * 1000;
+  return new Date(wibMs).toISOString().slice(0, 16);
 }
 
 function formatDurasiTerlambat(menit: number) {
@@ -97,13 +104,9 @@ export default async function PerizinanPage({
     (x) => new Date(x.batas_kembali) < sekarang
   );
 
-  // Default waktu keluar = sekarang, batas kembali = besok sore 17:00
-  const isoSekarang = new Date(sekarang.getTime() - sekarang.getTimezoneOffset() * 60000)
-    .toISOString()
-    .slice(0, 16);
-  const besok = new Date(sekarang.getTime() + 86400000 - sekarang.getTimezoneOffset() * 60000)
-    .toISOString()
-    .slice(0, 16);
+  // Default waktu keluar = sekarang WIB, batas kembali = besok WIB
+  const isoSekarang = isoLokalWib(sekarang);
+  const besok = isoLokalWib(new Date(sekarang.getTime() + 86400000));
 
   return (
     <div className="space-y-6">
@@ -222,7 +225,7 @@ export default async function PerizinanPage({
                           Alasan: {iz.alasan}
                           {iz.penjemput ? ` · Dijemput oleh: ${iz.penjemput}` : ""}
                         </p>
-                        <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-muted">
+                        <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted">
                           <span>Keluar: {formatWaktu(iz.waktu_keluar)}</span>
                           <span className="font-semibold text-ink">
                             Batas Kembali: {formatWaktu(iz.batas_kembali)}
@@ -258,27 +261,27 @@ export default async function PerizinanPage({
                     >
                       <input type="hidden" name="id" value={iz.id} />
                       <label className="block flex-1 min-w-[180px]">
-                        <span className="mb-1 block text-[11px] font-semibold text-muted">
+                        <span className="mb-1 block text-xs font-semibold text-muted">
                           Waktu Tiba di Pondok
                         </span>
                         <input
                           name="waktu_kembali"
                           type="datetime-local"
                           defaultValue={isoSekarang}
-                          className="h-9 w-full rounded-lg border border-line bg-surface px-2.5 text-xs text-ink"
+                          className="h-10 w-full rounded-lg border border-line bg-surface px-2.5 text-xs text-ink md:h-9"
                         />
                       </label>
                       <label className="block flex-1 min-w-[180px]">
-                        <span className="mb-1 block text-[11px] font-semibold text-muted">
+                        <span className="mb-1 block text-xs font-semibold text-muted">
                           Catatan Kedatangan / Ta&apos;zir (Opsional)
                         </span>
                         <input
                           name="tindak_lanjut"
                           placeholder="Mis. Kembali diantar ayah / udzur hujan"
-                          className="h-9 w-full rounded-lg border border-line bg-surface px-2.5 text-xs text-ink"
+                          className="h-10 w-full rounded-lg border border-line bg-surface px-2.5 text-xs text-ink md:h-9"
                         />
                       </label>
-                      <button className="h-9 cursor-pointer rounded-lg bg-emerald px-3.5 text-xs font-semibold text-on-brand transition hover:bg-emerald-hover">
+                      <button className="h-10 cursor-pointer rounded-lg bg-emerald px-3.5 text-xs font-semibold text-on-brand transition hover:bg-emerald-hover md:h-9">
                         ✓ Tandai Sudah Kembali
                       </button>
                     </form>
@@ -311,7 +314,7 @@ export default async function PerizinanPage({
                           {" "}
                           · {LABEL_JENIS[iz.jenis] ?? iz.jenis} ({iz.alasan})
                         </span>
-                        <div className="text-[11px] text-muted">
+                        <div className="text-xs text-muted">
                           Kembali: {iz.waktu_kembali ? formatWaktu(iz.waktu_kembali) : "-"}
                           {iz.tindak_lanjut ? ` · Catatan: ${iz.tindak_lanjut}` : ""}
                         </div>

@@ -1,6 +1,7 @@
 import ExcelJS from "exceljs";
 import type { NextRequest } from "next/server";
 import { konteks } from "@/lib/konteks";
+import { hariIni } from "@/lib/waktu";
 
 export async function GET(req: NextRequest) {
   const { sb, pondokId, peran, nama } = await konteks();
@@ -26,6 +27,12 @@ export async function GET(req: NextRequest) {
     { data: mapel },
     { data: jadwal },
     { data: nilai },
+    { data: tahfidzHalaqah },
+    { data: tahfidzSetoran },
+    { data: tahfidzJuz },
+    { data: perizinan },
+    { data: pelanggaran },
+    { data: websiteTulisan },
   ] = await Promise.all([
     sb.from("pondok").select("*").eq("id", pondokId).maybeSingle(),
     sb.from("tahun_ajaran").select("*").eq("pondok_id", pondokId).order("nama", { ascending: false }),
@@ -39,10 +46,16 @@ export async function GET(req: NextRequest) {
     sb.from("mapel").select("*").eq("pondok_id", pondokId).order("nama"),
     sb.from("jadwal").select("*").eq("pondok_id", pondokId).order("hari").order("jam_mulai"),
     sb.from("nilai").select("*").eq("pondok_id", pondokId).limit(30000),
+    sb.from("tahfidz_halaqah").select("*").eq("pondok_id", pondokId).order("nama"),
+    sb.from("tahfidz_setoran").select("*").eq("pondok_id", pondokId).order("tanggal", { ascending: false }).limit(20000),
+    sb.from("tahfidz_juz").select("*").eq("pondok_id", pondokId).order("juz"),
+    sb.from("perizinan_santri").select("*").eq("pondok_id", pondokId).order("waktu_keluar", { ascending: false }).limit(10000),
+    sb.from("catatan_pelanggaran").select("*").eq("pondok_id", pondokId).order("tanggal", { ascending: false }).limit(10000),
+    sb.from("website_tulisan").select("*").eq("pondok_id", pondokId).order("tanggal", { ascending: false }),
   ]);
 
   const kodePondok = pondok?.kode ?? "pondok";
-  const tgl = new Date().toISOString().slice(0, 10);
+  const tgl = hariIni();
 
   if (format === "json") {
     const arsipJson = {
@@ -69,6 +82,18 @@ export async function GET(req: NextRequest) {
         mapel: mapel ?? [],
         jadwal: jadwal ?? [],
         nilai: nilai ?? [],
+      },
+      tahfidz: {
+        halaqah: tahfidzHalaqah ?? [],
+        setoran: tahfidzSetoran ?? [],
+        juz: tahfidzJuz ?? [],
+      },
+      keamanan_perizinan: {
+        perizinan: perizinan ?? [],
+        pelanggaran: pelanggaran ?? [],
+      },
+      website: {
+        tulisan: websiteTulisan ?? [],
       },
     };
 
@@ -107,13 +132,15 @@ export async function GET(req: NextRequest) {
     ["Kode Pondok", kodePondok],
     ["NSPP", pondok?.nspp ?? "-"],
     ["Kota", pondok?.kota ?? "-"],
-    ["Tanggal Unduh Backup", new Date().toLocaleString("id-ID")],
+    ["Tanggal Unduh Backup", new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })],
     ["Diunduh Oleh", `${nama} (Admin Utama)`],
     ["Jumlah Santri", String((santri ?? []).length)],
     ["Jumlah Kamar", String((kamar ?? []).length)],
     ["Jumlah Kelas", String((kelas ?? []).length)],
     ["Jumlah Data Tagihan", String((tagihan ?? []).length)],
     ["Jumlah Transaksi Pembayaran", String((pembayaran ?? []).length)],
+    ["Jumlah Catatan Setoran Tahfidz", String((tahfidzSetoran ?? []).length)],
+    ["Jumlah Catatan Perizinan", String((perizinan ?? []).length)],
   ].forEach(([k, v]) => wsInfo.addRow({ k, v }));
 
   // 2. Sheet Santri
@@ -260,6 +287,68 @@ export async function GET(req: NextRequest) {
       mapel: petaMapel.get(n.mapel_id) ?? "",
       jenis: String(n.jenis ?? "").toUpperCase(),
       nilai: Number(n.nilai ?? 0),
+    });
+  });
+
+  // 7. Sheet Tahfidz & Muroja'ah
+  const wsTahfidz = wb.addWorksheet("Tahfidz & Juz");
+  wsTahfidz.columns = [
+    { header: "Tanggal", key: "tanggal", width: 14 },
+    { header: "NIS", key: "nis", width: 14 },
+    { header: "Nama Santri", key: "santri", width: 26 },
+    { header: "Status", key: "status", width: 12 },
+    { header: "Tambah Hafalan (Ziyadah)", key: "tambah", width: 28 },
+    { header: "Ulang Hafalan (Muroja'ah)", key: "ulang", width: 28 },
+  ];
+  wsTahfidz.getRow(1).font = { bold: true };
+  wsTahfidz.views = [{ state: "frozen", ySplit: 1 }];
+  (tahfidzSetoran ?? []).forEach((s) => {
+    const info = petaSantri.get(s.santri_id);
+    wsTahfidz.addRow({
+      tanggal: s.tanggal ?? "",
+      nis: info?.nis ?? "",
+      santri: info?.nama ?? "",
+      status: s.status ?? "",
+      tambah: s.tambah_hafalan ?? "",
+      ulang: s.ulang_hafalan ?? "",
+    });
+  });
+
+  // 8. Sheet Perizinan & Pelanggaran
+  const wsIzin = wb.addWorksheet("Perizinan & Disiplin");
+  wsIzin.columns = [
+    { header: "Kategori", key: "kat", width: 16 },
+    { header: "Tanggal / Keluar", key: "waktu", width: 20 },
+    { header: "NIS", key: "nis", width: 14 },
+    { header: "Nama Santri", key: "santri", width: 26 },
+    { header: "Jenis / Pelanggaran", key: "jenis", width: 24 },
+    { header: "Alasan / Tindakan", key: "alasan", width: 30 },
+    { header: "Status / Poin", key: "status", width: 18 },
+  ];
+  wsIzin.getRow(1).font = { bold: true };
+  wsIzin.views = [{ state: "frozen", ySplit: 1 }];
+  (perizinan ?? []).forEach((iz) => {
+    const info = petaSantri.get(iz.santri_id);
+    wsIzin.addRow({
+      kat: "Perizinan",
+      waktu: iz.waktu_keluar ? String(iz.waktu_keluar).slice(0, 16).replace("T", " ") : "",
+      nis: info?.nis ?? "",
+      santri: info?.nama ?? "",
+      jenis: iz.jenis ?? "",
+      alasan: iz.alasan ?? "",
+      status: iz.status ?? "",
+    });
+  });
+  (pelanggaran ?? []).forEach((pl) => {
+    const info = petaSantri.get(pl.santri_id);
+    wsIzin.addRow({
+      kat: "Pelanggaran",
+      waktu: pl.tanggal ?? "",
+      nis: info?.nis ?? "",
+      santri: info?.nama ?? "",
+      jenis: `${pl.nama_pelanggaran ?? ""} (${pl.kategori ?? ""})`,
+      alasan: pl.tindakan ?? pl.catatan ?? "",
+      status: `${pl.poin ?? 0} Poin`,
     });
   });
 

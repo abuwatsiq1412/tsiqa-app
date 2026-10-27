@@ -5,9 +5,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { IkonW, Bintang, type NamaIkonW } from "@/components-wali-ikon";
 
-/* ------------------------------------------------------------------ */
-/*  Dasar: lembar bawah & kabar singkat                                */
-/* ------------------------------------------------------------------ */
+// Lembar bawah & kabar singkat
 export function LembarBawah({ judul, tutup, children }: { judul: string; tutup: () => void; children: ReactNode }) {
   useEffect(() => {
     const k = (e: KeyboardEvent) => e.key === "Escape" && tutup();
@@ -19,12 +17,12 @@ export function LembarBawah({ judul, tutup, children }: { judul: string; tutup: 
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center">
-      <button aria-label="Tutup" onClick={tutup} className="animate-pudar absolute inset-0 cursor-default bg-ink/50" />
-      <div role="dialog" aria-label={judul} className="animate-naik relative max-h-[88vh] w-full max-w-md overflow-y-auto rounded-t-[28px] bg-white px-5 pb-8 pt-3">
+      <button aria-label="Tutup" onClick={tutup} className="animate-pudar absolute inset-0 cursor-default bg-black/55" />
+      <div role="dialog" aria-modal="true" aria-label={judul} className="animate-naik relative max-h-[88vh] w-full max-w-md overflow-y-auto rounded-t-[28px] border-t border-line bg-surface px-5 pb-8 pt-3 text-ink shadow-sheet">
         <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-line" />
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-extrabold">{judul}</h2>
-          <button onClick={tutup} aria-label="Tutup" className="-mr-2.5 flex h-11 w-11 cursor-pointer items-center justify-center text-muted">
+          <h2 className="text-xl font-extrabold text-ink">{judul}</h2>
+          <button onClick={tutup} aria-label="Tutup" className="-mr-2.5 flex h-11 w-11 cursor-pointer items-center justify-center text-muted hover:text-ink">
             <IkonW n="tutup" className="h-5 w-5" />
           </button>
         </div>
@@ -44,15 +42,13 @@ function useKabar() {
   };
   const node = teks ? (
     <div role="status" className="animate-muncul pointer-events-none fixed inset-x-5 bottom-24 z-[60] flex justify-center">
-      <span className="rounded-full bg-forest px-4.5 py-3 text-[13px] font-semibold text-white shadow-lg">{teks}</span>
+      <span className="rounded-full border border-line/30 bg-forest px-4.5 py-3 text-[13px] font-semibold text-white shadow-lg">{teks}</span>
     </div>
   ) : null;
   return { tampil, node };
 }
 
-/* ------------------------------------------------------------------ */
-/*  Navigasi bawah                                                     */
-/* ------------------------------------------------------------------ */
+// Navigasi bawah
 const NAV: { href: string; label: string; ikon: NamaIkonW; juga?: string[] }[] = [
   { href: "/wali", label: "Beranda", ikon: "beranda" },
   { href: "/wali/tagihan", label: "Tagihan", ikon: "tagihan" },
@@ -65,7 +61,7 @@ export function NavBawah() {
   const path = usePathname();
   const a = useSearchParams().get("a");
   return (
-    <nav aria-label="Menu utama" className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white pb-[env(safe-area-inset-bottom)] print:hidden">
+    <nav aria-label="Menu utama" className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface pb-[env(safe-area-inset-bottom)] print:hidden">
       <div className="mx-auto flex h-[72px] max-w-md gap-1 px-2.5 py-2">
         {NAV.map((n) => {
           const aktif = n.href === "/wali" ? path === "/wali" : path === n.href || path.startsWith(n.href + "/") || !!n.juga?.some((j) => path.startsWith(j));
@@ -75,7 +71,7 @@ export function NavBawah() {
               <span className={`flex h-[30px] w-[52px] items-center justify-center rounded-full transition-colors ${aktif ? "bg-emerald-pale" : ""}`}>
                 <IkonW n={n.ikon} className="h-[22px] w-[22px]" />
               </span>
-              <span className="text-[11px] font-bold">{n.label}</span>
+              <span className="text-xs font-bold">{n.label}</span>
             </Link>
           );
         })}
@@ -84,9 +80,7 @@ export function NavBawah() {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Kepala beranda: pilih ananda & kabar                               */
-/* ------------------------------------------------------------------ */
+// Kepala beranda: pilih ananda & kabar
 export interface AnakRingkas { id: string; nama: string; pendek: string; inisial: string; sub: string }
 export interface KabarItem { judul: string; isi: string; waktu: string; nada: "emas" | "hijau" | "merah" }
 
@@ -103,12 +97,12 @@ export function KepalaBeranda({ anak, aktifId, kabar }: { anak: AnakRingkas[]; a
           <span className="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-pale text-[15px] font-bold text-emerald">{aktif.inisial}</span>
           <span>
             <span className="block text-xs text-muted">Ananda</span>
-            <span className="flex items-center gap-1 text-base font-bold">{aktif.pendek}{anak.length > 1 && <IkonW n="bawah" className="h-[18px] w-[18px]" />}</span>
+            <span className="flex items-center gap-1 text-base font-bold text-ink">{aktif.pendek}{anak.length > 1 && <IkonW n="bawah" className="h-[18px] w-[18px]" />}</span>
           </span>
         </button>
-        <button onClick={() => setBuka("kabar")} aria-label="Kabar terbaru" className="tekan relative flex h-11 w-11 cursor-pointer items-center justify-center rounded-[14px] border border-line bg-white">
+        <button onClick={() => setBuka("kabar")} aria-label="Kabar terbaru" className="tekan relative flex h-11 w-11 cursor-pointer items-center justify-center rounded-[14px] border border-line bg-surface text-ink">
           <IkonW n="lonceng" className="h-[22px] w-[22px]" />
-          {kabar.length > 0 && <span className="absolute right-[11px] top-2.5 h-2 w-2 rounded-full border-2 border-white bg-gold" />}
+          {kabar.length > 0 && <span className="absolute right-[11px] top-2.5 h-2 w-2 rounded-full border-2 border-surface bg-gold" />}
         </button>
       </div>
 
@@ -117,10 +111,10 @@ export function KepalaBeranda({ anak, aktifId, kabar }: { anak: AnakRingkas[]; a
           <div className="mt-3 flex flex-col gap-2.5">
             {anak.map((x) => (
               <Link key={x.id} href={`${path}?a=${x.id}`} onClick={() => setBuka(null)}
-                className={`tekan flex items-center gap-3 rounded-2xl p-3.5 ${x.id === aktif.id ? "border-2 border-emerald bg-emerald-pale" : "border border-line bg-white"}`}>
+                className={`tekan flex items-center gap-3 rounded-2xl p-3.5 ${x.id === aktif.id ? "border-2 border-emerald bg-emerald-pale" : "border border-line bg-surface-soft/50"}`}>
                 <span className="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-pale text-sm font-bold text-emerald">{x.inisial}</span>
-                <span className="flex-1"><span className="block text-[15px] font-bold">{x.nama}</span><span className="block text-xs text-muted">{x.sub}</span></span>
-                {x.id === aktif.id && <span className="flex h-[26px] w-[26px] items-center justify-center rounded-full bg-emerald text-white"><IkonW n="centang" className="h-4 w-4" /></span>}
+                <span className="flex-1"><span className="block text-[15px] font-bold text-ink">{x.nama}</span><span className="block text-xs text-muted">{x.sub}</span></span>
+                {x.id === aktif.id && <span className="flex h-[26px] w-[26px] items-center justify-center rounded-full bg-emerald text-on-brand"><IkonW n="centang" className="h-4 w-4" /></span>}
               </Link>
             ))}
           </div>
@@ -135,7 +129,7 @@ export function KepalaBeranda({ anak, aktifId, kabar }: { anak: AnakRingkas[]; a
                 <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${nada[k.nada]}`}>
                   <IkonW n={k.nada === "merah" ? "awas" : k.nada === "hijau" ? "centang" : "tagihan"} />
                 </span>
-                <span><span className="block text-sm font-bold">{k.judul}</span><span className="block text-[13px] leading-snug text-muted">{k.isi}</span><span className="mt-1 block text-[11px] text-muted">{k.waktu}</span></span>
+                <span><span className="block text-sm font-bold text-ink">{k.judul}</span><span className="block text-[13px] leading-snug text-muted">{k.isi}</span><span className="mt-1 block text-xs text-muted">{k.waktu}</span></span>
               </div>
             ))}
           </div>
@@ -145,9 +139,7 @@ export function KepalaBeranda({ anak, aktifId, kabar }: { anak: AnakRingkas[]; a
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Kartu utama                                                        */
-/* ------------------------------------------------------------------ */
+// Kartu utama
 export function HeroWali({ pondok, anak, total, chip, nada, children }: {
   pondok: string; anak: string; total: number; chip: string; nada: "emas" | "merah" | "hijau"; children?: ReactNode;
 }) {
@@ -173,7 +165,7 @@ export function HeroWali({ pondok, anak, total, chip, nada, children }: {
   const chipCls = { emas: "bg-gold-pale text-gold-ink", merah: "bg-belum-bg text-belum", hijau: "bg-emerald-pale text-emerald" }[nada];
 
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-forest p-5 text-white shadow-[0_10px_24px_rgba(38,59,53,0.22)]">
+    <div className="relative overflow-hidden rounded-3xl border border-line/40 bg-forest p-5 text-white shadow-[0_10px_24px_rgba(38,59,53,0.22)]">
       <Bintang className="pointer-events-none absolute -right-12 -top-12 h-[190px] w-[190px] opacity-30" />
       <div className="relative">
         <div className="text-xs font-medium text-white/80">{pondok} · wali dari {anak}</div>
@@ -193,9 +185,7 @@ export function HeroWali({ pondok, anak, total, chip, nada, children }: {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Cara bayar                                                         */
-/* ------------------------------------------------------------------ */
+// Cara bayar
 export function CaraBayar({ nominal, untuk, rekening, wa, pesanWa, label = "Cara bayar", gaya = "terang" }: {
   nominal: string; untuk: string; rekening: string | null; wa: string | null; pesanWa: string; label?: string; gaya?: "terang" | "hijau";
 }) {
@@ -205,22 +195,22 @@ export function CaraBayar({ nominal, untuk, rekening, wa, pesanWa, label = "Cara
     try { await navigator.clipboard.writeText(rekening ?? ""); kabar.tampil("Rekening disalin"); } catch { kabar.tampil("Salin manual dari layar"); }
   };
   const cls = gaya === "terang"
-    ? "flex-1 bg-ivory text-forest"
-    : "w-full bg-emerald text-white";
+    ? "flex-1 border border-line bg-surface-soft text-ink"
+    : "w-full bg-emerald text-on-brand";
   return (
     <>
       <button onClick={() => setBuka(true)} className={`tekan h-[46px] cursor-pointer rounded-[14px] text-sm font-bold ${cls}`}>{label}</button>
       {buka && (
         <LembarBawah judul="Cara bayar" tutup={() => setBuka(false)}>
           <div className="mt-1.5 text-[13px] text-muted">{untuk}</div>
-          <div className="text-3xl font-extrabold tracking-tight text-forest">{nominal}</div>
+          <div className="text-3xl font-extrabold tracking-tight text-ink">{nominal}</div>
 
-          <div className="mt-4 rounded-[18px] border border-line bg-ivory p-4">
+          <div className="mt-4 rounded-[18px] border border-line bg-surface-soft p-4">
             <div className="text-xs text-muted">Transfer ke rekening resmi</div>
             {rekening ? (
               <div className="mt-1.5 flex items-center justify-between gap-2.5">
-                <span className="text-[15px] font-bold leading-snug">{rekening}</span>
-                <button onClick={salin} className="tekan flex h-11 shrink-0 cursor-pointer items-center gap-1.5 rounded-xl border border-emerald bg-white px-3.5 text-[13px] font-bold text-emerald">
+                <span className="text-[15px] font-bold leading-snug text-ink">{rekening}</span>
+                <button onClick={salin} className="tekan flex h-11 shrink-0 cursor-pointer items-center gap-1.5 rounded-xl border border-emerald bg-surface px-3.5 text-[13px] font-bold text-emerald">
                   <IkonW n="salin" className="h-4 w-4" />Salin
                 </button>
               </div>
@@ -233,13 +223,13 @@ export function CaraBayar({ nominal, untuk, rekening, wa, pesanWa, label = "Cara
             {["Transfer sesuai nominal tagihan.", "Ketuk “Sudah transfer” di rincian tagihan dan unggah buktinya.", "Tagihan lunas setelah dicek bendahara, kwitansi muncul di Riwayat."].map((t, i) => (
               <li key={i} className="flex items-start gap-3">
                 <span className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full bg-emerald-pale text-xs font-extrabold text-emerald">{i + 1}</span>
-                <span className="text-sm leading-snug">{t}</span>
+                <span className="text-sm leading-snug text-ink">{t}</span>
               </li>
             ))}
           </ol>
           {wa && (
             <a href={`https://wa.me/${wa}?text=${encodeURIComponent(pesanWa)}`} target="_blank" rel="noopener"
-              className="tekan mt-5 flex h-[50px] items-center justify-center gap-2 rounded-2xl bg-emerald text-[15px] font-bold text-white">
+              className="tekan mt-5 flex h-[50px] items-center justify-center gap-2 rounded-2xl bg-emerald text-[15px] font-bold text-on-brand">
               <IkonW n="wa" />Hubungi bendahara
             </a>
           )}
@@ -251,9 +241,7 @@ export function CaraBayar({ nominal, untuk, rekening, wa, pesanWa, label = "Cara
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Formulir "Sudah transfer" (foto dikecilkan di HP sebelum diunggah)  */
-/* ------------------------------------------------------------------ */
+// Formulir "Sudah transfer" (foto dikecilkan di HP sebelum diunggah)
 async function kecilkan(file: File): Promise<File> {
   if (!file.type.startsWith("image/") || file.size < 700_000) return file;
   try {
@@ -289,12 +277,12 @@ export function FormKonfirmasi({ aksi, tagihanId, anakId, sisa, hari }: {
       <label className="block">
         <span className="mb-1.5 block text-[13px] font-semibold text-muted">Nominal transfer (Rp)</span>
         <input name="nominal" type="number" inputMode="numeric" min={1} max={sisa} defaultValue={sisa} required
-          className="h-[52px] w-full rounded-[14px] border border-line bg-white px-4 text-base font-bold outline-none focus:border-emerald focus:ring-2 focus:ring-emerald/20" />
+          className="h-[52px] w-full rounded-[14px] border border-line bg-surface-soft px-4 text-base font-bold text-ink outline-none focus:border-emerald focus:ring-2 focus:ring-emerald/20" />
       </label>
       <label className="block">
         <span className="mb-1.5 block text-[13px] font-semibold text-muted">Tanggal transfer</span>
         <input name="tanggal" type="date" max={hari} defaultValue={hari} required
-          className="h-[52px] w-full rounded-[14px] border border-line bg-white px-4 text-base outline-none focus:border-emerald focus:ring-2 focus:ring-emerald/20" />
+          className="h-[52px] w-full rounded-[14px] border border-line bg-surface-soft px-4 text-base text-ink outline-none focus:border-emerald focus:ring-2 focus:ring-emerald/20" />
       </label>
       <label className="block">
         <span className="mb-1.5 block text-[13px] font-semibold text-muted">Bukti transfer (foto atau PDF)</span>
@@ -313,18 +301,16 @@ export function FormKonfirmasi({ aksi, tagihanId, anakId, sisa, hari }: {
       <label className="block">
         <span className="mb-1.5 block text-[13px] font-semibold text-muted">Catatan (opsional)</span>
         <input name="catatan" maxLength={200} placeholder="Mis. transfer atas nama Bpk. Hasan"
-          className="h-[52px] w-full rounded-[14px] border border-line bg-white px-4 text-base outline-none focus:border-emerald focus:ring-2 focus:ring-emerald/20" />
+          className="h-[52px] w-full rounded-[14px] border border-line bg-surface-soft px-4 text-base text-ink placeholder:text-muted/60 outline-none focus:border-emerald focus:ring-2 focus:ring-emerald/20" />
       </label>
-      <button disabled={kirim} className="tekan h-[50px] cursor-pointer rounded-2xl bg-emerald text-[15px] font-bold text-white disabled:opacity-60">
+      <button disabled={kirim} className="tekan h-[50px] cursor-pointer rounded-2xl bg-emerald text-[15px] font-bold text-on-brand disabled:opacity-60">
         {kirim ? "Mengirim…" : "Kirim konfirmasi"}
       </button>
     </form>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Akun: notifikasi, pasang aplikasi, keluar, service worker           */
-/* ------------------------------------------------------------------ */
+// Akun: notifikasi, pasang aplikasi, keluar, service worker
 export function DaftarSW() {
   useEffect(() => {
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("/wali/sw.js", { scope: "/wali/" }).catch(() => {});
@@ -375,13 +361,13 @@ export function PushToggle({ kunci, simpan, hapus }: {
       <div className="flex items-center gap-3 border-b border-line/70 px-4 py-3.5">
         <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-soft text-emerald"><IkonW n="lonceng" /></span>
         <span className="flex-1">
-          <span className="block text-sm font-semibold">Notifikasi tagihan</span>
+          <span className="block text-sm font-semibold text-ink">Notifikasi tagihan</span>
           <span className="block text-xs text-muted">{dukung ? "Kabar tagihan baru dan pembayaran" : "Belum tersedia di perangkat ini"}</span>
         </span>
         <button role="switch" aria-checked={aktif} aria-label="Notifikasi tagihan" onClick={ubah} disabled={!siap && dukung}
           className="relative h-11 w-[52px] cursor-pointer disabled:opacity-50">
           <span className={`absolute left-0 top-2 h-7 w-[52px] rounded-full transition-colors ${aktif ? "bg-emerald" : "bg-line"}`} />
-          <span className={`absolute top-[11px] h-[22px] w-[22px] rounded-full bg-white shadow transition-all ${aktif ? "left-[27px]" : "left-[3px]"}`} />
+          <span className={`absolute top-[11px] h-[22px] w-[22px] rounded-full bg-surface shadow transition-all ${aktif ? "left-[27px]" : "left-[3px]"}`} />
         </button>
       </div>
       {kabar.node}
@@ -402,7 +388,7 @@ export function PasangAplikasi() {
       <button onClick={() => (prompt ? prompt.prompt() : kabar.tampil("Buka menu browser, lalu pilih “Tambahkan ke layar utama”"))}
         className="tekan flex w-full cursor-pointer items-center gap-3 border-b border-line/70 px-4 py-3.5 text-left">
         <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-soft text-emerald"><IkonW n="pasang" /></span>
-        <span className="flex-1"><span className="block text-sm font-semibold">Pasang di layar utama</span><span className="block text-xs text-muted">Buka seperti aplikasi biasa</span></span>
+        <span className="flex-1"><span className="block text-sm font-semibold text-ink">Pasang di layar utama</span><span className="block text-xs text-muted">Buka seperti aplikasi biasa</span></span>
         <IkonW n="kanan" className="h-4 w-4 text-muted" />
       </button>
       {kabar.node}
@@ -413,7 +399,7 @@ export function PasangAplikasi() {
 export function TombolKeluar({ aksi }: { aksi: () => Promise<void> }) {
   return (
     <form action={aksi} onSubmit={() => navigator.serviceWorker?.controller?.postMessage("bersihkan")}>
-      <button className="tekan flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-[14px] border border-line bg-white text-sm font-bold text-belum">
+      <button className="tekan flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-[14px] border border-line bg-surface text-sm font-bold text-belum">
         <IkonW n="keluar" className="h-[18px] w-[18px]" />Keluar
       </button>
     </form>

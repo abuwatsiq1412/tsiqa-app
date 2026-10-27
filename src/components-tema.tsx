@@ -18,7 +18,8 @@ export function adalahHalamanPublikTerang(path: string): boolean {
     path.startsWith("/dokumen/") ||
     path.startsWith("/wali/masuk") ||
     path.startsWith("/wali/aktivasi") ||
-    path.startsWith("/guru/masuk")
+    path.startsWith("/guru/masuk") ||
+    path.startsWith("/guru/aktivasi")
   );
 }
 
@@ -127,7 +128,7 @@ export function SakelarTema({ ringkas = false }: { ringkas?: boolean }) {
     >
       {ikon}
       {!ringkas && (
-        <span className="hidden text-[11px] font-semibold text-muted group-hover:text-ink sm:inline">
+        <span className="hidden text-xs font-semibold text-muted group-hover:text-ink sm:inline">
           {tema === "terang" ? "Terang" : tema === "gelap" ? "Malam" : "Otomatis"}
         </span>
       )}
@@ -150,4 +151,3 @@ function terapkanTema(pilihan: TemaPilihan) {
     }
   }
 }
-
