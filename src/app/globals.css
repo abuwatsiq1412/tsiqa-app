@@ -7,11 +7,11 @@
   --color-emerald-pale: #ddf4ec;
   --color-forest: #263b35;
   --color-forest-light: #314b44;
-  --color-ink: #182622;
-  --color-muted: #5b6b65;
-  --color-ivory: #f8faf9;
-  --color-surface-soft: #f1f5f3;
-  --color-line: #e2e8e5;
+  --color-ink: #192622;
+  --color-muted: #60706a;
+  --color-ivory: #faf9f5;
+  --color-surface-soft: #f4f3ec;
+  --color-line: #e6e2d8;
   --color-lunas: #0f766e;
   --color-lunas-bg: #ddf4ec;
   --color-cicilan: #92400e;
@@ -38,13 +38,15 @@
   --color-gold-pale: #fbf3dd;
 
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --radius-md: 10px;
-  --radius-lg: 14px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
 
-  /* Bayangan berlapis: tipis di dekat tepi + lembut menyebar, supaya kartu terasa "duduk" di atas latar */
-  --shadow-kartu: 0 1px 2px rgba(24, 38, 34, 0.04), 0 8px 24px -14px rgba(24, 38, 34, 0.12);
-  --shadow-angkat: 0 2px 4px rgba(24, 38, 34, 0.05), 0 16px 36px -16px rgba(24, 38, 34, 0.2);
-  --shadow-tombol: 0 1px 2px rgba(15, 118, 110, 0.25), 0 4px 10px -4px rgba(15, 118, 110, 0.35);
+  /* Bayangan mikro presisi ala shadcn/ui: 1px tactile depth, bukan blur tebal melayang */
+  --shadow-kartu: 0 1px 2px rgba(24, 38, 34, 0.04), 0 0 0 1px rgba(24, 38, 34, 0.03);
+  --shadow-angkat: 0 2px 4px rgba(24, 38, 34, 0.05), 0 12px 24px -12px rgba(24, 38, 34, 0.15);
+  --shadow-tombol: 0 1px 2px rgba(15, 118, 110, 0.2);
 }
 
 /* Mode Gelap: Mengikuti sistem bawaan pengguna (kecuali dipaksa terang) */

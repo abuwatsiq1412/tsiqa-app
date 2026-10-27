@@ -1,14 +1,45 @@
-// Sistem Komponen UI TSIQA: Quiet Minimalism + Soft Modern + Academic Tech
-import type { ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 import { ToastOk } from "@/components-toast";
+import { cn } from "@/lib/utils";
+
+// ==================== shadcn/ui Card Architecture ====================
+export const Card = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      "rounded-xl border border-line bg-surface text-ink shadow-(--shadow-kartu) transition-colors",
+      className
+    )}
+    {...props}
+  />
+);
+
+export const CardHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("flex flex-col space-y-1.5 p-4 sm:p-5", className)} {...props} />
+);
+
+export const CardTitle = ({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) => (
+  <h3 className={cn("font-semibold leading-none tracking-tight text-ink", className)} {...props} />
+);
+
+export const CardDescription = ({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) => (
+  <p className={cn("text-xs leading-relaxed text-muted sm:text-sm", className)} {...props} />
+);
+
+export const CardContent = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("p-4 pt-0 sm:p-5 sm:pt-0", className)} {...props} />
+);
+
+export const CardFooter = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("flex items-center p-4 pt-0 sm:p-5 sm:pt-0", className)} {...props} />
+);
 
 export type VarianKartu = "putih" | "forest" | "mint" | "soft";
 
 const GAYA_KARTU: Record<VarianKartu, string> = {
-  putih: "border border-line/70 bg-surface text-ink shadow-(--shadow-kartu)",
+  putih: "border border-line bg-surface text-ink shadow-(--shadow-kartu)",
   forest: "border border-forest-light bg-forest text-white shadow-[0_4px_16px_-4px_rgba(38,59,53,0.3)]",
   mint: "border border-emerald/20 bg-emerald-pale/60 text-ink",
-  soft: "border border-line/70 bg-surface-soft text-ink",
+  soft: "border border-line bg-surface-soft text-ink",
 };
 
 export const Kartu = ({
@@ -20,7 +51,7 @@ export const Kartu = ({
   className?: string;
   varian?: VarianKartu;
 }) => (
-  <div className={`rounded-xl p-4 sm:p-5 transition-colors ${GAYA_KARTU[varian]} ${className}`}>
+  <div className={cn("rounded-xl p-4 sm:p-5 transition-colors", GAYA_KARTU[varian], className)}>
     {children}
   </div>
 );

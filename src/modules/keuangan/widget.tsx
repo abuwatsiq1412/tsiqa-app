@@ -72,10 +72,13 @@ export async function PanelTagihanMendesak() {
 
   return (
     <Kartu className="!p-0 overflow-hidden">
-      <div className="flex items-center justify-between border-b border-line px-5 py-3.5">
-        <h2 className="text-sm font-semibold text-ink">Perlu ditagih</h2>
+      <div className="flex items-center justify-between border-b border-line bg-surface-soft/60 px-5 py-3.5">
+        <div>
+          <h2 className="text-sm font-semibold text-ink">Perlu Ditagih</h2>
+          <p className="text-xs text-muted">Tagihan mendekati atau lewat jatuh tempo</p>
+        </div>
         <Link href="/keuangan/tagihan" className="text-xs font-medium text-emerald hover:underline">
-          Semua<Ikon nama="panah" className="ml-1 inline h-3.5 w-3.5 align-[-2px]" />
+          Semua Tagihan &rarr;
         </Link>
       </div>
       <div className="divide-y divide-line text-sm">
@@ -100,7 +103,7 @@ export async function PanelTagihanMendesak() {
               </div>
               <div className="flex items-center gap-3 text-right">
                 <div>
-                  <div className="font-semibold text-ink">{rupiah(Number(t.sisa))}</div>
+                  <div className="font-semibold text-ink tabular-nums">{rupiah(Number(t.sisa))}</div>
                   <div className={`text-[11px] ${lewat ? "font-medium text-belum" : "text-muted"}`}>
                     {tanggal(t.jatuh_tempo)}
                   </div>
