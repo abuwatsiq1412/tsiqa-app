@@ -24,32 +24,28 @@ export async function RingkasanKeuangan() {
     <>
       <Kartu>
         <div className="flex items-center justify-between">
-          <span className="text-xs font-medium text-muted">Kas masuk hari ini</span>
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-pale text-emerald">
-            <Ikon nama="kasir" className="h-4 w-4" />
-          </span>
+          <span className="text-xs font-medium text-muted">Kas Masuk Hari Ini</span>
+          <Ikon nama="kasir" className="h-4 w-4 text-muted/60" />
         </div>
-        <div className="mt-2 text-2xl font-bold tracking-tight text-ink">{rupiah(kas)}</div>
+        <div className="mt-2 text-2xl font-semibold tracking-tight text-ink tabular-nums">{rupiah(kas)}</div>
         <div className="mt-2 flex items-center justify-between text-xs text-muted">
-          <span>{jmlTransaksi} transaksi</span>
+          <span className="tabular-nums">{jmlTransaksi} transaksi</span>
           <Link href="/keuangan/laporan" className="font-medium text-emerald hover:underline">
-            Laporan<Ikon nama="panah" className="ml-1 inline h-3.5 w-3.5 align-[-2px]" />
+            Laporan<Ikon nama="panah" className="ml-1 inline h-3 w-3 align-[-1px]" />
           </Link>
         </div>
       </Kartu>
 
       <Kartu>
         <div className="flex items-center justify-between">
-          <span className="text-xs font-medium text-muted">Belum lunas</span>
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-surface-soft text-emerald">
-            <Ikon nama="tagihan" className="h-4 w-4" />
-          </span>
+          <span className="text-xs font-medium text-muted">Belum Lunas</span>
+          <Ikon nama="tagihan" className="h-4 w-4 text-muted/60" />
         </div>
-        <div className="mt-2 text-2xl font-bold tracking-tight text-ink">{rupiah(belum)}</div>
+        <div className="mt-2 text-2xl font-semibold tracking-tight text-ink tabular-nums">{rupiah(belum)}</div>
         <div className="mt-2 flex items-center justify-between text-xs text-muted">
-          <span>{jmlTagihan} tagihan</span>
+          <span className="tabular-nums">{jmlTagihan} tagihan</span>
           <Link href="/keuangan/tagihan" className="font-medium text-emerald hover:underline">
-            Kelola<Ikon nama="panah" className="ml-1 inline h-3.5 w-3.5 align-[-2px]" />
+            Kelola<Ikon nama="panah" className="ml-1 inline h-3 w-3 align-[-1px]" />
           </Link>
         </div>
       </Kartu>

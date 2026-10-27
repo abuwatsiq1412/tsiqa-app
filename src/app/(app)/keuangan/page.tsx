@@ -157,10 +157,10 @@ export default async function Keuangan() {
                     </td>
                     <td className="px-4 py-3">
                       <Lencana varian="mint" titik={false}>
-                        {String(b.metode).toUpperCase()}
+                        {String(b.metode).charAt(0).toUpperCase() + String(b.metode).slice(1)}
                       </Lencana>
                     </td>
-                    <td className="px-5 py-3 text-right font-semibold text-ink">
+                    <td className="px-5 py-3 text-right font-semibold text-ink tabular-nums">
                       {rupiah(Number(b.nominal))}
                     </td>
                   </tr>

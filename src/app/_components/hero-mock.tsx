@@ -9,7 +9,7 @@ export function HeroMock() {
         <div className="space-y-3 p-3.5 sm:space-y-4 sm:p-5">
           <div className="flex items-start justify-between gap-2 sm:gap-3">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-muted sm:text-xs">
+              <p className="text-xs font-medium text-muted">
                 Ringkasan hari ini
               </p>
               <p className="mt-0.5 text-sm font-semibold text-ink sm:text-lg">
@@ -24,7 +24,7 @@ export function HeroMock() {
               <p className="text-[11.5px] text-muted sm:text-[13px]">
                 Penerimaan syahriah
               </p>
-              <p className="mt-0.5 text-[15px] font-semibold text-ink sm:mt-1 sm:text-xl">
+              <p className="mt-0.5 text-[15px] font-semibold text-ink tabular-nums sm:mt-1 sm:text-xl">
                 Rp29.400.000
               </p>
               <div className="mt-1.5 flex flex-wrap gap-1 sm:mt-2 sm:gap-1.5">
@@ -36,9 +36,9 @@ export function HeroMock() {
               <p className="text-[11.5px] text-muted sm:text-[13px]">
                 Kuota santri aktif
               </p>
-              <p className="mt-0.5 text-[15px] font-semibold text-ink sm:mt-1 sm:text-xl">
+              <p className="mt-0.5 text-[15px] font-semibold text-ink tabular-nums sm:mt-1 sm:text-xl">
                 94{" "}
-                <span className="text-xs font-medium text-muted sm:text-sm">
+                <span className="text-xs font-medium text-muted tabular-nums sm:text-sm">
                   / 150
                 </span>
               </p>

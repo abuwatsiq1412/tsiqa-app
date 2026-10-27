@@ -385,7 +385,7 @@ export function Pricing() {
                       <div className="lift h-full rounded-xl border border-line bg-white p-3 peer-checked:border-emerald peer-checked:bg-emerald-pale/30 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-emerald sm:p-4">
                         <div className="flex items-start justify-between gap-2.5">
                           <div className="min-w-0">
-                            <p className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted sm:gap-1.5 sm:text-xs">
+                            <p className="flex items-center gap-1 text-xs font-medium text-muted sm:gap-1.5">
                               <Icon
                                 name={m.icon}
                                 className="size-3 text-emerald sm:size-3.5"
@@ -458,7 +458,7 @@ export function Pricing() {
           <div className="p-4 sm:p-5">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted sm:text-xs">
+                <p className="text-xs font-medium text-muted">
                   Simulasi biaya
                 </p>
                 <h3 className="mt-0.5 truncate text-base font-semibold text-ink sm:mt-1 sm:text-lg">
@@ -467,7 +467,7 @@ export function Pricing() {
               </div>
               <div
                 aria-hidden="true"
-                className="grid size-13 shrink-0 -rotate-12 place-items-center rounded-full border-2 border-gold text-center text-[9px] font-bold uppercase leading-tight tracking-wide text-gold-ink sm:size-16 sm:text-[10px]"
+                className="grid size-13 shrink-0 -rotate-12 place-items-center rounded-full border-2 border-gold text-center text-[9px] font-bold leading-tight text-gold-ink sm:size-16 sm:text-[11px]"
               >
                 <span>
                   Garansi

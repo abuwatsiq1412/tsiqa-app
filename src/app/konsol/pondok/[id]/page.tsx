@@ -270,7 +270,7 @@ export default async function DetailPondok({
           <div className="mt-5 border-t border-line pt-4">
             <div className="mb-2.5 flex items-center justify-between">
               <div>
-                <h3 className="text-xs font-bold text-ink uppercase tracking-wider">
+                <h3 className="text-xs font-semibold text-ink">
                   Harga Kesepakatan Khusus (Opsional)
                 </h3>
                 <p className="text-[11px] text-muted">

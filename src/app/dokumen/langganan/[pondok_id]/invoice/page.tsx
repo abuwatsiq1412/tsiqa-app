@@ -55,7 +55,7 @@ export default async function HalamanInvoiceLangganan({
           </div>
 
           <div className="text-left sm:text-right">
-            <span className="inline-block rounded-md bg-[#ecfdf5] px-2.5 py-1 text-[11px] font-bold tracking-wider text-[#047857] uppercase">
+            <span className="inline-block rounded-md border border-[#047857]/30 bg-[#ecfdf5] px-2.5 py-1 text-xs font-semibold text-[#047857]">
               Surat Penawaran & Tagihan
             </span>
             <p className="mt-1.5 font-mono text-xs font-semibold text-[#181713]">
@@ -68,7 +68,7 @@ export default async function HalamanInvoiceLangganan({
         {/* TUJUAN SURAT */}
         <section className="mt-6 grid gap-4 rounded-xl border border-[#e3dfd4] bg-[#faf9f5] p-4 sm:grid-cols-2">
           <div>
-            <p className="text-[11px] font-semibold tracking-wider text-[#6b685e] uppercase">
+            <p className="text-xs font-medium text-[#6b685e]">
               Kepada Yth. Pimpinan / Pengurus
             </p>
             <p className="mt-1 font-display text-lg font-bold text-[#181713]">
@@ -86,7 +86,7 @@ export default async function HalamanInvoiceLangganan({
           </div>
 
           <div className="sm:text-right">
-            <p className="text-[11px] font-semibold tracking-wider text-[#6b685e] uppercase">
+            <p className="text-xs font-medium text-[#6b685e]">
               Identitas Sistem Pondok
             </p>
             <p className="mt-1 text-xs text-[#181713]">
@@ -108,12 +108,12 @@ export default async function HalamanInvoiceLangganan({
 
         {/* RINCIAN PAKET & MODUL */}
         <section className="mt-6">
-          <h2 className="text-xs font-bold tracking-wider text-[#525048] uppercase">
+          <h2 className="text-xs font-semibold text-[#525048]">
             1. Rincian Komponen Layanan Aktif
           </h2>
           <div className="mt-2.5 overflow-hidden rounded-xl border border-[#e3dfd4]">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-[#e3dfd4] bg-[#f4f2ec] text-[11px] font-semibold text-[#525048] uppercase">
+              <thead className="border-b border-[#e3dfd4] bg-[#f4f2ec] text-xs font-medium text-[#525048]">
                 <tr>
                   <th className="px-4 py-2.5">Komponen Layanan</th>
                   <th className="px-4 py-2.5">Keterangan</th>
@@ -213,13 +213,13 @@ export default async function HalamanInvoiceLangganan({
 
         {/* PILIHAN SIKLUS PEMBAYARAN */}
         <section className="mt-6">
-          <h2 className="text-xs font-bold tracking-wider text-[#525048] uppercase">
+          <h2 className="text-xs font-semibold text-[#525048]">
             2. Pilihan Siklus Pembayaran
           </h2>
           <div className="mt-2.5 grid gap-4 sm:grid-cols-2">
             <div className="rounded-xl border border-[#e3dfd4] p-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#181713] uppercase">
+                <span className="text-xs font-semibold text-[#181713]">
                   Opsi A · Siklus Bulanan
                 </span>
                 <span className="rounded bg-[#f4f2ec] px-2 py-0.5 text-[10px] font-semibold text-[#525048]">
@@ -243,7 +243,7 @@ export default async function HalamanInvoiceLangganan({
 
             <div className="rounded-xl border-2 border-[#047857] bg-[#ecfdf5]/40 p-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#047857] uppercase">
+                <span className="text-xs font-semibold text-[#047857]">
                   Opsi B · Siklus Tahunan (12 Bulan)
                 </span>
                 <span className="rounded bg-[#047857] px-2 py-0.5 text-[10px] font-semibold text-white">
@@ -274,7 +274,7 @@ export default async function HalamanInvoiceLangganan({
         {/* PROSEDUR KONFIRMASI & GARANSI */}
         <section className="mt-6 grid gap-4 rounded-xl border border-[#e3dfd4] bg-[#faf9f5] p-4 sm:grid-cols-2">
           <div>
-            <h3 className="text-xs font-bold text-[#181713] uppercase">
+            <h3 className="text-xs font-semibold text-[#181713]">
               Prosedur Pembayaran & Aktivasi
             </h3>
             <ol className="mt-2 list-decimal space-y-1 pl-4 text-xs text-[#525048]">
@@ -297,7 +297,7 @@ export default async function HalamanInvoiceLangganan({
           </div>
 
           <div>
-            <h3 className="text-xs font-bold text-[#181713] uppercase">
+            <h3 className="text-xs font-semibold text-[#181713]">
               Komitmen & Garansi Amanah TSIQA
             </h3>
             <ul className="mt-2 list-disc space-y-1 pl-4 text-xs text-[#525048]">
@@ -336,8 +336,8 @@ export default async function HalamanInvoiceLangganan({
               Tim Kemitraan & Layanan TSIQA
             </p>
             <div className="flex h-16 items-center justify-end">
-              <span className="inline-block rounded border border-[#047857]/40 bg-[#ecfdf5] px-3 py-1 font-mono text-[10px] font-bold tracking-wider text-[#047857] uppercase">
-                DOKUMEN RESMI TERVERIFIKASI
+              <span className="inline-block rounded border border-[#047857]/40 bg-[#ecfdf5] px-3 py-1 font-mono text-[11px] font-semibold text-[#047857]">
+                Dokumen Resmi Terverifikasi
               </span>
             </div>
             <p className="font-semibold text-[#181713] underline">

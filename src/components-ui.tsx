@@ -5,10 +5,10 @@ import { ToastOk } from "@/components-toast";
 export type VarianKartu = "putih" | "forest" | "mint" | "soft";
 
 const GAYA_KARTU: Record<VarianKartu, string> = {
-  putih: "border border-line/80 bg-surface text-ink shadow-(--shadow-kartu)",
-  forest: "border border-forest-light bg-forest text-white shadow-[0_10px_24px_-10px_rgba(38,59,53,0.45)]",
-  mint: "border border-emerald/20 bg-emerald-pale/65 text-ink",
-  soft: "border border-line/80 bg-surface-soft text-ink",
+  putih: "border border-line/70 bg-surface text-ink shadow-(--shadow-kartu)",
+  forest: "border border-forest-light bg-forest text-white shadow-[0_4px_16px_-4px_rgba(38,59,53,0.3)]",
+  mint: "border border-emerald/20 bg-emerald-pale/60 text-ink",
+  soft: "border border-line/70 bg-surface-soft text-ink",
 };
 
 export const Kartu = ({
@@ -20,22 +20,22 @@ export const Kartu = ({
   className?: string;
   varian?: VarianKartu;
 }) => (
-  <div className={`rounded-2xl p-4 sm:p-5 transition-colors ${GAYA_KARTU[varian]} ${className}`}>
+  <div className={`rounded-xl p-4 sm:p-5 transition-colors ${GAYA_KARTU[varian]} ${className}`}>
     {children}
   </div>
 );
 
 export const input =
-  "w-full min-h-10 rounded-xl border border-line bg-surface px-3.5 py-2 text-sm text-ink placeholder:text-muted/60 outline-none transition focus:border-emerald focus:ring-2 focus:ring-emerald/20 disabled:bg-surface-soft disabled:text-muted";
+  "w-full min-h-9 rounded-lg border border-line bg-surface px-3 py-1.5 text-sm text-ink placeholder:text-muted/60 outline-none transition focus:border-emerald focus:ring-1 focus:ring-emerald/30 disabled:bg-surface-soft disabled:text-muted";
 
 export const tombol =
-  "inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl bg-emerald px-4 py-2 text-sm font-semibold text-on-brand shadow-(--shadow-tombol) transition hover:bg-emerald-hover active:scale-[0.98] disabled:opacity-50 cursor-pointer";
+  "inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-emerald px-3.5 py-1.5 text-sm font-medium text-on-brand shadow-xs transition hover:bg-emerald-hover active:scale-[0.99] disabled:opacity-50 cursor-pointer";
 
 export const tombolSekunder =
-  "inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-line bg-surface px-4 py-2 text-sm font-semibold text-ink transition hover:bg-surface-soft hover:border-muted/30 active:scale-[0.98] disabled:opacity-50 cursor-pointer";
+  "inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg border border-line bg-surface px-3.5 py-1.5 text-sm font-medium text-ink transition hover:bg-surface-soft hover:border-muted/30 active:scale-[0.99] disabled:opacity-50 cursor-pointer";
 
 export const Label = ({ children }: { children: ReactNode }) => (
-  <span className="mb-1.5 block text-[13px] font-semibold text-muted">{children}</span>
+  <span className="mb-1.5 block text-xs font-medium text-muted">{children}</span>
 );
 
 export function HeaderHalaman({
@@ -50,15 +50,15 @@ export function HeaderHalaman({
   aksi?: ReactNode;
 }) {
   return (
-    <div className="mb-7 flex flex-wrap items-end justify-between gap-3">
+    <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
       <div>
         {kategori && (
-          <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-gold">
+          <div className="mb-1 text-xs font-medium text-muted">
             {kategori}
           </div>
         )}
-        <h1 className="text-2xl font-extrabold tracking-tight text-ink sm:text-[28px]">{judul}</h1>
-        {deskripsi && <p className="mt-1 max-w-2xl text-sm text-muted">{deskripsi}</p>}
+        <h1 className="text-xl font-bold tracking-tight text-ink sm:text-2xl">{judul}</h1>
+        {deskripsi && <p className="mt-1 max-w-2xl text-xs sm:text-sm text-muted leading-relaxed">{deskripsi}</p>}
       </div>
       {aksi && <div className="flex flex-wrap items-center gap-2">{aksi}</div>}
     </div>

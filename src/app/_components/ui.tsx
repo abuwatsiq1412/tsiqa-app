@@ -111,8 +111,8 @@ export function Eyebrow({
 }) {
   return (
     <p
-      className={`text-[11px] font-semibold uppercase tracking-[0.14em] sm:text-[13px] ${
-        onDark ? "text-emerald-pale" : "text-emerald"
+      className={`text-xs font-semibold sm:text-sm ${
+        onDark ? "text-emerald-pale/90" : "text-emerald"
       }`}
     >
       {children}

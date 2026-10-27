@@ -63,7 +63,7 @@ export default async function Kwitansi({
                 {labelLembar}
               </span>
             )}
-            <span className="rounded bg-emerald-pale px-2 py-0.5 text-[11px] font-bold tracking-wider text-emerald uppercase">
+            <span className="rounded border border-emerald/20 bg-emerald-pale/60 px-2 py-0.5 text-xs font-semibold text-emerald">
               Kwitansi Pembayaran
             </span>
           </div>
@@ -99,7 +99,7 @@ export default async function Kwitansi({
           : {huruf(b.metode)} · Sisa tagihan:{" "}
           <strong className={sisa === 0 ? "text-emerald" : "text-ink"}>
             {rupiah(sisa)}
-            {sisa === 0 ? " (LUNAS)" : ""}
+            {sisa === 0 ? " (Lunas)" : ""}
           </strong>
         </div>
       </div>
@@ -107,7 +107,7 @@ export default async function Kwitansi({
       {/* Footer: Kotak Nominal di Kiri + Tanda Tangan di Kanan */}
       <div className="mt-3.5 flex items-end justify-between gap-4 border-t border-line pt-2.5 text-xs">
         <div>
-          <div className="text-[10px] font-semibold tracking-wider text-muted uppercase">
+          <div className="text-xs font-medium text-muted">
             Jumlah Diterima
           </div>
           <div className="mt-1 inline-block rounded-lg border-2 border-emerald bg-emerald-pale/60 px-4 py-1.5 font-mono text-lg font-extrabold text-emerald">

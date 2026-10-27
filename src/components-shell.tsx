@@ -381,11 +381,11 @@ export function KerangkaApp({
             {cari ? (
               <button
                 onClick={() => setPalet(true)}
-                className="flex h-10 w-full cursor-pointer items-center gap-2 rounded-xl border border-line bg-surface-soft/60 px-3 text-left text-[13px] text-muted transition hover:border-muted/30 hover:bg-white"
+                className="flex h-9 w-full cursor-pointer items-center gap-2 rounded-lg border border-line bg-surface-soft/60 px-3 text-left text-xs text-muted transition hover:border-muted/30 hover:bg-surface"
               >
-                <Ikon nama="cari" className="h-4 w-4 shrink-0" />
+                <Ikon nama="cari" className="h-3.5 w-3.5 shrink-0" />
                 <span className="flex-1 truncate">Cari menu atau santri…</span>
-                <kbd className="hidden rounded-md border border-line bg-white px-1.5 py-0.5 text-[11px] font-semibold sm:inline">Ctrl K</kbd>
+                <kbd className="hidden rounded border border-line bg-surface px-1.5 py-0.5 font-mono text-[10px] font-semibold sm:inline">Ctrl K</kbd>
               </button>
             ) : (
               <span className="text-sm font-semibold text-ink">{mode === "konsol" ? "Konsol TSIQA" : ""}</span>
@@ -395,23 +395,23 @@ export function KerangkaApp({
           <div className="flex items-center gap-3 text-xs">
             {tanggal && (
               <div className="text-right leading-tight" title={`${tanggal.masehi} · ${tanggal.hijriah}`}>
-                <div className="hidden text-[12px] font-semibold text-ink sm:block">{tanggal.masehi}</div>
+                <div className="hidden text-xs font-medium text-ink sm:block">{tanggal.masehi}</div>
                 <div className="hidden text-[11px] text-gold-ink sm:block">{tanggal.hijriah}</div>
-                <div className="text-[11px] font-semibold text-ink sm:hidden">{tanggal.masehiPendek}</div>
+                <div className="text-[11px] font-medium text-ink sm:hidden">{tanggal.masehiPendek}</div>
                 <div className="text-[10px] text-gold-ink sm:hidden">{tanggal.hijriahPendek}</div>
               </div>
             )}
             {adaKeuangan && (
               <Link
                 href="/keuangan/pembayaran"
-                className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-pale px-3 py-1.5 font-medium text-emerald transition hover:bg-emerald hover:text-white"
+                className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-emerald/20 bg-emerald-pale/60 px-2.5 text-xs font-medium text-emerald transition hover:bg-emerald hover:text-white"
               >
                 <Ikon nama="kasir" className="h-3.5 w-3.5" />
                 <span className="hidden sm:inline">Terima Bayar</span>
               </Link>
             )}
             <SakelarTema />
-            <span className="hidden rounded-full border border-line bg-surface-soft px-2.5 py-1 text-[11px] font-medium text-muted sm:inline">
+            <span className="hidden rounded-md border border-line bg-surface-soft px-2 py-1 text-xs font-medium text-muted sm:inline">
               {LABEL_PERAN[anggota.peran] ?? anggota.peran}
             </span>
           </div>

@@ -87,7 +87,7 @@ function MockHariIni() {
           </div>
         ))}
       </div>
-      <p className="pt-0.5 text-[11px] font-semibold uppercase tracking-wider text-muted sm:pt-1 sm:text-xs">
+      <p className="pt-0.5 text-xs font-medium text-muted">
         Perlu ditindaklanjuti
       </p>
       <ul className="divide-y divide-line rounded-xl border border-line text-xs sm:text-sm">
@@ -128,7 +128,7 @@ function MockSantri() {
         </span>
       </div>
       <div className="overflow-hidden rounded-xl border border-line text-xs sm:text-sm">
-        <div className="grid grid-cols-[1.4fr_1fr_0.9fr_0.8fr] gap-1.5 bg-surface-soft px-2.5 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted sm:gap-2 sm:px-3.5 sm:py-2 sm:text-xs">
+        <div className="grid grid-cols-[1.4fr_1fr_0.9fr_0.8fr] gap-1.5 bg-surface-soft px-2.5 py-1.5 text-xs font-medium text-muted sm:gap-2 sm:px-3.5 sm:py-2">
           <span>Nama</span>
           <span>Kamar</span>
           <span>Kelas</span>

@@ -62,29 +62,41 @@ export default async function HariIni() {
     ...(jmlTelat ? [{ n: jmlTelat, judul: "Tagihan lewat jatuh tempo", ket: `Total ${rupiah(nilaiTelat)}`, href: "/keuangan/tagihan", aksi: "Lihat", nada: "merah" as const }] : []),
     ...(tanpaKamar ? [{ n: tanpaKamar, judul: "Santri mukim belum punya kamar", ket: "Tempatkan di kamar", href: "/penempatan", aksi: "Tempatkan", nada: "hijau" as const }] : []),
   ];
-  const warna = { emas: "bg-gold-pale text-gold", merah: "bg-belum-bg text-belum", hijau: "bg-emerald-pale text-emerald" };
+  const warna = {
+    emas: "border border-amber-200/80 bg-amber-50/80 text-amber-800 dark:border-amber-900/40 dark:bg-amber-950/20 dark:text-amber-300",
+    merah: "border border-red-200/80 bg-red-50/80 text-red-700 dark:border-red-900/40 dark:bg-red-950/20 dark:text-red-300",
+    hijau: "border border-emerald/20 bg-emerald-pale/60 text-emerald",
+  };
 
   return (
     <>
-      <div className="hero-glow relative mb-8 overflow-hidden rounded-3xl bg-forest px-6 py-7 text-white shadow-[0_18px_36px_-18px_rgba(38,59,53,0.55)] sm:px-8">
-        <h1 className="text-2xl font-extrabold tracking-tight sm:text-[28px]">Assalamu&apos;alaikum, {nama}</h1>
-        <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-white/80">
-          {tugas.length === 0 ? "Semua beres untuk hari ini." : `Ada ${tugas.length} hal yang perlu diperhatikan hari ini.`}
-        </p>
-        <div className="mt-5 flex flex-wrap gap-2.5">
+      <div className="mb-7 flex flex-col gap-4 rounded-xl border border-line/70 bg-surface p-5 shadow-xs sm:flex-row sm:items-center sm:justify-between sm:p-6">
+        <div>
+          <h1 className="text-xl font-bold tracking-tight text-ink sm:text-2xl">
+            Assalamu&apos;alaikum, {nama}
+          </h1>
+          <p className="mt-1 text-xs text-muted sm:text-sm">
+            {tugas.length === 0
+              ? "Semua agenda operasional hari ini sudah beres."
+              : `Ada ${tugas.length} hal yang perlu diperhatikan hari ini.`}
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
           {adaKeuangan && (
-            <Link href="/keuangan/pembayaran" className="inline-flex h-11 items-center gap-2 rounded-xl bg-gold-soft px-5 text-sm font-bold text-forest transition hover:brightness-95 active:scale-[0.98]">
-              <Ikon nama="kasir" className="h-4 w-4" />Terima pembayaran
+            <Link href="/keuangan/pembayaran" className={tombol}>
+              <Ikon nama="kasir" className="h-3.5 w-3.5" />
+              Terima Pembayaran
             </Link>
           )}
-          <Link href="/santri/baru" className="inline-flex h-11 items-center gap-2 rounded-xl bg-white/14 px-5 text-sm font-bold text-white transition hover:bg-white/20 active:scale-[0.98]">
-            <Ikon nama="tambah" className="h-4 w-4" />Tambah santri
+          <Link href="/santri/baru" className={tombolSekunder}>
+            <Ikon nama="tambah" className="h-3.5 w-3.5" />
+            Tambah Santri
           </Link>
         </div>
       </div>
 
-      <section className="mb-8">
-        <h2 className="mb-3 text-base font-extrabold text-ink">Perlu dikerjakan</h2>
+      <section className="mb-7">
+        <h2 className="mb-2.5 text-sm font-semibold text-ink">Perlu dikerjakan</h2>
         <Kartu className="!p-0 overflow-hidden">
           {tugas.length === 0 ? (
             <Kosong judul="Tidak ada yang mendesak" isi="Tagihan, bukti transfer, dan penempatan santri sudah beres." />
@@ -92,10 +104,18 @@ export default async function HariIni() {
             <ul className="divide-y divide-line/70">
               {tugas.map((x) => (
                 <li key={x.href}>
-                  <Link href={x.href} className="flex items-center gap-4 px-5 py-4 transition hover:bg-surface-soft/60">
-                    <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-extrabold ${warna[x.nada]}`}>{x.n}</span>
-                    <span className="min-w-0 flex-1"><span className="block text-[15px] font-bold text-ink">{x.judul}</span><span className="block text-[13px] text-muted">{x.ket}</span></span>
-                    <span className="flex items-center gap-1 text-[13px] font-bold text-emerald">{x.aksi}<Ikon nama="panah" className="h-3.5 w-3.5" /></span>
+                  <Link href={x.href} className="flex items-center gap-3.5 px-4 py-3.5 transition hover:bg-surface-soft/60 sm:px-5">
+                    <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-xs font-semibold tabular-nums ${warna[x.nada]}`}>
+                      {x.n}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-medium text-ink">{x.judul}</span>
+                      <span className="block text-xs text-muted">{x.ket}</span>
+                    </span>
+                    <span className="flex items-center gap-1 text-xs font-medium text-emerald">
+                      {x.aksi}
+                      <Ikon nama="panah" className="h-3 w-3" />
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -104,34 +124,36 @@ export default async function HariIni() {
         </Kartu>
       </section>
 
-      <h2 className="mb-3 text-base font-extrabold text-ink">Ringkasan</h2>
+      <h2 className="mb-2.5 text-sm font-semibold text-ink">Ringkasan</h2>
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Kartu>
-          <span className="text-xs font-medium text-muted">Santri aktif</span>
+          <span className="text-xs font-medium text-muted">Santri Aktif</span>
           <div className="mt-2 flex items-baseline gap-1.5">
-            <span className="text-2xl font-bold tracking-tight text-ink">{totalSantri}</span>
-            <span className="text-sm text-muted">/ {kuota}</span>
+            <span className="text-2xl font-semibold tracking-tight text-ink tabular-nums sm:text-3xl">{totalSantri}</span>
+            <span className="text-xs text-muted tabular-nums">/ {kuota} kuota</span>
           </div>
           <div className="mt-3">
             <BarProgres nilai={totalSantri} maks={kuota} />
           </div>
-          <div className="mt-2 text-xs text-muted">
+          <div className="mt-2 text-xs text-muted tabular-nums">
             {mukim} mukim · {kalong} kalong · {putra} putra · {putri} putri
           </div>
         </Kartu>
 
         <Kartu>
-          <span className="text-xs font-medium text-muted">Hunian asrama</span>
+          <span className="text-xs font-medium text-muted">Hunian Asrama</span>
           <div className="mt-2 flex items-baseline gap-1.5">
-            <span className="text-2xl font-bold tracking-tight text-ink">{terisiAsrama}</span>
-            <span className="text-sm text-muted">/ {kapasitasAsrama || "-"}</span>
+            <span className="text-2xl font-semibold tracking-tight text-ink tabular-nums sm:text-3xl">{terisiAsrama}</span>
+            <span className="text-xs text-muted tabular-nums">/ {kapasitasAsrama || "-"} kasur</span>
           </div>
           <div className="mt-3">
             <BarProgres nilai={terisiAsrama} maks={kapasitasAsrama || 1} />
           </div>
-          <div className="mt-2 flex items-center justify-between text-xs text-muted">
+          <div className="mt-2 flex items-center justify-between text-xs text-muted tabular-nums">
             <span>{totalKamar} kamar · {jmlKelas ?? 0} kelas</span>
-            <Link href="/kamar" className="font-medium text-emerald hover:underline">Kamar<Ikon nama="panah" className="ml-1 inline h-3.5 w-3.5 align-[-2px]" /></Link>
+            <Link href="/kamar" className="font-medium text-emerald hover:underline">
+              Kamar<Ikon nama="panah" className="ml-1 inline h-3 w-3 align-[-1px]" />
+            </Link>
           </div>
         </Kartu>
 

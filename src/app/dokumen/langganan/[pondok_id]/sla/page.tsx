@@ -54,7 +54,7 @@ export default async function HalamanSlaLangganan({
           </div>
 
           <div className="text-left sm:text-right">
-            <span className="inline-block rounded-md bg-[#ecfdf5] px-2.5 py-1 text-[11px] font-bold tracking-wider text-[#047857] uppercase">
+            <span className="inline-block rounded-md border border-[#047857]/30 bg-[#ecfdf5] px-2.5 py-1 text-xs font-semibold text-[#047857]">
               Piagam Garansi Tsiqah
             </span>
             <p className="mt-1.5 font-mono text-xs font-semibold text-[#181713]">
@@ -82,7 +82,7 @@ export default async function HalamanSlaLangganan({
         {/* PASAL-PASAL SLA */}
         <section className="mt-6 space-y-4 text-xs leading-relaxed text-[#2b2923]">
           <div className="rounded-xl border border-[#e3dfd4] p-4">
-            <h2 className="font-bold text-[#047857] uppercase">
+            <h2 className="font-semibold text-[#047857]">
               Pasal 1 · Kedaulatan & Kepemilikan Data Pondok
             </h2>
             <p className="mt-1.5">
@@ -102,7 +102,7 @@ export default async function HalamanSlaLangganan({
           </div>
 
           <div className="rounded-xl border border-[#e3dfd4] p-4">
-            <h2 className="font-bold text-[#047857] uppercase">
+            <h2 className="font-semibold text-[#047857]">
               Pasal 2 · Garansi 30 Hari Uang Kembali Utuh
             </h2>
             <p className="mt-1.5">
@@ -118,7 +118,7 @@ export default async function HalamanSlaLangganan({
           </div>
 
           <div className="rounded-xl border border-[#e3dfd4] p-4">
-            <h2 className="font-bold text-[#047857] uppercase">
+            <h2 className="font-semibold text-[#047857]">
               Pasal 3 · Perlindungan Masa Tenggang & Keamanan Data Saat Berhenti
             </h2>
             <p className="mt-1.5">
@@ -136,7 +136,7 @@ export default async function HalamanSlaLangganan({
           </div>
 
           <div className="rounded-xl border border-[#e3dfd4] p-4">
-            <h2 className="font-bold text-[#047857] uppercase">
+            <h2 className="font-semibold text-[#047857]">
               Pasal 4 · Rincian Kesepakatan Biaya Kemitraan
             </h2>
             <div className="mt-2 grid gap-3 sm:grid-cols-3">
@@ -172,7 +172,7 @@ export default async function HalamanSlaLangganan({
           </div>
 
           <div className="rounded-xl border border-[#e3dfd4] p-4">
-            <h2 className="font-bold text-[#047857] uppercase">
+            <h2 className="font-semibold text-[#047857]">
               Pasal 5 · Pendampingan & Dukungan Teknis
             </h2>
             <p className="mt-1.5">
@@ -202,8 +202,8 @@ export default async function HalamanSlaLangganan({
               Manajemen Layanan TSIQA
             </p>
             <div className="flex h-16 items-center justify-end">
-              <span className="inline-block rounded border border-[#047857]/40 bg-[#ecfdf5] px-3 py-1 font-mono text-[10px] font-bold tracking-wider text-[#047857] uppercase">
-                GARANSI AMANAH TSIQA
+              <span className="inline-block rounded border border-[#047857]/40 bg-[#ecfdf5] px-3 py-1 font-mono text-[11px] font-semibold text-[#047857]">
+                Garansi Amanah TSIQA
               </span>
             </div>
             <p className="font-semibold text-[#181713] underline">

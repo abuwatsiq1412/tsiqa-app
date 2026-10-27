@@ -328,7 +328,7 @@ export default function LandingPage() {
                     </div>
                     <div className="mt-3 flex flex-1 flex-col gap-2 sm:mt-4 sm:gap-3">
                       <div className="rounded-xl border border-line bg-white p-2.5 sm:p-3.5">
-                        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted sm:text-xs">
+                        <p className="text-xs font-medium text-muted">
                           Cara lama
                         </p>
                         <p className="mt-1 text-xs leading-relaxed text-muted sm:mt-1.5 sm:text-[14.5px]">
@@ -336,7 +336,7 @@ export default function LandingPage() {
                         </p>
                       </div>
                       <div className="flex-1 rounded-xl border border-emerald/25 bg-emerald-pale/40 p-2.5 sm:p-3.5">
-                        <p className="text-[10px] font-semibold uppercase tracking-wider text-emerald sm:text-xs">
+                        <p className="text-xs font-medium text-emerald">
                           Dengan TSIQA
                         </p>
                         <p className="mt-1 text-xs leading-relaxed text-ink sm:mt-1.5 sm:text-[14.5px]">
@@ -447,7 +447,7 @@ export default function LandingPage() {
                 </h2>
                 <div
                   aria-hidden="true"
-                  className="absolute right-0 top-0 grid size-13 -rotate-6 place-items-center rounded-full border-2 border-gold text-center text-[8.5px] font-bold uppercase leading-tight tracking-wider text-gold-ink sm:right-1 sm:size-[68px] sm:border-[3px] sm:text-[10px]"
+                  className="absolute right-0 top-0 grid size-13 -rotate-6 place-items-center rounded-full border-2 border-gold text-center text-[9px] font-bold leading-tight text-gold-ink sm:right-1 sm:size-[68px] sm:border-[2.5px] sm:text-[11px]"
                 >
                   <span>
                     Garansi
@@ -463,7 +463,7 @@ export default function LandingPage() {
               </p>
 
               <div className="mt-4 rounded-2xl border border-line bg-surface-soft p-3.5 sm:mt-5 sm:p-5">
-                <h3 className="text-[11px] font-semibold uppercase tracking-wider text-muted sm:text-xs">
+                <h3 className="text-xs font-medium text-muted">
                   Syarat singkat
                 </h3>
                 <ul className="mt-2.5 space-y-2 sm:mt-3 sm:space-y-2.5">
@@ -491,7 +491,7 @@ export default function LandingPage() {
                       <Icon name={j.icon} className="size-4 sm:size-5" />
                     </span>
                     <div>
-                      <p className="text-[10px] font-semibold uppercase tracking-wider text-gold sm:text-xs">
+                      <p className="text-xs font-medium text-gold-ink">
                         Janji {i + 1}
                       </p>
                       <h3 className="mt-0.5 text-sm font-semibold sm:text-[17px]">
@@ -560,7 +560,7 @@ export default function LandingPage() {
               </div>
 
               <div className="mt-4 rounded-2xl border border-line bg-ivory p-3.5 sm:mt-5 sm:p-4">
-                <p className="text-[11px] font-semibold uppercase tracking-wider text-muted sm:text-xs">
+                <p className="text-xs font-medium text-muted">
                   Hubungi langsung
                 </p>
                 <ul className="mt-2.5 space-y-2.5 text-xs sm:mt-3 sm:space-y-3 sm:text-sm">

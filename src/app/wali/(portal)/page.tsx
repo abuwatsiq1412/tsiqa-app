@@ -120,7 +120,7 @@ export default async function Beranda({ searchParams }: { searchParams: Promise<
                 <div key={idx} className="py-2">
                   <div className="flex items-center justify-between text-xs text-muted">
                     <span>{tanggalLengkap(s.tanggal)}</span>
-                    <span className="font-bold uppercase text-emerald">{s.status}</span>
+                    <span className="font-medium capitalize text-emerald">{s.status}</span>
                   </div>
                   {s.tambah_hafalan && (
                     <div className="mt-0.5 font-semibold text-ink">

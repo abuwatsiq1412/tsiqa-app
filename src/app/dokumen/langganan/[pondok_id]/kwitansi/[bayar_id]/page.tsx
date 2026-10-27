@@ -77,7 +77,7 @@ export default async function HalamanKwitansiLangganan({
           </div>
 
           <div className="text-left sm:text-right">
-            <span className="inline-block rounded bg-[#ecfdf5] px-2 py-0.5 text-[10px] font-bold tracking-wider text-[#047857] uppercase">
+            <span className="inline-block rounded border border-[#047857]/30 bg-[#ecfdf5] px-2.5 py-0.5 text-xs font-semibold text-[#047857]">
               Kwitansi Pembayaran Lunas
             </span>
             <p className="mt-1 font-mono text-xs font-semibold text-[#181713]">
@@ -140,7 +140,7 @@ export default async function HalamanKwitansiLangganan({
         {/* NOMINAL & CAP LUNAS */}
         <section className="mt-3.5 flex items-end justify-between gap-4 border-t border-[#e3dfd4] pt-3">
           <div>
-            <p className="text-[10px] font-semibold tracking-wider text-[#6b685e] uppercase">
+            <p className="text-xs font-medium text-[#6b685e]">
               Total Nominal Diterima
             </p>
             <div className="mt-1 inline-block rounded-xl border-2 border-[#047857] bg-[#ecfdf5] px-4 py-1.5 font-mono text-xl font-bold text-[#047857]">

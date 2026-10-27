@@ -93,7 +93,7 @@ export default async function BukuPelanggaranPage({
                       <span className="text-sm font-bold text-ink">{s?.nama ?? "Santri"}</span>
                       <span className="text-xs text-muted">({s?.nis ?? "-"})</span>
                       <Lencana varian={varian}>
-                        {p.kategori.toUpperCase()} · +{p.poin} Poin
+                        {p.kategori.charAt(0).toUpperCase() + p.kategori.slice(1)} · +{p.poin} Poin
                       </Lencana>
                       <span className="text-xs text-muted">{tanggal(p.tanggal)}</span>
                     </div>

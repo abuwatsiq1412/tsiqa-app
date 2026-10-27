@@ -288,7 +288,7 @@ export default async function WebsitePublikPondok({
         <section className="mx-auto max-w-6xl px-4 pt-12 sm:px-8">
           <div className="rounded-2xl border border-emerald/25 bg-emerald-pale/35 p-5 sm:p-6">
             <div className="mb-3 flex items-center justify-between gap-2">
-              <h2 className="text-sm font-extrabold uppercase tracking-wider text-emerald">
+              <h2 className="text-sm font-semibold text-emerald">
                 Maklumat & Pengumuman Resmi Pondok
               </h2>
               <span className="text-xs text-muted">Terbaru</span>
@@ -342,7 +342,7 @@ export default async function WebsitePublikPondok({
 
             <div className="space-y-4 lg:col-span-6">
               <div className="rounded-2xl border border-line bg-surface p-6 shadow-xs">
-                <div className={`text-xs font-extrabold uppercase tracking-wider ${t.aksenText}`}>
+                <div className={`text-xs font-semibold ${t.aksenText}`}>
                   Visi Pesantren
                 </div>
                 <p className="mt-2 text-sm font-semibold leading-relaxed text-ink">
@@ -350,7 +350,7 @@ export default async function WebsitePublikPondok({
                 </p>
 
                 <div
-                  className={`mt-6 text-xs font-extrabold uppercase tracking-wider ${t.aksenText}`}
+                  className={`mt-6 text-xs font-semibold ${t.aksenText}`}
                 >
                   Misi Pendidikan & Pembinaan
                 </div>
@@ -560,7 +560,7 @@ export default async function WebsitePublikPondok({
                 </p>
 
                 <div className="pt-2">
-                  <div className="mb-2 text-xs font-bold uppercase tracking-wider text-white/90">
+                  <div className="mb-2 text-xs font-semibold text-white/90">
                     Persyaratan Pendaftaran:
                   </div>
                   <ul className="space-y-1.5 text-xs text-white/85 sm:text-sm">
