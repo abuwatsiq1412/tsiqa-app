@@ -74,14 +74,14 @@ export async function PanelTagihanMendesak() {
     <Kartu className="!p-0 overflow-hidden">
       <div className="flex items-center justify-between border-b border-line bg-surface-soft/60 px-5 py-3.5">
         <div>
-          <h2 className="text-sm font-semibold text-ink">Perlu Ditagih</h2>
+          <h2 className="text-sm font-semibold tracking-[-0.015em] text-ink">Perlu Ditagih</h2>
           <p className="text-xs text-muted">Tagihan mendekati atau lewat jatuh tempo</p>
         </div>
-        <Link href="/keuangan/tagihan" className="text-xs font-medium text-emerald hover:underline">
+        <Link href="/keuangan/tagihan" className="text-xs font-semibold text-emerald hover:underline">
           Semua Tagihan &rarr;
         </Link>
       </div>
-      <div className="divide-y divide-line text-sm">
+      <div className="divide-y divide-line/70 text-sm">
         {(daftar ?? []).map((t) => {
           const lewat = t.jatuh_tempo < hari;
           const s = peta.get(t.santri_id);
@@ -93,7 +93,7 @@ export async function PanelTagihanMendesak() {
               <div className="min-w-0">
                 <Link
                   href={`/keuangan/tagihan/${t.id}`}
-                  className="font-medium text-ink hover:text-emerald"
+                  className="font-semibold text-ink hover:text-emerald tracking-tight"
                 >
                   {s?.nama ?? "Santri"}
                 </Link>

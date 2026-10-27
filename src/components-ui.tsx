@@ -102,7 +102,7 @@ export function Lencana({
   titik = true,
 }: {
   children: ReactNode;
-  varian?: "lunas" | "cicilan" | "belum" | "mint" | "netral";
+  varian?: "lunas" | "cicilan" | "belum" | "mint" | "netral" | "gold";
   titik?: boolean;
 }) {
   const peta = {
@@ -111,6 +111,7 @@ export function Lencana({
     belum: "bg-belum-bg text-belum border-belum/15",
     mint: "bg-emerald-pale text-emerald border-emerald/20",
     netral: "bg-surface-soft text-muted border-line",
+    gold: "bg-gold-pale text-gold-ink border-gold-soft/50",
   };
   const warnaTitik = {
     lunas: "bg-emerald",
@@ -118,10 +119,11 @@ export function Lencana({
     belum: "bg-belum",
     mint: "bg-emerald",
     netral: "bg-muted",
+    gold: "bg-gold",
   };
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium ${peta[varian]}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-semibold ${peta[varian]}`}
     >
       {titik && <span className={`h-1.5 w-1.5 rounded-full ${warnaTitik[varian]}`} />}
       {children}
