@@ -135,18 +135,13 @@ export function SakelarTema({ ringkas = false }: { ringkas?: boolean }) {
             title={item.judul}
             aria-label={item.judul}
             aria-pressed={aktif}
-            className={`flex h-7 cursor-pointer items-center gap-1.5 rounded-md px-2 text-xs transition duration-150 ${
+            className={`flex h-7 w-7 cursor-pointer items-center justify-center rounded-md transition duration-150 ${
               aktif
                 ? "bg-surface text-ink font-semibold shadow-xs"
                 : "text-muted hover:text-ink hover:bg-surface/50 font-normal"
             }`}
           >
             {item.ikon}
-            {!ringkas && (
-              <span className="hidden text-[11px] md:inline">
-                {item.label}
-              </span>
-            )}
           </button>
         );
       })}

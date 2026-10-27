@@ -35,17 +35,16 @@ type Mode = "pondok" | "konsol";
 
 const TEMA: Record<Mode, {
   sidebar: string; garis: string; judulGrup: string; item: string; itemAktif: string; ikon: string;
-  ikonAktif: string; penanda: string; logo: string; tombolIkon: string; nama: string; peran: string;
+  ikonAktif: string; logo: string; tombolIkon: string; nama: string; peran: string;
 }> = {
   pondok: {
-    sidebar: "bg-white border-line/80",
+    sidebar: "bg-surface border-line/80",
     garis: "border-line/70",
-    judulGrup: "text-muted/90",
-    item: "text-muted hover:bg-surface-soft hover:text-ink",
-    itemAktif: "bg-emerald-pale font-medium text-emerald",
+    judulGrup: "text-muted/80",
+    item: "text-muted hover:bg-surface-soft hover:text-ink font-medium",
+    itemAktif: "bg-emerald-pale/80 font-semibold text-emerald",
     ikon: "text-muted group-hover:text-ink",
     ikonAktif: "text-emerald",
-    penanda: "bg-gold",
     logo: "bg-emerald text-white",
     tombolIkon: "text-muted hover:bg-surface-soft hover:text-ink",
     nama: "text-ink",
@@ -55,11 +54,10 @@ const TEMA: Record<Mode, {
     sidebar: "bg-forest border-forest-light",
     garis: "border-white/10",
     judulGrup: "text-white/50",
-    item: "text-white/70 hover:bg-white/8 hover:text-white",
-    itemAktif: "bg-white/12 font-medium text-white",
+    item: "text-white/70 hover:bg-white/8 hover:text-white font-medium",
+    itemAktif: "bg-white/14 font-semibold text-white",
     ikon: "text-white/50 group-hover:text-white",
     ikonAktif: "text-white",
-    penanda: "bg-gold-soft",
     logo: "bg-gold-soft text-forest",
     tombolIkon: "text-white/60 hover:bg-white/10 hover:text-white",
     nama: "text-white",
@@ -305,7 +303,6 @@ export function KerangkaApp({
                             ringkas ? "mx-auto h-10 w-10 justify-center" : "gap-2.5 px-3 py-2"
                           } ${aktif ? t.itemAktif : t.item}`}
                         >
-                          {aktif && <span className={`absolute bottom-1.5 left-0 top-1.5 w-1 rounded-r-full ${t.penanda}`} />}
                           <Ikon nama={m.ikon} className={`h-4 w-4 shrink-0 transition ${aktif ? t.ikonAktif : t.ikon}`} />
                           {!ringkas && <span className="truncate">{m.label}</span>}
                         </Link>
